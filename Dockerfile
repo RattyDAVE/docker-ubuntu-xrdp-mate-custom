@@ -12,11 +12,11 @@ apt-get install -y tzdata && \
 apt-get autoclean && apt-get autoremove && \
 rm -rf /var/lib/apt/lists/* && \
 localedef -i en_GB -c -f UTF-8 -A /usr/share/locale/locale.alias en_GB.UTF-8 && \
-useradd -ms /bin/bash myles && \
+useradd -ms /bin/bash user1 && \
 echo user1:password1|chpasswd && \
-useradd -ms /bin/bash dave && \
+useradd -ms /bin/bash user2 && \
 echo user2:password2|chpasswd && \
-usermod -aG sudo user1
+usermod -aG sudo user2
                                     
 ADD km-0809.ini /etc/xrdp/km-0809.ini
 RUN chown xrdp.xrdp /etc/xrdp/km-0809.ini
