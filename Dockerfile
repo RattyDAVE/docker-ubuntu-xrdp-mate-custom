@@ -14,7 +14,6 @@ apt-get install -y supervisor tzdata mate-core \
     libappindicator1 libcurl3 fonts-wqy-microhei firefox  && \
 apt-get autoclean && apt-get autoremove && \
 rm -rf /var/lib/apt/lists/* && \
-echo "mate-session" > /home/desktop/.xsession && \
 localedef -i en_GB -c -f UTF-8 -A /usr/share/locale/locale.alias en_GB.UTF-8 && \
 sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini && \
 sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini && \
@@ -23,8 +22,12 @@ useradd -ms /bin/bash user1 && \
 echo user1:password1|chpasswd && \
 useradd -ms /bin/bash user2 && \
 echo user2:password2|chpasswd && \
-usermod -aG sudo user2
-     
+usermod -aG sudo user2 && \
+echo "mate-session" > /home/user1/.xsession && \
+echo "mate-session" > /home/user2/.xsession && \
+echo "END"
+
+
 ADD xrdp.conf /etc/supervisor/conf.d/xrdp.conf     
 ADD km-0809.ini /etc/xrdp/km-0809.ini
 
