@@ -1,4 +1,4 @@
-FROM rigormortiz/ubuntu-supervisor
+FROM ubuntu:zesty
 
 MAINTAINER Dave Pucknell <dave@pucknell.co.uk>
 
@@ -8,7 +8,7 @@ ENV LANGUAGE en_GB:GB
 ENV LC_ALL en_GB.UTF-8
 
 RUN apt-get update -y && \
-apt-get install -y tzdata mate-core \
+apt-get install -y supervisor tzdata mate-core \
     mate-desktop-environment mate-notification-daemon \
     gconf-service libnspr4 libnss3 fonts-liberation \
     libappindicator1 libcurl3 fonts-wqy-microhei firefox  && \
@@ -35,5 +35,7 @@ RUN chmod 644 /etc/xrdp/km-0809.ini
 RUN locale-gen en_GB.UTF-8
 RUN update-locale LANG=en_GB.UTF-8
 RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+
+CMD ["/usr/bin/supervisord", "-n"]
                                     
 EXPOSE 3389
