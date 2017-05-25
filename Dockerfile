@@ -10,20 +10,20 @@ ENV LC_ALL en_GB.UTF-8
 RUN	echo "Start `date`"
 
 RUN 	apt-get update -y && \
-	apt-get install -y tzdata pwgen && \ 
+	apt-get install -y tzdata && \ 
 	apt-get autoclean && apt-get autoremove && \
  	rm -rf /var/lib/apt/lists/* 
 
-RUN 	useradd -ms /bin/bash user1 && \
-	echo user1:password1|chpasswd && \
-	useradd -ms /bin/bash user2 && \
-	echo user2:password2|chpasswd && \
-	usermod -aG sudo user2 && \
-	echo "mate-session" > /home/user1/.xsession && \
-	echo "mate-session" > /home/user2/.xsession && \
-	echo "END"
+# RUN 	useradd -ms /bin/bash user1 && \
+# 	echo user1:password1|chpasswd && \
+#	useradd -ms /bin/bash user2 && \
+#	echo user2:password2|chpasswd && \
+#	usermod -aG sudo user2 && \
+#	echo "mate-session" > /home/user1/.xsession && \
+#	echo "mate-session" > /home/user2/.xsession && \
+#	echo "END"
 	
-ADD 	startup.sh /root/startup.sh
+# ADD 	startup.sh /root/startup.sh
 
 ADD 	km-0809.ini /etc/xrdp/km-0809.ini
 RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
@@ -40,4 +40,4 @@ RUN	echo "END `date`"
                                     
 EXPOSE 3389
 
-CMD ["/bin/bash", "/root/startup.sh"]
+# CMD ["/bin/bash", "/root/startup.sh"]
