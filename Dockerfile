@@ -1,4 +1,5 @@
-FROM rigormortiz/ubuntu-supervisor:0.1
+#FROM rigormortiz/ubuntu-supervisor:0.1
+FROM ubuntu:zesty
 ENV DEBIAN_FRONTEND noninteractive
 MAINTAINER Dave Pucknell <dave@pucknell.co.uk>
 ENV LANG en_GB.UTF-8
@@ -8,7 +9,7 @@ ENV LC_ALL en_GB.UTF-8
 RUN	echo "Start `date`"
 
 RUN apt-get update -y && \
-    apt-get install -y tzdata mate-core xrdp \
+    apt-get install -y supervisor tzdata mate-core xrdp \
     mate-desktop-environment mate-notification-daemon \
     gconf-service libnspr4 libnss3 fonts-liberation \
     libappindicator1 libcurl3 fonts-wqy-microhei firefox && \
@@ -33,7 +34,7 @@ RUN 	ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure
 
 RUN	echo "END `date`"
 
-# CMD ["/usr/bin/supervisord", "-n"]
+CMD ["/usr/bin/supervisord", "-n"]
                                     
 EXPOSE 3389
 
