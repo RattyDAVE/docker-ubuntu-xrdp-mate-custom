@@ -1,5 +1,7 @@
 #FROM rigormortiz/ubuntu-supervisor:0.1
-FROM ubuntu:zesty
+#FROM ubuntu:zesty
+FROM ubuntu:latest
+
 ENV DEBIAN_FRONTEND noninteractive
 MAINTAINER Dave Pucknell <dave@pucknell.co.uk>
 ENV LANG en_GB.UTF-8
