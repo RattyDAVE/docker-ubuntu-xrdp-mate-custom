@@ -9,6 +9,9 @@ RUN	echo "Start `date`"
 
 # X2go
 # Install requirements
+
+RUN apt-get update -y
+
 RUN apt-get install -y \
         software-properties-common \
         openssh-server
