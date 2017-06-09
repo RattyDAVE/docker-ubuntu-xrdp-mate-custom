@@ -12,11 +12,15 @@ RUN	echo "Start `date`"
 RUN apt-get install -y \
         software-properties-common \
         openssh-server
+        
 
 # Install X2Go server components
 RUN add-apt-repository ppa:x2go/stable
 RUN apt-get update -y
 RUN apt-get install -y x2goserver
+
+RUN apt-get autoclean && apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/*
 
 # SSH runtime
 RUN mkdir /var/run/sshd
