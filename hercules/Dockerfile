@@ -12,13 +12,16 @@ RUN     apt-get update -y
 
 RUN     apt-get install -y \
                 nfs-common \
-                hercules
+                hercules \
+                x3270
 
 RUN     apt-get autoclean && apt-get autoremove && \
         rm -rf /var/lib/apt/lists/*
     
 RUN     mkdir /mnt/mainframe
 RUN     echo nas.lan:mainframe	/mnt/mainframe	nfs4	rw,hard,intr,vers=2,nolock >> /etc/fstab
+
+RUN     usermod -aG sudo desktop
 
 RUN	echo "END `date`"
 
