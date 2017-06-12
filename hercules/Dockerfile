@@ -13,7 +13,8 @@ RUN     apt-get update -y
 RUN     apt-get install -y \
                 nfs-common \
                 hercules \
-                x3270
+                x3270 \
+                telnet
 
 RUN     apt-get autoclean && apt-get autoremove && \
         rm -rf /var/lib/apt/lists/*
