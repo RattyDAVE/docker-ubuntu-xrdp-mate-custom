@@ -8,22 +8,23 @@ RUN	echo "Start `date`"
 # Herculese
 # Install requirements
 
-RUN apt-get update -y
+RUN     apt-get update -y
 
-RUN apt-get install -y \
-        nfs-common \
-        hercules
+RUN     apt-get install -y \
+                nfs-common \
+                hercules
 
-RUN apt-get autoclean && apt-get autoremove && \
-    rm -rf /var/lib/apt/lists/*
+RUN     apt-get autoclean && apt-get autoremove && \
+        rm -rf /var/lib/apt/lists/*
     
-RUN mkdir /mnt/mainframe
-
+RUN     mkdir /mnt/mainframe
+RUN     echo nas.lan:mainframe	/mnt/mainframe	nfs4	vers=2,nolock >> /etc/fstab
 
 RUN	echo "END `date`"
 
-CMD ["/usr/bin/supervisord", "-n"]
+#CMD ["/usr/bin/supervisord", "-n"]
                                     
-EXPOSE 22 3370
+EXPOSE 22 3270
 
-# CMD ["/bin/bash", "/root/startup.sh"]
+ADD 	startup.sh /root/startup.sh
+CMD ["/bin/bash", "/root/startup.sh"]
