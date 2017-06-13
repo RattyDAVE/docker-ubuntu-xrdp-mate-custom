@@ -37,7 +37,7 @@ CMD ["/bin/bash", "/root/startup.sh"]
 
 
 
-turnkey_mvs.conf# hercules -f ./conf/turnkey_mvs.conf
+# hercules -f ./conf/turnkey_mvs.conf
 CMD ["/usr/bin/hercules", "-f", "/mnt/mainframe/mvs38j.davetest/turnkey_mvs.conf"]
 
 # telnet 127.0.0.1 3270
