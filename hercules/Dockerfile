@@ -38,16 +38,16 @@ CMD ["/bin/bash", "/root/startup.sh"]
 
 
 # hercules -f ./conf/turnkey_mvs.conf
-CMD ["/usr/bin/hercules", "-f", "/mnt/mainframe/mvs38j.davetest/turnkey_mvs.conf"]
+#CMD ["/usr/bin/hercules", "-f", "/mnt/mainframe/mvs38j.davetest/turnkey_mvs.conf"]
 
 # telnet 127.0.0.1 3270
 
-CMD ["/usr/bin/telnet", "127.0.0.1", "3270"]
+#CMD ["/usr/bin/telnet", "127.0.0.1", "3270"]
 
 # 5x c3270 127.0.0.1:3270
 
-CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
-CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
-CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
-CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
-CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
+#CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
+#CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
+#CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
+#CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
+#CMD ["/usr/bin/c3270", "127.0.0.1:3270"]
