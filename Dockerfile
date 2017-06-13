@@ -15,7 +15,9 @@ RUN apt-get update -y && \
     locales supervisor tzdata mate-core xrdp \
     mate-desktop-environment mate-notification-daemon \
     gconf-service libnspr4 libnss3 fonts-liberation \
-    libappindicator1 libcurl3 fonts-wqy-microhei firefox && \
+    libappindicator1 libcurl3 fonts-wqy-microhei firefox \
+    chromium-browser \
+    && \
     apt-get autoclean && apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     useradd -ms /bin/bash desktop && \
@@ -23,6 +25,7 @@ RUN apt-get update -y && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini && \
     xrdp-keygen xrdp auto && \
     echo "desktop:desktop" | chpasswd && \
+    usermod -aG sudo desktop && \
     echo "mate-session" > /home/desktop/.xsession
 
 ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
