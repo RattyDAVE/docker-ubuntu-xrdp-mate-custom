@@ -1,4 +1,4 @@
-FROM rattydave/docker-ubuntu-xrdp-mate-custom
+FROM rattydave/docker-ubuntu-xrdp-mate-custom:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 MAINTAINER Dave Pucknell <dave@pucknell.co.uk>
