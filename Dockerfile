@@ -2,6 +2,8 @@
 #FROM ubuntu:zesty
 FROM ubuntu:latest
 
+#NO USERS ARE ACTIVE!!!!!!!!
+
 ENV DEBIAN_FRONTEND noninteractive
 MAINTAINER Dave Pucknell <dave@pucknell.co.uk>
 ENV LANG en_GB.UTF-8
@@ -19,13 +21,10 @@ RUN apt-get update -y && \
     remmina* && \
     apt-get autoclean && apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* && \
-    useradd -ms /bin/bash desktop && \
+    echo "mate-session" > /etc/skel/.xsession && \
     sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini && \
-    xrdp-keygen xrdp auto && \
-    echo "desktop:desktop" | chpasswd && \
-    usermod -aG sudo desktop && \
-    echo "mate-session" > /home/desktop/.xsession
+    xrdp-keygen xrdp auto
 
 ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
 ADD 	km-0809.ini /etc/xrdp/km-0809.ini
