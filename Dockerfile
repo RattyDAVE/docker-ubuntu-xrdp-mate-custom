@@ -1,5 +1,3 @@
-#FROM rigormortiz/ubuntu-supervisor:0.1
-#FROM ubuntu:zesty
 FROM ubuntu:latest
 
 #NO USERS ARE ACTIVE!!!!!!!!
