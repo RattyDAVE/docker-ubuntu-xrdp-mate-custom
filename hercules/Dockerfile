@@ -1,4 +1,4 @@
-FROM rattydave/docker-ubuntu-xrdp-mate-custom:latest
+FROM rattydave/docker-ubuntu-xrdp-mate-custom:core
 
 ENV DEBIAN_FRONTEND noninteractive
 MAINTAINER Dave Pucknell <dave@pucknell.co.uk>
@@ -23,8 +23,6 @@ RUN     apt-get autoclean && apt-get autoremove && \
     
 RUN     mkdir /mnt/mainframe
 RUN     echo nas.lan:mainframe	/mnt/mainframe	nfs4	rw,hard,intr,vers=2,nolock >> /etc/fstab
-
-RUN     usermod -aG sudo desktop
 
 RUN	echo "END `date`"
 
