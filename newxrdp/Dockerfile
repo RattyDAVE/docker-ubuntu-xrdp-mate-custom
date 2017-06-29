@@ -19,7 +19,6 @@ RUN apt-get update -y && \
     remmina* git wget
 
 RUN cd /tmp \
-    && git clone -b devel https://github.com/scarygliders/X11RDP-o-Matic.git \
     && git clone https://github.com/scarygliders/X11RDP-o-Matic.git \
     && wget -O /tmp/X11RDP-o-Matic/DEV-X11rdp-o-matic.sh https://www.dropbox.com/s/obrg90m4djhb2ct/DEV-X11rdp-o-matic.sh \
     && chmod +x /tmp/X11RDP-o-Matic/*.sh \
