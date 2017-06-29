@@ -24,8 +24,8 @@ RUN cd /tmp \
     && chmod +x /tmp/X11RDP-o-Matic/*.sh \
     && apt-get -y install dh-make gdebi autoconf dh-systemd libfuse-dev libjpeg-dev libopus-dev libpam0g-dev libssl-dev libtool libtool-bin nasm xserver-xorg-dev flex bison libxml2-dev intltool xsltproc xutils-dev xutils dialog checkinstall x11proto-dmx-dev x11proto-xf86dga-dev x11proto-bigreqs-dev x11proto-record-dev x11proto-xf86vidmode-dev x11proto-xcmisc-dev libx11-xcb-dev libxcb-dri2-0-dev libxcb-dri3-dev libxcb-glx0-dev libxcb-present-dev libxcb-randr0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxshmfence-dev libxxf86vm-dev libwinpr-asn1-0.1 libwinpr-bcrypt0.1 libwinpr-credentials0.1 libwinpr-credui0.1 libwinpr-dev libwinpr-error0.1 libwinpr-io0.1 libwinpr-pipe0.1 libwinpr-sspicli0.1 libwinpr-timezone0.1 libwinpr-winhttp0.1 libwinpr-winsock0.1 libxfreerdp-client1.1 libavahi-client-dev libavahi-common-dev
 
-RUN cd /tmp/X11RDP-o-Matic/ \
-    && ./DEV-X11rdp-o-matic.sh --nocpuoptimize --justdoit --withsound --withkerberos --withpamuserpass --withfreerdp --withjpeg --withsimplesound --withpulse
+RUN cd /tmp/X11RDP-o-Matic/
+# XXXX RUN ./DEV-X11rdp-o-matic.sh --nocpuoptimize --justdoit --withsound --withkerberos --withpamuserpass --withfreerdp --withjpeg --withsimplesound --withpulse
 
 # Fetch the pulseaudio source code. Run the build (even when not installing it) otherwise the compilation of the xrdp pulseaudio sink module will fail.
 RUN apt-get -y build-dep pulseaudio
