@@ -16,7 +16,8 @@ RUN apt-get update -y && \
     mate-desktop-environment mate-notification-daemon \
     gconf-service libnspr4 libnss3 fonts-liberation \
     libappindicator1 libcurl3 fonts-wqy-microhei firefox \
-    remmina* && \
+    remmina* \
+    torbrowser-launcher && \
     apt-get autoclean && apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     echo "mate-session" > /etc/skel/.xsession && \
