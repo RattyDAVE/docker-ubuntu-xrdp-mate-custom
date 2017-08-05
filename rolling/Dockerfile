@@ -12,11 +12,12 @@ RUN	echo "Start `date`"
 
 RUN apt-get update -y && \
     apt-get install -y \
-    locales supervisor tzdata mate-core xrdp \
+    locales supervisor tzdata mate-core \
     mate-desktop-environment mate-notification-daemon \
     gconf-service libnspr4 libnss3 fonts-liberation \
     libappindicator1 libcurl3 fonts-wqy-microhei firefox \
-    remmina* && \
+    remmina* \
+    xrdp vnc4server && \
     apt-get autoclean && apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     echo "mate-session" > /etc/skel/.xsession && \
