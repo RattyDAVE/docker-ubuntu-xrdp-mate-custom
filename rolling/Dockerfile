@@ -17,6 +17,7 @@ RUN apt-get update -y && \
     gconf-service libnspr4 libnss3 fonts-liberation \
     libappindicator1 libcurl3 fonts-wqy-microhei firefox \
     remmina* \
+    openssh-server \
     xrdp vnc4server && \
     apt-get autoclean && apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* && \
@@ -25,6 +26,7 @@ RUN apt-get update -y && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini && \
     xrdp-keygen xrdp auto
 
+ADD     sshd.conf /etc/supervisor/conf.d/sshd.conf
 ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
 ADD 	km-0809.ini /etc/xrdp/km-0809.ini
 RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
