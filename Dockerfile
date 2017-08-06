@@ -9,10 +9,20 @@ ENV LC_ALL en_GB.UTF-8
 
 RUN     apt-get update -y && \
     apt-get install -y \
-    locales supervisor tzdata mate-core xrdp \
-    mate-desktop-environment mate-notification-daemon \
-    gconf-service libnspr4 libnss3 fonts-liberation \
-    libappindicator1 libcurl3 fonts-wqy-microhei firefox \
+    locales \
+    supervisor \
+    tzdata \
+    xrdp \
+    mate-core \
+    mate-desktop-environment \
+    mate-notification-daemon \
+    gconf-service \
+    libnspr4 libnss3 \
+    fonts-liberation \
+    libappindicator1 \
+    libcurl3 \
+    fonts-wqy-microhei \
+    firefox \
     remmina* && \
     apt-get autoclean && apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* && \
