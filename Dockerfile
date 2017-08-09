@@ -28,21 +28,25 @@ RUN     apt-get update -y && \
     libcurl3 \
     fonts-wqy-microhei \
     firefox \
-    remmina* && \
-    apt-get autoclean && apt-get autoremove && \
-    rm -rf /var/lib/apt/lists/* && \
-    echo "mate-session" > /etc/skel/.xsession && \
-    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini && \
-    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini && \
-    xrdp-keygen xrdp auto
+    remmina*
+
+RUN    apt-get autoclean && apt-get autoremove
+RUN    rm -rf /var/lib/apt/lists/*
+
+RUN    echo "mate-session" > /etc/skel/.xsession
+RUN    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
+RUN    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
+RUN    xrdp-keygen xrdp auto
 
 ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
 ADD 	km-0809.ini /etc/xrdp/km-0809.ini
-RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini && \
-    chmod 644 /etc/xrdp/km-0809.ini && \
-    locale-gen en_GB.UTF-8 && \
-    update-locale LANG=en_GB.UTF-8 && \
-    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
+RUN     chmod 644 /etc/xrdp/km-0809.ini
+
+RUN    locale-gen en_GB.UTF-8
+RUN    update-locale LANG=en_GB.UTF-8
+
+RUN    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 CMD ["/usr/bin/supervisord", "-n"]
                                     
