@@ -22,7 +22,8 @@ RUN     apt-get update -y && \
     mate-desktop-environment \
     mate-notification-daemon \
     gconf-service \
-    libnspr4 libnss3 \
+    libnspr4 \
+    libnss3 \
     fonts-liberation \
     libappindicator1 \
     libcurl3 \
