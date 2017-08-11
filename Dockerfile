@@ -17,7 +17,7 @@ RUN     apt-get update -y && \
     locales \
     supervisor \
     tzdata \
-    xrdp \
+    tightvncserver xrdp \
     mate-core \
     mate-desktop-environment \
     mate-notification-daemon \
@@ -29,7 +29,7 @@ RUN     apt-get update -y && \
     libcurl3 \
     fonts-wqy-microhei \
     firefox \
-    wget \
+    ca-certificates wget \
     remmina*
 
 # Install Google Chrome
