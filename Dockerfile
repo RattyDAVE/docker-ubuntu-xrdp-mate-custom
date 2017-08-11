@@ -29,6 +29,7 @@ RUN     apt-get update -y && \
     libcurl3 \
     fonts-wqy-microhei \
     firefox \
+    wget \
     remmina*
 
 # Install Google Chrome
