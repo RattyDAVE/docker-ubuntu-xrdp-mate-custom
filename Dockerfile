@@ -16,21 +16,30 @@ RUN     apt-get update -y && \
     apt-get install --no-install-recommends -y \
     locales \
     supervisor \
-    tzdata \
-    tightvncserver xrdp \
+    tzdata
+
+RUN apt-get install --no-install-recommends -y \
     mate-core \
     mate-desktop-environment \
-    mate-notification-daemon \
+    mate-notification-daemon
+    
+RUN apt-get install --no-install-recommends -y \
     gconf-service \
     libnspr4 \
     libnss3 \
     fonts-liberation \
     libappindicator1 \
     libcurl3 \
-    fonts-wqy-microhei \
+    fonts-wqy-microhei
+    
+RUN apt-get install --no-install-recommends -y \
     firefox \
     ca-certificates wget \
     remmina*
+    
+RUN apt-get install -y \
+    xrdp
+
 
 # Install Google Chrome
 #RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
