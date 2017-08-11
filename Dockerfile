@@ -65,14 +65,10 @@ RUN    dpkg -i skypeforlinux-64.deb
 RUN    apt-get autoclean && apt-get autoremove
 RUN    rm -rf /var/lib/apt/lists/*
 
-RUN    wget https://addons.mozilla.org/firefox/downloads/latest/lastpass-password-manager/addon-8542-latest.xpi
-RUN    wget wget https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/addon-607454-latest.xpi
-RUN    firefox -install-global-extension addon-8542-latest.xpi
-RUN    firefox -install-global-extension addon-607454-latest.xpi
-
 RUN    echo "mate-session" > /etc/skel/.xsession
 RUN    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
 RUN    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
+#RUN    sed -i.bak '/fi/a #xrdp multiple users configuration \n mate-session \n' /etc/xrdp/startwm.sh
 RUN    xrdp-keygen xrdp auto
 
 ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
