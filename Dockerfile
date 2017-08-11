@@ -13,7 +13,7 @@ RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
 
 RUN     apt-get update -y && \
-    apt-get install -y \
+    apt-get install --no-install-recommends -y \
     locales \
     supervisor \
     tzdata \
@@ -33,11 +33,19 @@ RUN     apt-get update -y && \
     remmina*
 
 # Install Google Chrome
-RUN    apt-get install libxss1 libappindicator1 libindicator7 xdg-utils
-RUN    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN    dpkg -i google-chrome*.deb
+#RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
+#RUN    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#RUN    dpkg -i google-chrome*.deb
+#RUN    apt-get install -f
 
-RUN    apt-get install -f
+# Install Skype
+#RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
+RUN    wget https://go.skype.com/skypeforlinux-64.deb
+RUN    apt-get install -y apt-transport-https
+RUN    dpkg -i skypeforlinux-64.deb
+#RUN    apt-get install -f
+
+
 
 RUN    apt-get autoclean && apt-get autoremove
 RUN    rm -rf /var/lib/apt/lists/*
