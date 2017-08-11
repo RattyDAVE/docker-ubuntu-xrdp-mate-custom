@@ -33,7 +33,7 @@ RUN     apt-get update -y && \
     remmina*
 
 # Install Google Chrome
-RUN    apt-get install libxss1 libappindicator1 libindicator7
+RUN    apt-get install libxss1 libappindicator1 libindicator7 xdg-utils
 RUN    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN    dpkg -i google-chrome*.deb
 
