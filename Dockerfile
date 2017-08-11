@@ -18,12 +18,12 @@ RUN     apt-get update -y && \
     supervisor \
     tzdata
 
-RUN apt-get install --no-install-recommends -y \
+RUN apt-get install -y \
     mate-core \
     mate-desktop-environment \
     mate-notification-daemon
     
-RUN apt-get install --no-install-recommends -y \
+RUN apt-get install -y \
     gconf-service \
     libnspr4 \
     libnss3 \
