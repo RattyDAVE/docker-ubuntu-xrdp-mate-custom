@@ -40,7 +40,7 @@ RUN     apt-get update -y && \
 
 # Install Skype
 #RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
-RUN    wget https://go.skype.com/skypeforlinux-64.deb
+RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb
 RUN    apt-get install -y apt-transport-https
 RUN    dpkg -i skypeforlinux-64.deb
 #RUN    apt-get install -f
