@@ -37,6 +37,10 @@ RUN apt-get install --no-install-recommends -y \
     ca-certificates wget \
     remmina*
     
+    
+RUN apt-get install -y \
+    caja-dropbox
+    
 RUN apt-get install -y \
     xrdp
 
