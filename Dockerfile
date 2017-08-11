@@ -31,6 +31,13 @@ RUN     apt-get update -y && \
     firefox \
     remmina*
 
+# Install Google Chrome
+RUN    apt-get install libxss1 libappindicator1 libindicator7
+RUN    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN    dpkg -i google-chrome*.deb
+
+RUN    apt-get install -f
+
 RUN    apt-get autoclean && apt-get autoremove
 RUN    rm -rf /var/lib/apt/lists/*
 
