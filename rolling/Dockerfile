@@ -46,7 +46,7 @@ RUN     wget --no-check-certificate http://http.us.debian.org/debian/pool/main/o
 RUN    wget --no-check-certificate http://http.us.debian.org/debian/pool/main/x/xrdp/xorgxrdp_0.9.2~20170325-1~exp1_amd64.deb
 RUN    wget --no-check-certificate http://http.us.debian.org/debian/pool/main/x/xrdp/xrdp_0.9.2~20170325-1~exp1_amd64.deb
 
-RUN    dpkg -i xorgxrdp_0.9.2-20170325-1-exp1_amd64.deb xrdp_0.9.2-20170325-1-exp1_amd64.deb libssl1.1_1.1.0f-4_arm64.deb libjpeg62-turbo_1.5.1-2_amd64.deb
+RUN    dpkg -i *.deb
 
 # Install Google Chrome
 #RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
