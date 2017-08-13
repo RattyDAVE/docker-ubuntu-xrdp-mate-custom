@@ -8,9 +8,9 @@ ENV LANGUAGE en_GB:GB
 ENV LC_ALL en_GB.UTF-8
 
 ## Enable Ubuntu Universe, Multiverse, and deb-src for main.
-RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
-RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
-RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
+#RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
+#RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
+#RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
 
 RUN     apt-get update -y && \
     apt-get install --no-install-recommends -y \
@@ -39,8 +39,9 @@ RUN apt-get install --no-install-recommends -y \
 #RUN apt-get install -y \
 #    xrdp
 
+RUN    wget --no-check-certificate http://http.us.debian.org/debian/pool/main/x/xrdp/xorgxrdp_0.9.2~20170325-1~exp1_amd64.deb
+RUN    dpkg -i xorgxrdp_0.9.2-20170325-1-exp1_amd64.deb
 
-http://http.us.debian.org/debian/pool/main/x/xrdp/xrdp_0.9.2~20170325-1~exp1_amd64.deb
 RUN    wget --no-check-certificate http://http.us.debian.org/debian/pool/main/x/xrdp/xrdp_0.9.2~20170325-1~exp1_amd64.deb
 RUN    dpkg -i xrdp_0.9.2-20170325-1-exp1_amd64.deb
 
