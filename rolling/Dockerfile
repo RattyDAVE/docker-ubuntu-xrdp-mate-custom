@@ -1,4 +1,4 @@
-FROM ubuntu:zesty
+FROM ubuntu:latest
 
 #NO USERS ARE ACTIVE!!!!!!!!
 
@@ -34,20 +34,15 @@ RUN apt-get install -y \
     
 RUN apt-get install --no-install-recommends -y \
     firefox \
-    filezilla \
-    netbeans \
-    dia \
-    geany \
-    putty \
-    mysql-workbench \
     ca-certificates wget \
-    remmina*
-    
-RUN apt-get install -y \
-    caja-dropbox
-    
-RUN apt-get install -y \
-    xrdp
+        
+#RUN apt-get install -y \
+#    xrdp
+
+
+http://http.us.debian.org/debian/pool/main/x/xrdp/xrdp_0.9.2~20170325-1~exp1_amd64.deb
+RUN    wget --no-check-certificate http://http.us.debian.org/debian/pool/main/x/xrdp/xrdp_0.9.2~20170325-1~exp1_amd64.deb
+RUN    dpkg -i xrdp_0.9.2-20170325-1-exp1_amd64.deb
 
 # Install Google Chrome
 #RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
@@ -57,9 +52,9 @@ RUN apt-get install -y \
 
 # Install Skype
 #RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
-RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb
-RUN    apt-get install -y apt-transport-https
-RUN    dpkg -i skypeforlinux-64.deb
+#RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb
+#RUN    apt-get install -y apt-transport-https
+#RUN    dpkg -i skypeforlinux-64.deb
 #RUN    apt-get install -f
 
 RUN    apt-get autoclean && apt-get autoremove
