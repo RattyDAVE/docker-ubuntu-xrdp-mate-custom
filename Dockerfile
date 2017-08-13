@@ -8,9 +8,9 @@ ENV LANGUAGE en_GB:GB
 ENV LC_ALL en_GB.UTF-8
 
 ## Enable Ubuntu Universe, Multiverse, and deb-src for main.
-RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
-RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
-RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
+#RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
+#RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
+#RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
 
 RUN     apt-get update -y && \
     apt-get install --no-install-recommends -y \
@@ -31,21 +31,11 @@ RUN apt-get install -y \
     libappindicator1 \
     libcurl3 \
     fonts-wqy-microhei
-    
+
 RUN apt-get install --no-install-recommends -y \
     firefox \
-    filezilla \
-    netbeans \
-    dia \
-    geany \
-    putty \
-    mysql-workbench \
-    ca-certificates wget \
-    remmina*
-    
-RUN apt-get install -y \
-    caja-dropbox
-    
+    ca-certificates wget
+
 RUN apt-get install -y \
     xrdp
 
@@ -53,13 +43,6 @@ RUN apt-get install -y \
 #RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
 #RUN    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 #RUN    dpkg -i google-chrome*.deb
-#RUN    apt-get install -f
-
-# Install Skype
-#RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
-RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb
-RUN    apt-get install -y apt-transport-https
-RUN    dpkg -i skypeforlinux-64.deb
 #RUN    apt-get install -f
 
 RUN    apt-get autoclean && apt-get autoremove
