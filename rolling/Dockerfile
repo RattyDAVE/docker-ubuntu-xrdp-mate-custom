@@ -65,15 +65,15 @@ RUN    apt-get autoclean && apt-get autoremove
 RUN    rm -rf /var/lib/apt/lists/*
 
 RUN    echo "mate-session" > /etc/skel/.xsession
-RUN    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
-RUN    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
+#RUN    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
+#RUN    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
 #RUN    sed -i.bak '/fi/a #xrdp multiple users configuration \n mate-session \n' /etc/xrdp/startwm.sh
-RUN    xrdp-keygen xrdp auto
+#RUN    xrdp-keygen xrdp auto
 
-ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
-ADD 	km-0809.ini /etc/xrdp/km-0809.ini
-RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
-RUN     chmod 644 /etc/xrdp/km-0809.ini
+#ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
+#ADD 	km-0809.ini /etc/xrdp/km-0809.ini
+#RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
+#RUN     chmod 644 /etc/xrdp/km-0809.ini
 
 RUN    locale-gen en_GB.UTF-8
 RUN    update-locale LANG=en_GB.UTF-8
