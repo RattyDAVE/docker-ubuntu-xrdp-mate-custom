@@ -75,9 +75,9 @@ RUN mkdir -p /var/run/dbus
 RUN chown messagebus:messagebus /var/run/dbus
 RUN dbus-uuidgen --ensure
 
-RUN echo "[program:dbus-daemon]" >> /etc/supervisor/conf.d/dbus.conf
-RUN echo "command=/usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus.conf
-RUN echo "user=messagebus" >> /etc/supervisor/conf.d/dbus.conf
+#RUN echo "[program:dbus-daemon]" >> /etc/supervisor/conf.d/dbus.conf
+#RUN echo "command=/usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus.conf
+#RUN echo "user=messagebus" >> /etc/supervisor/conf.d/dbus.conf
 
 RUN mkdir -p /var/run/xrdp
 RUN chown root:xrdp /var/run/xrdp
