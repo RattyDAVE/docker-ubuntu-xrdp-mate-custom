@@ -34,21 +34,14 @@ RUN apt-get install -y \
     
 RUN apt-get install --no-install-recommends -y \
     firefox \
+    vim \
+    mc \
     ca-certificates wget
         
 RUN apt-get install -y \
+    tightvncserver \
     xrdp
     
-
-#RUN     cd /root
-
-#RUN     wget --no-check-certificate http://http.us.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_1.5.1-2_amd64.deb
-#RUN     wget --no-check-certificate http://http.us.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.0f-4_amd64.deb
-#RUN    wget --no-check-certificate http://http.us.debian.org/debian/pool/main/x/xrdp/xorgxrdp_0.9.2~20170325-1~exp1_amd64.deb
-#RUN    wget --no-check-certificate http://http.us.debian.org/debian/pool/main/x/xrdp/xrdp_0.9.2~20170325-1~exp1_amd64.deb
-
-#RUN    dpkg -i *.deb
-
 # Install Google Chrome
 #RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
 #RUN    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -68,16 +61,22 @@ RUN    rm -rf /var/lib/apt/lists/*
 RUN    echo "mate-session" > /etc/skel/.xsession
 RUN    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
 RUN    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
+
+#Not needed CHECKED!
 #RUN    sed -i.bak '/fi/a #xrdp multiple users configuration \n mate-session \n' /etc/xrdp/startwm.sh
+#--------
+
 RUN    xrdp-keygen xrdp auto
 
-RUN mkdir -p /var/run/dbus
-RUN chown messagebus:messagebus /var/run/dbus
-RUN dbus-uuidgen --ensure
+#RUN mkdir -p /var/run/dbus
+#RUN chown messagebus:messagebus /var/run/dbus
+#RUN dbus-uuidgen --ensure
 
+#Not needed CHECKED!
 #RUN echo "[program:dbus-daemon]" >> /etc/supervisor/conf.d/dbus.conf
 #RUN echo "command=/usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus.conf
 #RUN echo "user=messagebus" >> /etc/supervisor/conf.d/dbus.conf
+#--------
 
 RUN mkdir -p /var/run/xrdp
 RUN chown root:xrdp /var/run/xrdp
@@ -87,8 +86,11 @@ RUN mkdir -p /var/run/xrdp/sockdir
 RUN chown root:xrdp /var/run/xrdp/sockdir
 RUN chmod 3777 /var/run/xrdp/sockdir
 
+#Not needed CHECKED!
 #RUN    /etc/init.d/xrdp start
 #RUN    /etc/init.d/xrdp stop
+#--------
+
 
 ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
 ADD 	km-0809.ini /etc/xrdp/km-0809.ini
