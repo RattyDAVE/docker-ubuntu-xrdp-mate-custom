@@ -68,9 +68,11 @@ RUN    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
 
 RUN    xrdp-keygen xrdp auto
 
-#RUN mkdir -p /var/run/dbus
-#RUN chown messagebus:messagebus /var/run/dbus
-#RUN dbus-uuidgen --ensure
+# NOT SURE IF NEEDED. Firefox errors is it related?
+RUN mkdir -p /var/run/dbus
+RUN chown messagebus:messagebus /var/run/dbus
+RUN dbus-uuidgen --ensure
+#--------
 
 #Not needed CHECKED!
 #RUN echo "[program:dbus-daemon]" >> /etc/supervisor/conf.d/dbus.conf
@@ -78,19 +80,22 @@ RUN    xrdp-keygen xrdp auto
 #RUN echo "user=messagebus" >> /etc/supervisor/conf.d/dbus.conf
 #--------
 
-RUN mkdir -p /var/run/xrdp
-RUN chown root:xrdp /var/run/xrdp
-RUN chmod 2775 /var/run/xrdp
+RUN /usr/share/xrdp/socksetup
 
-RUN mkdir -p /var/run/xrdp/sockdir
-RUN chown root:xrdp /var/run/xrdp/sockdir
-RUN chmod 3777 /var/run/xrdp/sockdir
+#RUN mkdir -p /var/run/xrdp
+#RUN chown root:xrdp /var/run/xrdp
+#RUN chmod 2775 /var/run/xrdp
+
+#RUN mkdir -p /var/run/xrdp/sockdir
+#RUN chown root:xrdp /var/run/xrdp/sockdir
+#RUN chmod 3777 /var/run/xrdp/sockdir
 
 #Not needed CHECKED!
 #RUN    /etc/init.d/xrdp start
 #RUN    /etc/init.d/xrdp stop
 #--------
 
+ADD     sshd.conf /etc/supervisor/conf.d/sshd.conf
 
 ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
 ADD 	km-0809.ini /etc/xrdp/km-0809.ini
