@@ -69,10 +69,10 @@ RUN    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
 
 RUN    xrdp-keygen xrdp auto
 
-# NOT SURE IF NEEDED. Firefox errors is it related?
-RUN mkdir -p /var/run/dbus
-RUN chown messagebus:messagebus /var/run/dbus
-RUN dbus-uuidgen --ensure
+#Not needed CHECKED!
+#RUN mkdir -p /var/run/dbus
+#RUN chown messagebus:messagebus /var/run/dbus
+#RUN dbus-uuidgen --ensure
 #--------
 
 #Not needed CHECKED!
@@ -97,11 +97,13 @@ RUN chmod 3777 /var/run/xrdp/sockdir
 #--------
 
 ADD     sshd.conf /etc/supervisor/conf.d/sshd.conf
+RUN mkdir /var/run/sshd
+RUN chmod 0755 /var/run/sshd
 
 ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
-ADD 	km-0809.ini /etc/xrdp/km-0809.ini
-RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
-RUN     chmod 644 /etc/xrdp/km-0809.ini
+#ADD 	km-0809.ini /etc/xrdp/km-0809.ini
+#RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
+#RUN     chmod 644 /etc/xrdp/km-0809.ini
 
 RUN    locale-gen en_GB.UTF-8
 RUN    update-locale LANG=en_GB.UTF-8
