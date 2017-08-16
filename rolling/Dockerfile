@@ -12,7 +12,7 @@ ENV LC_ALL en_GB.UTF-8
 #RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 #RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
 
-RUN     apt-get update -y && \
+RUN apt-get update -y && \
     apt-get install --no-install-recommends -y \
     locales \
     supervisor \
@@ -81,15 +81,15 @@ RUN dbus-uuidgen --ensure
 #RUN echo "user=messagebus" >> /etc/supervisor/conf.d/dbus.conf
 #--------
 
-RUN /usr/share/xrdp/socksetup
+#Taken From  /usr/share/xrdp/socksetup
+RUN mkdir -p /var/run/xrdp
+RUN chown root:xrdp /var/run/xrdp
+RUN chmod 2775 /var/run/xrdp
 
-#RUN mkdir -p /var/run/xrdp
-#RUN chown root:xrdp /var/run/xrdp
-#RUN chmod 2775 /var/run/xrdp
-
-#RUN mkdir -p /var/run/xrdp/sockdir
-#RUN chown root:xrdp /var/run/xrdp/sockdir
-#RUN chmod 3777 /var/run/xrdp/sockdir
+RUN mkdir -p /var/run/xrdp/sockdir
+RUN chown root:xrdp /var/run/xrdp/sockdir
+RUN chmod 3777 /var/run/xrdp/sockdir
+#--------
 
 #Not needed CHECKED!
 #RUN    /etc/init.d/xrdp start
