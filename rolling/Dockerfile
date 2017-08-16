@@ -33,6 +33,7 @@ RUN apt-get install -y \
     fonts-wqy-microhei
     
 RUN apt-get install --no-install-recommends -y \
+    openssh-server \
     firefox \
     vim \
     mc \
@@ -109,4 +110,4 @@ RUN    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigu
 
 CMD ["/usr/bin/supervisord", "-n"]
                                     
-EXPOSE 3389
+EXPOSE 3389 22
