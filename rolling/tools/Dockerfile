@@ -11,7 +11,8 @@ RUN     apt-get update -y && \
     remmina*
     
 RUN apt-get install -y \
-    caja-dropbox
+    caja-dropbox \
+    libreoffice
     
 # Install Skype
 #RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
