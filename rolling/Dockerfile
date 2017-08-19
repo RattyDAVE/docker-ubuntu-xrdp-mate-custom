@@ -14,9 +14,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y && \
     apt-get install --no-install-recommends -y \
-    locales \
     supervisor \
     tzdata
+#    locales \
+
 
 RUN apt-get install -y \
     mate-core \
@@ -100,10 +101,12 @@ ADD     sshd.conf /etc/supervisor/conf.d/sshd.conf
 RUN mkdir /var/run/sshd
 RUN chmod 0755 /var/run/sshd
 
-ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
-ADD 	km-0809.ini /etc/xrdp/km-0809.ini
-RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
-RUN     chmod 644 /etc/xrdp/km-0809.ini
+#ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
+#ADD 	km-0809.ini /etc/xrdp/km-0809.ini
+#RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
+#RUN     chmod 644 /etc/xrdp/km-0809.ini
+
+RUN sed -i s/us/gb/g /etc/default/keyboard
 
 #RUN    locale-gen en_GB.UTF-8
 #RUN    update-locale LANG=en_GB.UTF-8
