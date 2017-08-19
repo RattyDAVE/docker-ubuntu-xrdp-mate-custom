@@ -101,9 +101,9 @@ RUN mkdir /var/run/sshd
 RUN chmod 0755 /var/run/sshd
 
 ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
-#ADD 	km-0809.ini /etc/xrdp/km-0809.ini
-#RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
-#RUN     chmod 644 /etc/xrdp/km-0809.ini
+ADD 	km-0809.ini /etc/xrdp/km-0809.ini
+RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
+RUN     chmod 644 /etc/xrdp/km-0809.ini
 
 RUN    locale-gen en_GB.UTF-8
 RUN    update-locale LANG=en_GB.UTF-8
