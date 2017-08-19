@@ -3,9 +3,9 @@ FROM ubuntu:rolling
 #NO USERS ARE ACTIVE!!!!!!!!
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV LANG en_GB.UTF-8
-ENV LANGUAGE en_GB:GB
-ENV LC_ALL en_GB.UTF-8
+#ENV LANG en_GB.UTF-8
+#ENV LANGUAGE en_GB:GB
+#ENV LC_ALL en_GB.UTF-8
 
 ## Enable Ubuntu Universe, Multiverse, and deb-src for main.
 #RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
@@ -105,8 +105,8 @@ ADD 	km-0809.ini /etc/xrdp/km-0809.ini
 RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
 RUN     chmod 644 /etc/xrdp/km-0809.ini
 
-RUN    locale-gen en_GB.UTF-8
-RUN    update-locale LANG=en_GB.UTF-8
+#RUN    locale-gen en_GB.UTF-8
+#RUN    update-locale LANG=en_GB.UTF-8
 
 RUN    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
