@@ -1,17 +1,18 @@
 FROM rattydave/docker-ubuntu-xrdp-mate-custom:rolling-users-TEST
 
-RUN     apt-get update -y && \
+RUN apt-get update -y && \
     apt-get install --no-install-recommends -y \
+    xterm \
     filezilla \
     netbeans \
     dia \
     geany \
     putty \
-    mysql-workbench \
-    remmina*
+    mysql-workbench 
     
 RUN apt-get install -y \
     caja-dropbox \
+    remmina* \
     libreoffice
     
 # Install Skype
