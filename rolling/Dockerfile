@@ -106,6 +106,7 @@ RUN chmod 0755 /var/run/sshd
 #RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
 #RUN     chmod 644 /etc/xrdp/km-0809.ini
 
+RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
 RUN sed -i s/us/gb/g /etc/default/keyboard
 
 #RUN    locale-gen en_GB.UTF-8
