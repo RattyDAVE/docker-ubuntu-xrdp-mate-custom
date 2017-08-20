@@ -23,7 +23,7 @@ RUN echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale
 RUN echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
 RUN    locale-gen en_GB.UTF-8
 RUN    update-locale LANG=en_GB.UTF-8
-RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
+#RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
 RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
 #RUN sed -i s/us/gb/g /etc/default/keyboard
 
