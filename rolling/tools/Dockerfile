@@ -13,7 +13,6 @@ RUN apt-get update -y && \
 RUN apt-get install -y \
     caja-dropbox \
     remmina* \
-    bluej \
     libreoffice
     
 # Install Skype
@@ -24,10 +23,10 @@ RUN    apt-get install -y apt-transport-https
 RUN    dpkg -i skypeforlinux-64.deb
 RUN    apt-get install -f
 
-#RUN wget http://www.bluej.org/download/files/BlueJ-linux-410.deb
-#RUN apt-get install -y oracle-java8-jdk
-#RUN dpkg --install BlueJ-linux-410.deb
-#RUN dpkg --install *.deb && apt-get -f install
+RUN wget http://www.bluej.org/download/files/BlueJ-linux-410.deb
+RUN apt-get install -y oracle-java8-jdk
+RUN dpkg --install BlueJ-linux-410.deb
+RUN dpkg --install *.deb && apt-get -f install
 
 RUN    apt-get autoclean && apt-get autoremove
 RUN    rm -rf /var/lib/apt/lists/*
