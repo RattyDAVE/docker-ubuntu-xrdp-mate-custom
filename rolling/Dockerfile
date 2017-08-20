@@ -27,11 +27,11 @@ RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
 RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
 #RUN sed -i s/us/gb/g /etc/default/keyboard
 
-apt-get install --no-install-recommends -y \
+RUN apt-get install --no-install-recommends -y \
     supervisor \
     tzdata
 
-RUN    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 RUN apt-get install -y \
     mate-core \
