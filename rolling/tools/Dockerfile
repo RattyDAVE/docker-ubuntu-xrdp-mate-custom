@@ -24,6 +24,7 @@ RUN    apt-get install -y apt-transport-https
 #RUN    apt-get install -f
 
 RUN wget http://www.bluej.org/download/files/BlueJ-linux-410.deb
+RUN apt-get install -y oracle-java8-jdk
 #RUN dpkg --install BlueJ-linux-410.deb
 RUN dpkg --install *.deb && apt-get -f install
 
