@@ -12,12 +12,26 @@ ENV LC_ALL en_GB.UTF-8
 #RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 #RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
 
-RUN apt-get update -y && \
-    apt-get install --no-install-recommends -y \
-    supervisor \
-    tzdata \
+RUN apt-get update -y
+
+RUN apt-get install -y \    
     locales
 
+# Fix locale
+RUN echo 'LANG="en_GB.UTF-8"' > /etc/default/locale
+RUN echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale
+RUN echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
+RUN    locale-gen en_GB.UTF-8
+RUN    update-locale LANG=en_GB.UTF-8
+RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
+RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
+#RUN sed -i s/us/gb/g /etc/default/keyboard
+
+apt-get install --no-install-recommends -y \
+    supervisor \
+    tzdata
+
+RUN    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 RUN apt-get install -y \
     mate-core \
@@ -71,20 +85,6 @@ ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
 #ADD 	km-0809.ini /etc/xrdp/km-0809.ini
 #RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
 #RUN     chmod 644 /etc/xrdp/km-0809.ini
-
-RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
-#RUN sed -i s/us/gb/g /etc/default/keyboard
-RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
-# Fix locale
-RUN echo 'LANG="en_GB.UTF-8"' > /etc/default/locale
-RUN echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale
-RUN echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
-
-
-#RUN    locale-gen en_GB.UTF-8
-#RUN    update-locale LANG=en_GB.UTF-8
-
-RUN    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 CMD ["/usr/bin/supervisord", "-n"]
                                     
