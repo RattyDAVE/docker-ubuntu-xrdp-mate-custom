@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=setxkbmap gb
+Hidden=false
+X-MATE-Autostart-enabled=true
+Name[C]=SetKeyBoard GB
+Name=SetKeyBoard GB
+Comment[C]=Sets the keyboard to GB
+Comment=Sets the keyboard to GB
