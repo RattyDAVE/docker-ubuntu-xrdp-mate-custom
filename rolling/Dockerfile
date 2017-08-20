@@ -3,9 +3,9 @@ FROM ubuntu:rolling
 #NO USERS ARE ACTIVE!!!!!!!!
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV LANG en_GB.UTF-8
-ENV LANGUAGE en_GB:GB
-ENV LC_ALL en_GB.UTF-8
+#ENV LANG en_GB.UTF-8
+#ENV LANGUAGE en_GB:GB
+#ENV LC_ALL en_GB.UTF-8
 
 ## Enable Ubuntu Universe, Multiverse, and deb-src for main.
 #RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
