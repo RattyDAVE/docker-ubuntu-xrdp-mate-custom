@@ -44,19 +44,6 @@ RUN apt-get install -y \
     tightvncserver \
     xrdp
     
-# Install Google Chrome
-#RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
-#RUN    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#RUN    dpkg -i google-chrome*.deb
-#RUN    apt-get install -f
-
-# Install Skype
-#RUN    apt-get install --no-install-recommends -y libxss1 libappindicator1 libindicator7 xdg-utils
-#RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb
-#RUN    apt-get install -y apt-transport-https
-#RUN    dpkg -i skypeforlinux-64.deb
-#RUN    apt-get install -f
-
 RUN    apt-get autoclean && apt-get autoremove
 RUN    rm -rf /var/lib/apt/lists/*
 
@@ -64,23 +51,7 @@ RUN    echo "mate-session" > /etc/skel/.xsession
 RUN    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
 RUN    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
 
-#Not needed CHECKED!
-#RUN    sed -i.bak '/fi/a #xrdp multiple users configuration \n mate-session \n' /etc/xrdp/startwm.sh
-#--------
-
 RUN    xrdp-keygen xrdp auto
-
-#Not needed CHECKED!
-#RUN mkdir -p /var/run/dbus
-#RUN chown messagebus:messagebus /var/run/dbus
-#RUN dbus-uuidgen --ensure
-#--------
-
-#Not needed CHECKED!
-#RUN echo "[program:dbus-daemon]" >> /etc/supervisor/conf.d/dbus.conf
-#RUN echo "command=/usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus.conf
-#RUN echo "user=messagebus" >> /etc/supervisor/conf.d/dbus.conf
-#--------
 
 #Taken From  /usr/share/xrdp/socksetup
 RUN mkdir -p /var/run/xrdp
@@ -90,11 +61,6 @@ RUN chmod 2775 /var/run/xrdp
 RUN mkdir -p /var/run/xrdp/sockdir
 RUN chown root:xrdp /var/run/xrdp/sockdir
 RUN chmod 3777 /var/run/xrdp/sockdir
-#--------
-
-#Not needed CHECKED!
-#RUN    /etc/init.d/xrdp start
-#RUN    /etc/init.d/xrdp stop
 #--------
 
 ADD     sshd.conf /etc/supervisor/conf.d/sshd.conf
@@ -110,9 +76,9 @@ RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
 #RUN sed -i s/us/gb/g /etc/default/keyboard
 RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
 # Fix locale
-RUN echo 'LANG="en_GB.UTF-8"' > /etc/default/locale
-RUN echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale
-RUN echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
+#RUN echo 'LANG="en_GB.UTF-8"' > /etc/default/locale
+#RUN echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale
+#RUN echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
 
 
 #RUN    locale-gen en_GB.UTF-8
