@@ -20,13 +20,12 @@ RUN apt-get install -y \
 WORKDIR /root
 RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb
 RUN    apt-get install -y apt-transport-https
-RUN    dpkg -i skypeforlinux-64.deb
+#RUN    dpkg -i skypeforlinux-64.deb
 #RUN    apt-get install -f
 
 RUN wget http://www.bluej.org/download/files/BlueJ-linux-410.deb
-RUN dpkg --install BlueJ-linux-410.deb
-
-RUN apt-get -f install
+#RUN dpkg --install BlueJ-linux-410.deb
+RUN dpkg --install *.deb && apt-get -f install
 
 RUN    apt-get autoclean && apt-get autoremove
 RUN    rm -rf /var/lib/apt/lists/*
