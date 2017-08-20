@@ -24,7 +24,7 @@ RUN echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
 RUN    locale-gen en_GB.UTF-8
 RUN    update-locale LANG=en_GB.UTF-8
 #RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
-RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
+#RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
 #RUN sed -i s/us/gb/g /etc/default/keyboard
 
 RUN apt-get install --no-install-recommends -y \
@@ -33,19 +33,23 @@ RUN apt-get install --no-install-recommends -y \
 
 RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
+#RUN apt-get install -y \
+#    mate-core \
+#    mate-desktop-environment \
+#    mate-notification-daemon
+
 RUN apt-get install -y \
-    mate-core \
     mate-desktop-environment \
-    mate-notification-daemon
+    mate-themes
     
-RUN apt-get install -y \
-    gconf-service \
-    libnspr4 \
-    libnss3 \
-    fonts-liberation \
-    libappindicator1 \
-    libcurl3 \
-    fonts-wqy-microhei
+#RUN apt-get install -y \
+#    gconf-service \
+#    libnspr4 \
+#    libnss3 \
+#    fonts-liberation \
+#    libappindicator1 \
+#    libcurl3 \
+#    fonts-wqy-microhei
     
 RUN apt-get install --no-install-recommends -y \
     openssh-server \
@@ -85,6 +89,9 @@ ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
 #ADD 	km-0809.ini /etc/xrdp/km-0809.ini
 #RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
 #RUN     chmod 644 /etc/xrdp/km-0809.ini
+
+ADD setxkbmap.desktop /etc/xdg/autostart/setxkbmap.desktop
+RUN rm /etc/xdg/autostart/mate-*.desktop
 
 CMD ["/usr/bin/supervisord", "-n"]
                                     
