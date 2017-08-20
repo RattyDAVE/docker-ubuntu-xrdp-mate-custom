@@ -3,9 +3,9 @@ FROM ubuntu:rolling
 #NO USERS ARE ACTIVE!!!!!!!!
 
 ENV DEBIAN_FRONTEND noninteractive
-#ENV LANG en_GB.UTF-8
-#ENV LANGUAGE en_GB:GB
-#ENV LC_ALL en_GB.UTF-8
+ENV LANG en_GB.UTF-8
+ENV LANGUAGE en_GB:GB
+ENV LC_ALL en_GB.UTF-8
 
 ## Enable Ubuntu Universe, Multiverse, and deb-src for main.
 #RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
@@ -15,8 +15,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y && \
     apt-get install --no-install-recommends -y \
     supervisor \
-    tzdata
-#    locales \
+    tzdata \
+    locales
 
 
 RUN apt-get install -y \
@@ -109,6 +109,10 @@ RUN chmod 0755 /var/run/sshd
 RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
 #RUN sed -i s/us/gb/g /etc/default/keyboard
 RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
+# Fix locale
+RUN echo 'LANG="en_GB.UTF-8"' > /etc/default/locale
+RUN echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale
+RUN echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
 
 
 #RUN    locale-gen en_GB.UTF-8
