@@ -24,7 +24,7 @@ RUN    dpkg -i skypeforlinux-64.deb && apt-get install -f
 
 RUN wget http://www.bluej.org/download/files/BlueJ-linux-410.deb
 RUN apt-get install -y openjdk-9-jre
-RUN dpkg --install BlueJ-linux-410.deb && apt-get -f install
+#RUN dpkg --install BlueJ-linux-410.deb && apt-get -f install
 
-RUN    apt-get autoclean && apt-get autoremove
-RUN    rm -rf /var/lib/apt/lists/*
+#RUN    apt-get autoclean && apt-get autoremove
+#RUN    rm -rf /var/lib/apt/lists/*
