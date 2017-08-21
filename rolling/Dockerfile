@@ -11,7 +11,7 @@ ENV LC_ALL en_GB.UTF-8
 #RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
 #RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 #RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
-#RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list
+RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list
 
 RUN apt-get update -y
 
