@@ -3,6 +3,7 @@ FROM rattydave/docker-ubuntu-xrdp-mate-custom:rolling-users-TEST
 RUN apt-get update -yqq && \
     apt-get install --no-install-recommends -y \
     xterm \
+    curl \
     filezilla \
     netbeans \
     dia \
