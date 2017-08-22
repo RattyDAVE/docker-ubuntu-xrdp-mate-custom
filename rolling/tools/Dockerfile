@@ -26,6 +26,12 @@ RUN wget http://www.bluej.org/download/files/BlueJ-linux-410.deb
 RUN apt-get install -yqq openjdk-9-jre
 RUN dpkg -i BlueJ-linux-410.deb; apt-get install -f -y
 
+RUN set -xe \
+    && curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update \
+    && apt-get install -y google-chrome-stable
+
 
 #RUN    apt-get autoclean && apt-get autoremove
 #RUN    rm -rf /var/lib/apt/lists/*
