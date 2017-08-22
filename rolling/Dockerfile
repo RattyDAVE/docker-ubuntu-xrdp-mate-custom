@@ -15,7 +15,7 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list
 
 RUN apt-get update -y
 
-RUN apt-get install -y \    
+RUN apt-get install -yqq\    
     locales
 
 # Fix locale
@@ -28,7 +28,7 @@ RUN    update-locale LANG=en_GB.UTF-8
 #RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
 #RUN sed -i s/us/gb/g /etc/default/keyboard
 
-RUN apt-get install --no-install-recommends -y \
+RUN apt-get install --no-install-recommends -yqq \
     supervisor \
     tzdata
 
@@ -39,7 +39,7 @@ RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure 
 #    mate-desktop-environment \
 #    mate-notification-daemon
 
-RUN apt-get install -y \
+RUN apt-get install -yqq \
     mate-desktop-environment \
     mate-themes
     
@@ -52,14 +52,14 @@ RUN apt-get install -y \
 #    libcurl3 \
 #    fonts-wqy-microhei
     
-RUN apt-get install --no-install-recommends -y \
+RUN apt-get install --no-install-recommends -yqq \
     openssh-server \
     firefox \
     vim \
     mc \
     ca-certificates wget
         
-RUN apt-get install -y \
+RUN apt-get install -yqq \
     tightvncserver \
     xrdp
     
