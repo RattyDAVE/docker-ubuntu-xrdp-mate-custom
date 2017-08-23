@@ -39,7 +39,7 @@ RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure 
 #    mate-desktop-environment \
 #    mate-notification-daemon
 
-RUN apt-get install -yqq \
+RUN apt-get install -y \
     tightvncserver \
     vnc4server \
     x11vnc \
