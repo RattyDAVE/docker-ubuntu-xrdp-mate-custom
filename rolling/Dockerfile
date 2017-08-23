@@ -93,7 +93,7 @@ ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
 #RUN     chmod 644 /etc/xrdp/km-0809.ini
 
 ADD setxkbmap.desktop /etc/xdg/autostart/setxkbmap.desktop
-RUN rm /etc/xdg/autostart/mate-*.desktop
+#RUN rm /etc/xdg/autostart/mate-*.desktop
 
 CMD ["/usr/bin/supervisord", "-n"]
                                     
