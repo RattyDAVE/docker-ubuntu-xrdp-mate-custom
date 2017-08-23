@@ -40,6 +40,10 @@ RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure 
 #    mate-notification-daemon
 
 RUN apt-get install -yqq \
+    tightvncserver \
+    vnc4server \
+    x11vnc \
+    xrdp \
     mate-desktop-environment \
     mate-themes
     
@@ -57,13 +61,8 @@ RUN apt-get install --no-install-recommends -yqq \
     firefox \
     vim \
     mc \
-    ca-certificates wget
-        
-RUN apt-get install -yqq \
-    tightvncserver \
-    vnc4server \
-    x11vnc \
-    xrdp
+    ca-certificates \
+    wget
     
 RUN    apt-get autoclean && apt-get autoremove
 RUN    rm -rf /var/lib/apt/lists/*
