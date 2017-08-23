@@ -61,6 +61,8 @@ RUN apt-get install --no-install-recommends -yqq \
         
 RUN apt-get install -yqq \
     tightvncserver \
+    vnc4server \
+    x11vnc \
     xrdp
     
 RUN    apt-get autoclean && apt-get autoremove
