@@ -131,9 +131,9 @@ RUN echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
 
-#ADD 	km-0809.ini /etc/xrdp/km-0809.ini
-#RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
-#RUN     chmod 644 /etc/xrdp/km-0809.ini
+ADD 	km-0809.ini /etc/xrdp/km-0809.ini
+RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
+RUN     chmod 644 /etc/xrdp/km-0809.ini
 
 #ADD setxkbmap.desktop /etc/xdg/autostart/setxkbmap.desktop
 RUN echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
