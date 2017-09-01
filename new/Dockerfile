@@ -149,19 +149,21 @@ RUN echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
 #RUN rm /etc/xdg/autostart/mate-*.desktop
 
 
+# USERS ARE NOW HANDLED BY STARTUP SCRIPT.
+#RUN useradd -ms /bin/bash desktop
+#RUN echo "desktop:desktop" | chpasswd
+#RUN usermod -aG sudo desktop
 
-RUN useradd -ms /bin/bash desktop
-RUN echo "desktop:desktop" | chpasswd
-RUN usermod -aG sudo desktop
-
-RUN mkdir /home_ext
-RUN echo HOME=/home_ext >> /etc/default/useradd
-RUN useradd -ms /bin/bash --base-dir /home_ext ext_desktop
-RUN echo "ext_desktop:desktop" | chpasswd
-RUN usermod -aG sudo ext_desktop
+#RUN mkdir /home_ext
+#RUN echo HOME=/home_ext >> /etc/default/useradd
+#RUN useradd -ms /bin/bash --base-dir /home_ext ext_desktop
+#RUN echo "ext_desktop:desktop" | chpasswd
+#RUN usermod -aG sudo ext_desktop
 
 
 
-CMD ["/usr/bin/supervisord", "-n"]
+# CMD ["/usr/bin/supervisord", "-n"]
+ADD startup.sh /root/startup.sh
+CMD ["/bin/bash", "/root/startup.sh"]
                                     
 EXPOSE 3389 22
