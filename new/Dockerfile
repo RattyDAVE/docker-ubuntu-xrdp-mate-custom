@@ -39,13 +39,15 @@ RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure 
 #    mate-desktop-environment \
 #    mate-notification-daemon
 
-RUN apt-get install --no-install-recommends -yqq \
+RUN apt-get install -yqq \
     tightvncserver \
     vnc4server \
     x11vnc \
     xrdp \
     mate-desktop-environment \
-    mate-themes \
+    mate-themes
+    
+ RUN apt-get install --no-install-recommends -yqq \   
     openssh-server \
     chromium-browser \
     vim \
