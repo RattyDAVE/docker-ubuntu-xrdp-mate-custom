@@ -4,7 +4,7 @@
 # username:passsword:Y
 # username2:password2:Y
 
-file="/home/createusers.txt"
+file="/root/createusers.txt"
 if [ -f $file ]
   then
     while IFS=: read -r username password is_sudo
