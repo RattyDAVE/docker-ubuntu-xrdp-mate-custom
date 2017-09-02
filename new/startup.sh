@@ -10,11 +10,17 @@ if [ -f $file ]
     while IFS=: read -r username password is_sudo
         do
             echo "Username: $username, Password: $password , Sudo: $is_sudo"
-            useradd -ms /bin/bash $username
-            echo "$username:$password" | chpasswd
-            if [ "$is_sudo" = "Y" ]
-                then
+
+            if getent passwd $username > /dev/null 2>&1
+              then
+                echo "User Exists"
+              else
+                useradd -ms /bin/bash $username
+                echo "$username:$password" | chpasswd
+                if [ "$is_sudo" = "Y" ]
+                  then
                     usermod -aG sudo $username
+                fi
             fi
     done <"$file"
 fi
