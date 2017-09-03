@@ -83,7 +83,7 @@ RUN cd ~/Downloads && \
     make && \
     make install
 
-RUN curl -o /usr/include/X11/fonts/fontutil.h https://www.apt-browse.org/browse/ubuntu/trusty/main/i386/libxfont-dev/1:1.4.7-1/file/usr/include/X11/fonts/fontutil.h
+ADD fontutil.h /usr/include/X11/fonts/fontutil.h
     
 RUN cd ~/Downloads  && \
     git clone https://github.com/neutrinolabs/xorgxrdp.git && \
