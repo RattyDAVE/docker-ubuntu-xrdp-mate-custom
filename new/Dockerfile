@@ -39,17 +39,17 @@ RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure 
 #    mate-desktop-environment \
 #    mate-notification-daemon
 
-#RUN apt-get install -yqq \
-#    tightvncserver \
-#    vnc4server \
-#    x11vnc \
-#    xrdp \
-#    mate-desktop-environment \
-#    mate-themes
-
 RUN apt-get install -yqq \
+    tightvncserver \
+    vnc4server \
+    x11vnc \
+    xrdp \
     mate-desktop-environment \
     mate-themes
+
+#RUN apt-get install -yqq \
+#    mate-desktop-environment \
+#    mate-themes
     
  RUN apt-get install --no-install-recommends -yqq \   
     openssh-server \
@@ -71,27 +71,27 @@ RUN apt-get install -yqq \
     dos2unix \
     libreoffice
     
-RUN apt-get install build-essential pkg-config -yqq
-RUN apt-get -y install libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev fuse git
-RUN mkdir ~/Downloads
+#RUN apt-get install build-essential pkg-config -yqq
+#RUN apt-get -y install libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev fuse git
+#RUN mkdir ~/Downloads
 
-RUN cd ~/Downloads && \
-    git clone https://github.com/neutrinolabs/xrdp.git && \
-    cd ~/Downloads/xrdp && \
-    ./bootstrap && \
-    ./configure --enable-fuse --enable-jpeg && \ 
-    make && \
-    make install
+#RUN cd ~/Downloads && \
+#    git clone https://github.com/neutrinolabs/xrdp.git && \
+#    cd ~/Downloads/xrdp && \
+#    ./bootstrap && \
+#    ./configure --enable-fuse --enable-jpeg && \ 
+#    make && \
+#    make install
 
-ADD fontutil.h /usr/include/X11/fonts/fontutil.h
+#ADD fontutil.h /usr/include/X11/fonts/fontutil.h
     
-RUN cd ~/Downloads  && \
-    git clone https://github.com/neutrinolabs/xorgxrdp.git && \
-    cd ~/Downloads/xorgxrdp  && \
-    ./bootstrap  && \
-    ./configure  && \
-    make && \
-    make install
+#RUN cd ~/Downloads  && \
+#    git clone https://github.com/neutrinolabs/xorgxrdp.git && \
+#    cd ~/Downloads/xorgxrdp  && \
+#    ./bootstrap  && \
+#    ./configure  && \
+#    make && \
+#    make install
     
 #RUN apt-get install -y \
 #    gconf-service \
@@ -131,16 +131,15 @@ RUN    xrdp-keygen xrdp auto
 
 #Taken From  /usr/share/xrdp/socksetup
 RUN mkdir -p /var/run/xrdp
-#RUN chown root:xrdp /var/run/xrdp
+RUN chown root:xrdp /var/run/xrdp
 RUN chmod 2775 /var/run/xrdp
 
 RUN mkdir -p /var/run/xrdp/sockdir
-#RUN chown root:xrdp /var/run/xrdp/sockdir
+RUN chown root:xrdp /var/run/xrdp/sockdir
 RUN chmod 3777 /var/run/xrdp/sockdir
 #--------
 
 #ADD     sshd.conf /etc/supervisor/conf.d/sshd.conf
-
 RUN echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
     echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
@@ -152,16 +151,15 @@ RUN mkdir /var/run/sshd
 RUN chmod 0755 /var/run/sshd
 
 #ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
-
 RUN echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
-    echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "command=/usr/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]">> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
 
 ADD 	km-0809.ini /etc/xrdp/km-0809.ini
-#RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
+RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
 RUN     chmod 644 /etc/xrdp/km-0809.ini
 
 #ADD setxkbmap.desktop /etc/xdg/autostart/setxkbmap.desktop
