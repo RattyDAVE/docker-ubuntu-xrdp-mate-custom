@@ -163,7 +163,7 @@ RUN echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
 #RUN echo "ext_desktop:desktop" | chpasswd
 #RUN usermod -aG sudo ext_desktop
 
-RUN cp /etc/hosts /etc/hosts.ori
+# NO NO NO RUN cp /etc/hosts /etc/hosts.ori
 
 # CMD ["/usr/bin/supervisord", "-n"]
 ADD startup.sh /root/startup.sh
