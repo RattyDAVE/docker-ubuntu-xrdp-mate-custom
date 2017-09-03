@@ -64,6 +64,7 @@ RUN apt-get install -yqq \
     wget \
     caja-dropbox \
     remmina* \
+    dos2unix \
     libreoffice
     
 #RUN apt-get install -y \
