@@ -27,11 +27,11 @@ fi
 
 #### Change hosts file stop ads.
 
-cd /root
-rm hosts
-wget -o newhosts.txt https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews/hosts
-cat /etc/hosts.ori  >/etc/hosts
-cat hosts >> /etc/hosts
+#cd /root
+#rm hosts
+#wget -o newhosts.txt https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews/hosts
+#cat /etc/hosts.ori  >/etc/hosts
+#cat hosts >> /etc/hosts
 
 
 #This has to be the last command!
