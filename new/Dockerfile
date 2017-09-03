@@ -22,17 +22,14 @@ RUN apt-get install -yqq\
 RUN echo 'LANG="en_GB.UTF-8"' > /etc/default/locale
 RUN echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale
 RUN echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
-RUN    locale-gen en_GB.UTF-8
-RUN    update-locale LANG=en_GB.UTF-8
+RUN locale-gen en_GB.UTF-8
+RUN update-locale LANG=en_GB.UTF-8
+
+
 #RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
 #RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
 #RUN sed -i s/us/gb/g /etc/default/keyboard
 
-RUN apt-get install --no-install-recommends -yqq \
-    supervisor \
-    tzdata
-
-RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
 #RUN apt-get install -y \
 #    mate-core \
@@ -51,7 +48,9 @@ RUN apt-get install -yqq \
 #    mate-desktop-environment \
 #    mate-themes
     
- RUN apt-get install --no-install-recommends -yqq \   
+ RUN apt-get install --no-install-recommends -yqq \
+    supervisor \
+    tzdata
     openssh-server \
     chromium-browser \
     vim \
@@ -69,8 +68,9 @@ RUN apt-get install -yqq \
     caja-dropbox \
     remmina* \
     dos2unix \
-    libreoffice
-    
+    libreoffice && \ 
+    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+
 #RUN apt-get install build-essential pkg-config -yqq
 #RUN apt-get -y install libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev fuse git
 #RUN mkdir ~/Downloads
@@ -112,16 +112,15 @@ RUN apt-get install -yqq \
 
 
 WORKDIR /root
-RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb
-RUN    apt-get install -yqq apt-transport-https
-RUN    dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq
-
-RUN wget http://www.bluej.org/download/files/BlueJ-linux-410.deb
-RUN apt-get install -yqq openjdk-9-jre
-RUN dpkg -i BlueJ-linux-410.deb; apt-get install -f -y
+RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  && \ 
+       apt-get install -yqq apt-transport-https   && \ 
+       dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \ 
+       wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
+       apt-get install -yqq openjdk-9-jre  && \ 
+       dpkg -i BlueJ-linux-410.deb; apt-get install -f -y
     
-RUN    apt-get autoclean && apt-get autoremove
-RUN    rm -rf /var/lib/apt/lists/*
+RUN    apt-get autoclean && apt-get autoremove   && \ 
+       rm -rf /var/lib/apt/lists/*
 
 RUN    echo "mate-session" > /etc/skel/.xsession
 RUN    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
