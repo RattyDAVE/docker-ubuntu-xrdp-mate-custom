@@ -39,11 +39,15 @@ RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure 
 #    mate-desktop-environment \
 #    mate-notification-daemon
 
+#RUN apt-get install -yqq \
+#    tightvncserver \
+#    vnc4server \
+#    x11vnc \
+#    xrdp \
+#    mate-desktop-environment \
+#    mate-themes
+
 RUN apt-get install -yqq \
-    tightvncserver \
-    vnc4server \
-    x11vnc \
-    xrdp \
     mate-desktop-environment \
     mate-themes
     
@@ -66,6 +70,28 @@ RUN apt-get install -yqq \
     remmina* \
     dos2unix \
     libreoffice
+    
+RUN apt-get install build-essential pkg-config -yqq
+RUN apt-get -y install libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev fuse git
+RUN mkdir ~/Downloads
+
+RUN cd ~/Downloads && \
+    git clone https://github.com/neutrinolabs/xrdp.git && \
+    cd ~/Downloads/xrdp && \
+    ./bootstrap && \
+    ./configure --enable-fuse --enable-jpeg && \ 
+    make && \
+    make install
+
+RUN cd ~/Downloads  && \
+    git clone https://github.com/neutrinolabs/xorgxrdp.git && \
+    cd ~/Downloads/xorgxrdp  && \
+    ./bootstrap  && \
+    ./configure  && \
+    make && \
+    make install
+
+
     
 #RUN apt-get install -y \
 #    gconf-service \
