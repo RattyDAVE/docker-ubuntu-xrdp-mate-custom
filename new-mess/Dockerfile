@@ -7,31 +7,27 @@ ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB:GB
 ENV LC_ALL en_GB.UTF-8
 
+WORKDIR /root
+
 ## Enable Ubuntu Universe, Multiverse, and deb-src for main.
 #RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
 #RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 #RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
-RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list
-
-RUN apt-get update -y
-
-RUN apt-get install -yqq\    
-    locales  && \
-    echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \
-    echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale && \
-    echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale && \
-    locale-gen en_GB.UTF-8 && \
-    update-locale LANG=en_GB.UTF-8
-
-RUN apt-get install -yqq \
+RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \ 
+    apt-get update -y && \ 
+    apt-get install -yqq locales  && \ 
+    echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
+    echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale && \ 
+    echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale && \ 
+    locale-gen en_GB.UTF-8 && \ 
+    update-locale LANG=en_GB.UTF-8  && \ 
+    apt-get install -yqq \
     mate-desktop-environment \
-    mate-themes
-   
- RUN apt-get install --no-install-recommends -yqq \
+    mate-themes && \ 
+    apt-get install --no-install-recommends -yqq \
     supervisor \
     tzdata \
     openssh-server \
-    tightvncserver \
     chromium-browser \
     vim \
     mc \
@@ -51,7 +47,6 @@ RUN apt-get install -yqq \
     libreoffice && \ 
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
 
-WORKDIR /root
 RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  && \ 
        apt-get install -yqq apt-transport-https   && \ 
        dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \ 
@@ -59,65 +54,83 @@ RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  &&
        apt-get install -yqq openjdk-9-jre  && \ 
        dpkg -i BlueJ-linux-410.deb; apt-get install -f -y
     
-RUN apt-get -y install git xserver-xorg-dev libxfont1-dev xserver-xorg-core libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev fuse build-essential pkg-config 
-RUN git clone https://github.com/neutrinolabs/xrdp.git
-RUN git clone https://github.com/neutrinolabs/xorgxrdp.git
-
-RUN cd /root/xrdp && \
-    ./bootstrap && \
-    ./configure --enable-fuse --enable-jpeg  && \
-    make && \
-    make install
-
-RUN cd /root/xorgxrdp  && \
-    ./bootstrap  && \
-    ./configure  && \
-    make && \
-    make install
-
-RUN    apt-get autoclean && apt-get autoremove   && \ 
-       rm -rf /var/lib/apt/lists/*
-
-RUN    echo "mate-session" > /etc/skel/.xsession
-RUN    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
-RUN    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
-
-RUN    xrdp-keygen xrdp auto
-
-#Taken From  /usr/share/xrdp/socksetup
-RUN mkdir -p /var/run/xrdp
-#RUN chown root:xrdp /var/run/xrdp
-RUN chmod 2775 /var/run/xrdp
-
-RUN mkdir -p /var/run/xrdp/sockdir
-#RUN chown root:xrdp /var/run/xrdp/sockdir
-RUN chmod 3777 /var/run/xrdp/sockdir
-#--------
-
-#ADD     sshd.conf /etc/supervisor/conf.d/sshd.conf
+RUN apt-get -y install \
+        git \
+        libxfont1-dev \
+        xserver-xorg-core \
+        libx11-dev \
+        libxfixes-dev \
+        libssl-dev \
+        libpam0g-dev \
+        libtool \
+        libjpeg-dev \
+        flex \
+        bison \
+        gettext \
+        autoconf \
+        libxml-parser-perl \
+        libfuse-dev \
+        xsltproc \
+        libxrandr-dev \
+        python-libxml2 \
+        nasm \
+        xserver-xorg-dev \
+        fuse \
+        build-essential \
+        pkg-config
+        
+RUN git clone https://github.com/neutrinolabs/xrdp.git  && \
+    git clone https://github.com/neutrinolabs/xorgxrdp.git && \
+    cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg && make && make install  && \
+    cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install  && \
+    apt-get -y purge \
+        git \
+        libxfont1-dev \
+        libx11-dev \
+        libxfixes-dev \
+        libssl-dev \
+        libpam0g-dev \
+        libtool \
+        libjpeg-dev \
+        flex \
+        bison \
+        gettext \
+        autoconf \
+        libxml-parser-perl \
+        libfuse-dev \
+        xsltproc \
+        libxrandr-dev \
+        python-libxml2 \
+        nasm \
+        xserver-xorg-dev \
+        fuse \
+        build-essential \
+        pkg-config && \
+    apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
+    apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*  && \
+    rm -rf /root/xorgxrdp/ /root/xrdp/ && \
+    echo "mate-session" > /etc/skel/.xsession && \
+    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
+    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini  && \
+    xrdp-keygen xrdp auto  && \
+    mkdir -p /var/run/xrdp && \
+    chmod 2775 /var/run/xrdp  && \
+    mkdir -p /var/run/xrdp/sockdir && \
+    chmod 3777 /var/run/xrdp/sockdir
+    
 RUN echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
     echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "stderr_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
-    echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf
-
-RUN mkdir /var/run/sshd
-RUN chmod 0755 /var/run/sshd
-
-#ADD     xrdp.conf /etc/supervisor/conf.d/xrdp.conf
-RUN echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
+    echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
+    mkdir /var/run/sshd && chmod 0755 /var/run/sshd && \
+    echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]">> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
-
-ADD 	km-0809.ini /etc/xrdp/km-0809.ini
-#RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
-RUN   chmod 644 /etc/xrdp/km-0809.ini
-
-#ADD setxkbmap.desktop /etc/xdg/autostart/setxkbmap.desktop
-RUN echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
+    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Type=Application" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Exec=setxkbmap gb" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Hidden=false" >> /etc/xdg/autostart/setxkbmap.desktop && \
@@ -127,22 +140,9 @@ RUN echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
 
-#RUN rm /etc/xdg/autostart/mate-*.desktop
+ADD   km-0809.ini /etc/xrdp/km-0809.ini
+RUN   chmod 644 /etc/xrdp/km-0809.ini
 
-# USERS ARE NOW HANDLED BY STARTUP SCRIPT.
-#RUN useradd -ms /bin/bash desktop
-#RUN echo "desktop:desktop" | chpasswd
-#RUN usermod -aG sudo desktop
-
-#RUN mkdir /home_ext
-#RUN echo HOME=/home_ext >> /etc/default/useradd
-#RUN useradd -ms /bin/bash --base-dir /home_ext ext_desktop
-#RUN echo "ext_desktop:desktop" | chpasswd
-#RUN usermod -aG sudo ext_desktop
-
-# NO NO NO RUN cp /etc/hosts /etc/hosts.ori
-
-# CMD ["/usr/bin/supervisord", "-n"]
 ADD startup.sh /root/startup.sh
 CMD ["/bin/bash", "/root/startup.sh"]
                                     
