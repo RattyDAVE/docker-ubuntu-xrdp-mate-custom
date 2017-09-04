@@ -35,7 +35,7 @@ RUN apt-get install -yqq \
    
  RUN apt-get install --no-install-recommends -yqq \
     supervisor \
-    tzdata
+    tzdata \
     openssh-server \
     chromium-browser \
     vim \
