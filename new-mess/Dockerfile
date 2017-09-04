@@ -24,6 +24,7 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
     apt-get install -yqq \
         mate-desktop-environment \
         mate-themes \
+        tightvncserver \
         x11vnc && \ 
     apt-get install --no-install-recommends -yqq \
         supervisor \
