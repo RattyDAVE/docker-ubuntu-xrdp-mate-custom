@@ -16,18 +16,12 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list
 RUN apt-get update -y
 
 RUN apt-get install -yqq\    
-    locales
-
-# Fix locale
-RUN echo 'LANG="en_GB.UTF-8"' > /etc/default/locale
-RUN echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale
-RUN echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
-RUN locale-gen en_GB.UTF-8
-RUN update-locale LANG=en_GB.UTF-8
-
-#RUN sed -i 's/XKBLAYOUT=\"\w*"/XKBLAYOUT=\"'GB'\"/g' /etc/default/keyboard
-#RUN echo "setxkbmap gb" > /etc/profile.d/setxkbmap.sh
-#RUN sed -i s/us/gb/g /etc/default/keyboard
+    locales  && \
+    echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \
+    echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale && \
+    echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale && \
+    locale-gen en_GB.UTF-8 && \
+    update-locale LANG=en_GB.UTF-8
 
 RUN apt-get install -yqq \
     mate-desktop-environment \
