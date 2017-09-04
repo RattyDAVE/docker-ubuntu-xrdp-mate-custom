@@ -37,6 +37,7 @@ RUN apt-get install -yqq \
     supervisor \
     tzdata \
     openssh-server \
+    tightvncserver \
     chromium-browser \
     vim \
     mc \
