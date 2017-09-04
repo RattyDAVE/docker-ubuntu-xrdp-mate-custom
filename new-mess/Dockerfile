@@ -22,39 +22,38 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
     locale-gen en_GB.UTF-8 && \ 
     update-locale LANG=en_GB.UTF-8  && \ 
     apt-get install -yqq \
-    mate-desktop-environment \
-    mate-themes && \ 
+        mate-desktop-environment \
+        mate-themes \
+        x11vnc && \ 
     apt-get install --no-install-recommends -yqq \
-    supervisor \
-    tzdata \
-    openssh-server \
-    chromium-browser \
-    vim \
-    mc \
-    ca-certificates \
-    xterm \
-    curl \
-    filezilla \
-    netbeans \
-    dia \
-    geany \
-    putty \
-    mysql-workbench \
-    wget \
-    caja-dropbox \
-    remmina* \
-    dos2unix \
+        supervisor \
+        tzdata \
+        openssh-server \
+        chromium-browser \
+        vim \
+        mc \
+        ca-certificates \
+        xterm \
+        curl \
+        filezilla \
+        netbeans \
+        dia \
+        geany \
+        putty \
+        mysql-workbench \
+        wget \
+        caja-dropbox \
+        remmina* \
+        dos2unix \
     libreoffice && \ 
-    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
-
-RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  && \ 
-       apt-get install -yqq apt-transport-https   && \ 
-       dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \ 
-       wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
-       apt-get install -yqq openjdk-9-jre  && \ 
-       dpkg -i BlueJ-linux-410.deb; apt-get install -f -y
-    
-RUN apt-get -y install \
+    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
+    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  && \ 
+    apt-get install -yqq apt-transport-https   && \ 
+    dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \ 
+    wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
+    apt-get install -yqq openjdk-9-jre  && \ 
+    dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
+    apt-get -y install \
         git \
         libxfont1-dev \
         xserver-xorg-core \
@@ -77,9 +76,8 @@ RUN apt-get -y install \
         xserver-xorg-dev \
         fuse \
         build-essential \
-        pkg-config
-        
-RUN git clone https://github.com/neutrinolabs/xrdp.git  && \
+        pkg-config && \
+    git clone https://github.com/neutrinolabs/xrdp.git  && \
     git clone https://github.com/neutrinolabs/xorgxrdp.git && \
     cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg && make && make install  && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install  && \
@@ -116,9 +114,8 @@ RUN git clone https://github.com/neutrinolabs/xrdp.git  && \
     mkdir -p /var/run/xrdp && \
     chmod 2775 /var/run/xrdp  && \
     mkdir -p /var/run/xrdp/sockdir && \
-    chmod 3777 /var/run/xrdp/sockdir
-    
-RUN echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
+    chmod 3777 /var/run/xrdp/sockdir && \
+    echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
     echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "stderr_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
