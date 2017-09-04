@@ -64,7 +64,7 @@ RUN    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  &&
        apt-get install -yqq openjdk-9-jre  && \ 
        dpkg -i BlueJ-linux-410.deb; apt-get install -f -y
     
-RUN apt-get -y install git xserver-xorg-core libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev fuse build-essential pkg-config 
+RUN apt-get -y install git xserver-xorg-dev libxfont1-dev xserver-xorg-core libx11-dev libxfixes-dev libssl-dev libpam0g-dev libtool libjpeg-dev flex bison gettext autoconf libxml-parser-perl libfuse-dev xsltproc libxrandr-dev python-libxml2 nasm xserver-xorg-dev fuse build-essential pkg-config 
 RUN git clone https://github.com/neutrinolabs/xrdp.git
 RUN git clone https://github.com/neutrinolabs/xorgxrdp.git
 
@@ -74,11 +74,11 @@ RUN cd /root/xrdp && \
     make && \
     make install
 
-#RUN cd /root/xorgxrdp  && \
-#    ./bootstrap  && \
-#    ./configure  && \
-#    make && \
-#    make install
+RUN cd /root/xorgxrdp  && \
+    ./bootstrap  && \
+    ./configure  && \
+    make && \
+    make install
 
 RUN    apt-get autoclean && apt-get autoremove   && \ 
        rm -rf /var/lib/apt/lists/*
@@ -91,11 +91,11 @@ RUN    xrdp-keygen xrdp auto
 
 #Taken From  /usr/share/xrdp/socksetup
 RUN mkdir -p /var/run/xrdp
-RUN chown root:xrdp /var/run/xrdp
+#RUN chown root:xrdp /var/run/xrdp
 RUN chmod 2775 /var/run/xrdp
 
 RUN mkdir -p /var/run/xrdp/sockdir
-RUN chown root:xrdp /var/run/xrdp/sockdir
+#RUN chown root:xrdp /var/run/xrdp/sockdir
 RUN chmod 3777 /var/run/xrdp/sockdir
 #--------
 
@@ -118,7 +118,7 @@ RUN echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
 
 ADD 	km-0809.ini /etc/xrdp/km-0809.ini
-RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
+#RUN 	chown xrdp.xrdp /etc/xrdp/km-0809.ini
 RUN   chmod 644 /etc/xrdp/km-0809.ini
 
 #ADD setxkbmap.desktop /etc/xdg/autostart/setxkbmap.desktop
