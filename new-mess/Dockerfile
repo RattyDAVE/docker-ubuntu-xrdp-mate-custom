@@ -74,11 +74,11 @@ RUN cd /root/xrdp && \
     make && \
     make install
 
-RUN cd /root/xorgxrdp  && \
-    ./bootstrap  && \
-    ./configure  && \
-    make && \
-    make install
+#RUN cd /root/xorgxrdp  && \
+#    ./bootstrap  && \
+#    ./configure  && \
+#    make && \
+#    make install
 
 RUN    apt-get autoclean && apt-get autoremove   && \ 
        rm -rf /var/lib/apt/lists/*
