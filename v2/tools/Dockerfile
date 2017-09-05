@@ -1,4 +1,4 @@
-FROM rattydave/docker-ubuntu-xrdp-mate-custom:new-mess
+FROM rattydave/docker-ubuntu-xrdp-mate-custom:v2
 
 WORKDIR /root
 
