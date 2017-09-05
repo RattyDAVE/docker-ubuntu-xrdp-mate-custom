@@ -35,6 +35,7 @@ You do not need to publish port 22 only use if needed.
 This file contains 3 fields (username:password:is_sudo). Where username is the login id. Password is the password. is_sudo does the user have sudo access(only Y is recognised).
 
 Example
+
 ```
 mickey:mouse:N
 daisy:duke:Y
