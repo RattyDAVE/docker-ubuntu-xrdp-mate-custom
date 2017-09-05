@@ -46,7 +46,6 @@ In this example 4 users will be created and only daisy will have sudo rights.
 
 At every reboot it will check this file and ADD any new users.
 
-
 Example of a working command line.
 ```
 docker run -d --name RattyDAVEv2 \
