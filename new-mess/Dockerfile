@@ -1,7 +1,5 @@
 FROM ubuntu:latest
 
-#NO USERS ARE ACTIVE!!!!!!!!
-
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB:GB
@@ -28,32 +26,16 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
         x11vnc && \ 
     apt-get install --no-install-recommends -yqq \
         supervisor \
-        tzdata \
         openssh-server \
+        tzdata \
         chromium-browser \
         vim \
         mc \
         ca-certificates \
         xterm \
         curl \
-        filezilla \
-        netbeans \
-        dia \
-        geany \
-        putty \
-        mysql-workbench \
-        wget \
-        caja-dropbox \
-        remmina* \
-        dos2unix \
-    libreoffice && \ 
+        wget && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
-    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  && \ 
-    apt-get install -yqq apt-transport-https   && \ 
-    dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \ 
-    wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
-    apt-get install -yqq openjdk-9-jre  && \ 
-    dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     apt-get -y install \
         git \
         libxfont1-dev \
@@ -138,10 +120,11 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
     echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
 
+ADD   xrdp.ini /etc/xrdp/xrdp.ini
 ADD   km-0809.ini /etc/xrdp/km-0809.ini
 RUN   chmod 644 /etc/xrdp/km-0809.ini
 
 ADD startup.sh /root/startup.sh
 CMD ["/bin/bash", "/root/startup.sh"]
                                     
-EXPOSE 3389 22
+EXPOSE 3389
