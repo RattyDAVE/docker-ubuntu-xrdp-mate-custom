@@ -16,7 +16,6 @@ X11vnc (ubuntu repo)
 openssh-server (always useful)
 Custom xrdp.ini script
 
-
 Reasons for choosing the souce of XRDP and XRDPXORG over the repo versions is that the display can resized. Also xorg is far more effecient at memory and processing. 
 
 ```
