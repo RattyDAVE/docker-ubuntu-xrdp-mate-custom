@@ -49,7 +49,7 @@ At every reboot it will check this file and ADD any new users.
 Example of a working command line.
 ```
 docker run -d --name RattyDAVEv2 \
-           -p 3389:3389 -p 3389:22 \
+           -p 3389:3389 -p 2222:22 \
            -v /root/createusers.txt:/root/createusers.txt \
            -v /root/home:/home \
            -dit --restart unless-stopped \
