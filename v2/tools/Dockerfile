@@ -22,6 +22,7 @@ RUN apt-get update -y && \
     git clone https://github.com/z88dk/z88dk.git &&
     cd z88dk &&
     ./build.sh &&
+    cd .. &&
     wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  && \ 
     dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \ 
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
