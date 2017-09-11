@@ -17,6 +17,7 @@ RUN apt-get update -y && \
         libreoffice && \
     apt-get install -y \
         build-essential \
+        m4 \
         libxml2-dev \
         git && \
     git clone https://github.com/z88dk/z88dk.git && \
