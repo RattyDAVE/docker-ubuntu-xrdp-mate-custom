@@ -25,9 +25,12 @@ RUN apt-get update -y && \
     ./build.sh && \
     ./make install && \
     cd .. && \
+    rm -r z88dk && \
     wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  && \ 
-    dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \ 
+    dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \
+    rm skypeforlinux-64.deb && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
+    rm BlueJ-linux-410.deb && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
