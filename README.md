@@ -7,16 +7,16 @@ A virtual desktop docker conainer with persistant user information.
 This image is automatically rebuilt when updates are realeased for Ubuntu.
 
 Contents:
-Ubuntu 16.04
-Mate Desktop (ubuntu repo)
-XRDP built from source
-XRPDXORG built from source
-tightvncserver (ubuntu repo)
-X11vnc (ubuntu repo)
-openssh-server (always useful)
-Custom xrdp.ini script
-UK Keyboard layout
-UK Timezone
+ Ubuntu 16.04
+ Mate Desktop (ubuntu repo)
+ XRDP built from source
+ XRPDXORG built from source
+ tightvncserver (ubuntu repo)
+ X11vnc (ubuntu repo)
+ openssh-server (always useful)
+ Custom xrdp.ini script
+ UK Keyboard layout
+ UK Timezone
 
 Reasons for choosing the souce of XRDP and XRDPXORG over the repo versions is that the display can resized. Also xorg is far more effecient at memory and processing. 
 
