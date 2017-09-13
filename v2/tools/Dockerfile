@@ -2,8 +2,6 @@ FROM rattydave/docker-ubuntu-xrdp-mate-custom:v2
 
 WORKDIR /root
 
-ADD zesarux-5.1-debian8-64bit-BETA-08092017.tar.gz /root/
-
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
         filezilla \
