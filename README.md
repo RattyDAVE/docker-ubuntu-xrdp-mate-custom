@@ -7,16 +7,16 @@ A virtual desktop docker conainer with persistant user information.
 This image is automatically rebuilt when updates are realeased for Ubuntu.
 
 Contents:
- Ubuntu 16.04
- Mate Desktop (ubuntu repo)
- XRDP built from source
- XRPDXORG built from source
- tightvncserver (ubuntu repo)
- X11vnc (ubuntu repo)
- openssh-server (always useful)
- Custom xrdp.ini script
- UK Keyboard layout
- UK Timezone
+- Ubuntu 16.04
+- Mate Desktop (ubuntu repo)
+- XRDP built from source
+- XRPDXORG built from source
+- tightvncserver (ubuntu repo)
+- X11vnc (ubuntu repo)
+- openssh-server (always useful)
+- Custom xrdp.ini script
+- UK Keyboard layout
+- UK Timezone
 
 Reasons for choosing the souce of XRDP and XRDPXORG over the repo versions is that the display can resized. Also xorg is far more effecient at memory and processing. 
 
@@ -30,9 +30,9 @@ docker run -d --name RattyDAVEv2 \
            rattydave/docker-ubuntu-xrdp-mate-custom:latest
 ```
 
-Replace %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE% with the local filename of the createusers file.
-Replace %LOCAL_PATH_TO_HOME_DIRECTORY% with the local directory of the /home directorys.
-You do not need to publish port 22 only use if needed.
+- Replace %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE% with the local filename of the createusers file.
+- Replace %LOCAL_PATH_TO_HOME_DIRECTORY% with the local directory of the /home directorys.
+- You do not need to publish port 22 only use if needed.
 
 This file contains 3 fields (username:password:is_sudo). Where username is the login id. Password is the password. is_sudo does the user have sudo access(only Y is recognised).
 
@@ -64,13 +64,13 @@ docker run -d --name RattyDAVEv2 \
 
 Build contains.
 
-ubuntu 16.04
-mate desktop
-xrdp
-firefox
-remmina
-UK Keyboard layout
-UK Timezone
+- ubuntu 16.04
+- mate desktop
+- xrdp
+- firefox
+- remmina
+- UK Keyboard layout
+- UK Timezone
 
 ```
 docker run -d --name Desktop -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1
@@ -80,10 +80,10 @@ docker run -d --name Desktop -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-cust
 
 As core.
 
-Added desktop user as a local user.
-username desktop
-password desktop
-Also has sudo rights.
+- Added desktop user as a local user.
+- username desktop
+- password desktop
+- Also has sudo rights.
 
 Started implmentation for external users. 
 
