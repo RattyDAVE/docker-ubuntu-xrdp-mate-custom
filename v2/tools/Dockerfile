@@ -28,15 +28,18 @@ RUN apt-get update -y && \
     make install && \
     cd .. && \
     rm -rf z88dk && \
-    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb  && \ 
+    wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
+    dpkg -i gitkraken-amd64.deb; apt-get install -f -yqq && \
+    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb && \ 
     dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
-    dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
+    dpkg -i BlueJ-linux-410.deb; apt-get install -f -yqq && \
     rm -f *.deb && \
     apt-get purge -y \
         build-essential \
         m4 \
         libxml2-dev \
         git && \
+    apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
-    apt-get -y autoclean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
