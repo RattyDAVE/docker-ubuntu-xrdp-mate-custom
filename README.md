@@ -15,6 +15,8 @@ tightvncserver (ubuntu repo)
 X11vnc (ubuntu repo)
 openssh-server (always useful)
 Custom xrdp.ini script
+UK Keyboard layout
+UK Timezone
 
 Reasons for choosing the souce of XRDP and XRDPXORG over the repo versions is that the display can resized. Also xorg is far more effecient at memory and processing. 
 
@@ -54,4 +56,44 @@ docker run -d --name RattyDAVEv2 \
            -v /root/home:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:latest
+```
+
+## Previous Versions.
+
+### rattydave/docker-ubuntu-xrdp-mate-custom:v1
+
+Build contains.
+
+ubuntu 16.04
+mate desktop
+xrdp
+firefox
+remmina
+UK Keyboard layout
+UK Timezone
+
+```
+docker run -d --name Desktop -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1
+```
+
+### rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
+
+As core.
+
+Added desktop user as a local user.
+username desktop
+password desktop
+Also has sudo rights.
+
+Started implmentation for external users. 
+
+Local users only.
+```
+docker run -d --name Desktop -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
+```
+
+External User support. 
+Change %HOST_VOLUME_FOR_HOME% to the external volume.
+```
+docker run -d --name Desktop -v %HOST_VOLUME_FOR_HOME%:/home_ext -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
 ```
