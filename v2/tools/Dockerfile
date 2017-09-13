@@ -27,11 +27,11 @@ RUN apt-get update -y && \
     cd .. && \
     rm -rf z88dk && \
     wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
-    dpkg -i gitkraken-amd64.deb; apt-get install -f -yqq && \
+    dpkg -i gitkraken-amd64.deb; apt-get install -f -y && \
     wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb && \ 
-    dpkg -i skypeforlinux-64.deb; apt-get install -f -yqq   && \
+    dpkg -i skypeforlinux-64.deb; apt-get install -f -y   && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
-    dpkg -i BlueJ-linux-410.deb; apt-get install -f -yqq && \
+    dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     rm -f *.deb && \
     apt-get purge -y \
         build-essential \
