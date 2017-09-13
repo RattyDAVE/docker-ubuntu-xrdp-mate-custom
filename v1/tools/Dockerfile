@@ -1,4 +1,4 @@
-FROM rattydave/docker-ubuntu-xrdp-mate-custom:users
+FROM rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
 
 RUN     apt-get update -y && \
     apt-get install --no-install-recommends -y \
