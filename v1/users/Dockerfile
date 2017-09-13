@@ -1,4 +1,4 @@
-FROM rattydave/docker-ubuntu-xrdp-mate-custom:core
+FROM rattydave/docker-ubuntu-xrdp-mate-custom:v1
 
 RUN useradd -ms /bin/bash desktop
 RUN echo "desktop:desktop" | chpasswd
