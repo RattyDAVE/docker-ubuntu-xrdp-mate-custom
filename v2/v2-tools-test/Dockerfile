@@ -2,7 +2,7 @@ FROM rattydave/docker-ubuntu-xrdp-mate-custom:v2-tools
 
 RUN apt-get update -y && \ 
     apt-get install -yqq \
-      lxdm &&
+      lxdm && \
     echo "[program:lxdm]" >/etc/supervisor/conf.d/lxdm.conf && \
     echo "command=/usr/sbin/lxdm-binary -d" >> /etc/supervisor/conf.d/lxdm.conf && \
     echo "autorestart=true" >> /etc/supervisor/conf.d/lxdm.conf && \ 
