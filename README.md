@@ -37,7 +37,6 @@ docker run -d --name RattyDAVEv2 \
 This file contains 3 fields (username:password:is_sudo). Where username is the login id. Password is the password. is_sudo does the user have sudo access(only Y is recognised).
 
 Example
-
 ```
 mickey:mouse:N
 daisy:duke:Y
@@ -56,6 +55,33 @@ docker run -d --name RattyDAVEv2 \
            -v /root/home:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:latest
+```
+
+## rattydave/docker-ubuntu-xrdp-mate-custom:v2-tools
+
+I doubt most people would want this version but I have made available. This release contains development tools.
+
+- filezilla
+- netbeans
+- dia
+- geany
+- putty
+- mysql-workbench
+- caja-dropbox
+- remmina 
+- apt-transport-https
+- openjdk-9-jre
+- libreoffice
+- pasmo
+
+Example of a working command line.
+```
+docker run -d --name RattyDAVEv2-tools \
+           -p 3389:3389 -p 2222:22 \
+           -v /root/createusers.txt:/root/createusers.txt \
+           -v /root/home:/home \
+           -dit --restart unless-stopped \
+           rattydave/docker-ubuntu-xrdp-mate-custom:v2-tools
 ```
 
 ## Previous Versions.
