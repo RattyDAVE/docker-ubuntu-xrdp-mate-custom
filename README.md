@@ -69,10 +69,12 @@ I doubt most people would want this version but I have made available. This rele
 - mysql-workbench
 - caja-dropbox
 - remmina 
-- apt-transport-https
 - openjdk-9-jre
 - libreoffice
 - pasmo
+- gitkraken
+- skypeforlinux
+- BlueJ
 
 Example of a working command line.
 ```
