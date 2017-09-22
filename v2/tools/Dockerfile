@@ -15,7 +15,9 @@ RUN apt-get update -y && \
         apt-transport-https \
         openjdk-9-jre \
         libreoffice \
-        pasmo && \
+        pasmo \
+        build-essential \
+        git && \
     wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
     dpkg -i gitkraken-amd64.deb; apt-get install -f -y && \
     wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb && \ 
@@ -23,6 +25,10 @@ RUN apt-get update -y && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     rm -f *.deb && \
+    git clone https://github.com/BleuLlama/z80-machine.git && \
+    cd z80-machine && \
+    make && \
+    apt-get purge -y build-essential git && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*
