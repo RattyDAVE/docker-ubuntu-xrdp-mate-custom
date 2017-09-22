@@ -7,6 +7,12 @@ ENV LC_ALL en_GB.UTF-8
 
 WORKDIR /root
 
+#apt-get install -yqq \
+#        mate-desktop-environment \
+#        mate-themes \
+#        tightvncserver \
+#        x11vnc && \ 
+
 ## Enable Ubuntu Universe, Multiverse, and deb-src for main.
 #RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
 #RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
@@ -20,8 +26,7 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
     locale-gen en_GB.UTF-8 && \ 
     update-locale LANG=en_GB.UTF-8  && \ 
     apt-get install -yqq \
-        mate-desktop-environment \
-        mate-themes \
+        mate-desktop-environment-core \
         tightvncserver \
         x11vnc && \ 
     apt-get install --no-install-recommends -yqq \
