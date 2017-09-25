@@ -32,7 +32,7 @@ RUN apt-get update -y && \
     git clone https://github.com/BleuLlama/z80-machine.git && \
     cd z80-machine && \
     make && \
-    apt-get purge -y build-essential git && \
+    #apt-get purge -y build-essential git && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*
