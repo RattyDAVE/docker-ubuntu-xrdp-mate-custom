@@ -67,7 +67,7 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
         pkg-config && \
     git clone https://github.com/neutrinolabs/xrdp.git  && \
     git clone https://github.com/neutrinolabs/xorgxrdp.git && \
-    cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg && make && make install  && \
+    cd /root/xrdp && ./bootstrap && ./configure --enable-jpeg && make && make install  && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install  && \
     apt-get -y purge \
         git \
