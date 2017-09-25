@@ -27,7 +27,7 @@ RUN apt-get update -y && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     rm -f *.deb && \
-    git clone https://github.com/z88dk/z88dk.git && \
+    git clone https://github.com/RC2014Z80/z88dk-rc2014.git && \
     git clone https://github.com/feilipu/NASCOM_BASIC_4.7.git && \
     git clone https://github.com/BleuLlama/z80-machine.git && \
     cd z80-machine && \
