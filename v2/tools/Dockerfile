@@ -17,7 +17,9 @@ RUN apt-get update -y && \
         libreoffice \
         pasmo \
         build-essential \
-        git && \
+        git \
+        libxml2-dev \
+        m4 && \
     wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
     dpkg -i gitkraken-amd64.deb; apt-get install -f -y && \
     wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb && \ 
@@ -25,6 +27,8 @@ RUN apt-get update -y && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     rm -f *.deb && \
+    git clone https://github.com/z88dk/z88dk.git && \
+    git clone https://github.com/feilipu/NASCOM_BASIC_4.7.git && \
     git clone https://github.com/BleuLlama/z80-machine.git && \
     cd z80-machine && \
     make && \
