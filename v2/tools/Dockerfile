@@ -4,6 +4,7 @@ WORKDIR /root
 
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
+        sudo \
         filezilla \
         netbeans \
         dia \
