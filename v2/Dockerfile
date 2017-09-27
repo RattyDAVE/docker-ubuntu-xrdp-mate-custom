@@ -31,6 +31,7 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
         x11vnc && \ 
     apt-get install --no-install-recommends -yqq \
         supervisor \
+        sudo \
         openssh-server \
         tzdata \
         chromium-browser \
