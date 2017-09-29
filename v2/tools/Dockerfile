@@ -2,7 +2,7 @@ FROM rattydave/docker-ubuntu-xrdp-mate-custom:v2
 
 WORKDIR /root
 
-ADD rocket2014.tar.gz /root
+ADD rocket2014.tar.gz /opt
 
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
@@ -18,6 +18,7 @@ RUN apt-get update -y && \
         openjdk-9-jre \
         libreoffice \
         pasmo \
+        libqt5widgets5 && \
     wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
     dpkg -i gitkraken-amd64.deb; apt-get install -f -y && \
     wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb && \ 
