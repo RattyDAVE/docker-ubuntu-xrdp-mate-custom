@@ -29,3 +29,10 @@ RUN apt-get update -y && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*
+
+RUN echo "[Desktop Entry]" > /usr/share/applications/rocket2014.desktop && \
+    echo "Name=Rocket2014" >> usr/share/applications/rocket2014.desktop && \
+    echo "Comment=RC2014 Z80 emulator" >> /usr/share/applications/rocket2014.desktop && \
+    echo "Exec=/opt/rocket2014/Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
+    echo "Terminal=false" >> /usr/share/applications/rocket2014.desktop && \
+    echo "Type=Application" >> /usr/share/applications/rocket2014.desktop
