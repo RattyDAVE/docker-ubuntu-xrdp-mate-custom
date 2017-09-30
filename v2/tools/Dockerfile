@@ -44,6 +44,6 @@ RUN apt-get update -y && \
     echo "[Desktop Entry]" > /usr/share/applications/rocket2014.desktop && \
     echo "Name=Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
     echo "Comment=RC2014 Z80 emulator" >> /usr/share/applications/rocket2014.desktop && \
-    echo "Exec=/opt/rocket2014/Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
+    echo "Exec=/usr/bin/Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
     echo "Terminal=false" >> /usr/share/applications/rocket2014.desktop && \
     echo "Type=Application" >> /usr/share/applications/rocket2014.desktop
