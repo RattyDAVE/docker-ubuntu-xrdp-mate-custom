@@ -26,9 +26,9 @@ RUN apt-get update -y && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     rm -f *.deb && \
-    apt-get -y autoclean && apt-get -y autoremove && \
-    apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
-    rm -rf /var/lib/apt/lists/*
+    #apt-get -y autoclean && apt-get -y autoremove && \
+    #apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
+    #rm -rf /var/lib/apt/lists/*
 
 RUN echo "[Desktop Entry]" > /usr/share/applications/rocket2014.desktop && \
     echo "Name=Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
@@ -36,3 +36,12 @@ RUN echo "[Desktop Entry]" > /usr/share/applications/rocket2014.desktop && \
     echo "Exec=/opt/rocket2014/Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
     echo "Terminal=false" >> /usr/share/applications/rocket2014.desktop && \
     echo "Type=Application" >> /usr/share/applications/rocket2014.desktop
+    
+RUN apt-get install git build-essential qt5-default && \
+    git clone https://github.com/trcwm/rocket2014.git && \
+    cd rocket2014/src && \
+    qmake && \
+    make && \
+
+    
+
