@@ -50,7 +50,7 @@ At every reboot it will check this file and ADD any new users.
 Example of a working command line.
 ```
 docker run -d --name RattyDAVEv2 \
-           -p 3389:3389 -p 2222:22 \
+           -p 3389:3389 \
            -v /root/createusers.txt:/root/createusers.txt \
            -v /root/home:/home \
            -dit --restart unless-stopped \
@@ -75,6 +75,7 @@ I doubt most people would want this version but I have made available. This rele
 - gitkraken
 - skypeforlinux
 - BlueJ
+- Rocket2014 (A RC2014 Z80 emulator - https://github.com/trcwm/rocket2014 - ROMs located in /opt/rocket2014/examples )
 
 Example of a working command line.
 ```
