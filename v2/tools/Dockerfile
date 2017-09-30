@@ -37,7 +37,7 @@ RUN apt-get update -y && \
     cp *.* /opt/rocket2014 && \
     cd /root && \
     rm -R /root/rocket2014 && \
-    apt-get -y install git build-essential qt5-default  && \
+    apt-get -y purge git build-essential qt5-default  && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
