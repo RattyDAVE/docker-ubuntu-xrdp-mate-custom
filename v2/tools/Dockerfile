@@ -41,7 +41,7 @@ RUN apt-get install git build-essential qt5-default && \
     git clone https://github.com/trcwm/rocket2014.git && \
     cd rocket2014/src && \
     qmake && \
-    make && \
+    make
 
     
 
