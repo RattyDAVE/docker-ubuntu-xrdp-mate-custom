@@ -2,7 +2,7 @@ FROM rattydave/docker-ubuntu-xrdp-mate-custom:v2
 
 WORKDIR /root
 
-ADD rocket2014.tar.gz /opt
+#ADD rocket2014.tar.gz /opt
 
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
@@ -18,6 +18,7 @@ RUN apt-get update -y && \
         openjdk-9-jre \
         libreoffice \
         pasmo \
+        git build-essential qt5-default \
         libqt5widgets5 && \
     wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
     dpkg -i gitkraken-amd64.deb; apt-get install -f -y && \
@@ -25,25 +26,24 @@ RUN apt-get update -y && \
     dpkg -i skypeforlinux-64.deb; apt-get install -f -y   && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
-    rm -f *.deb 
-    #apt-get -y autoclean && apt-get -y autoremove && \
-    #apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
-    #rm -rf /var/lib/apt/lists/*
-
-RUN echo "[Desktop Entry]" > /usr/share/applications/rocket2014.desktop && \
+    rm -f *.deb  && \
+    git clone https://github.com/trcwm/rocket2014.git && \
+    cd /root/rocket2014/src && \
+    qmake && \
+    make && \
+    cp Rocket2014 /usr/bin && \
+    mkdir -p /opt/rocket2014  && \
+    cd ../examples && \
+    cp *.* /opt/rocket2014 && \
+    cd /root && \
+    rm -R /root/rocket2014 && \
+    apt-get -y install git build-essential qt5-default  && \
+    apt-get -y autoclean && apt-get -y autoremove && \
+    apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
+    rm -rf /var/lib/apt/lists/*  && \
+    echo "[Desktop Entry]" > /usr/share/applications/rocket2014.desktop && \
     echo "Name=Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
     echo "Comment=RC2014 Z80 emulator" >> /usr/share/applications/rocket2014.desktop && \
     echo "Exec=/opt/rocket2014/Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
     echo "Terminal=false" >> /usr/share/applications/rocket2014.desktop && \
     echo "Type=Application" >> /usr/share/applications/rocket2014.desktop
-    
-RUN apt-get -y install git build-essential qt5-default
-
-RUN git clone https://github.com/trcwm/rocket2014.git
-
-RUN cd rocket2014/src && \
-    qmake && \
-    make
-
-    
-
