@@ -37,9 +37,11 @@ RUN echo "[Desktop Entry]" > /usr/share/applications/rocket2014.desktop && \
     echo "Terminal=false" >> /usr/share/applications/rocket2014.desktop && \
     echo "Type=Application" >> /usr/share/applications/rocket2014.desktop
     
-RUN apt-get install git build-essential qt5-default && \
-    git clone https://github.com/trcwm/rocket2014.git && \
-    cd rocket2014/src && \
+RUN apt-get -y install git build-essential qt5-default
+
+RUN git clone https://github.com/trcwm/rocket2014.git
+
+RUN cd rocket2014/src && \
     qmake && \
     make
 
