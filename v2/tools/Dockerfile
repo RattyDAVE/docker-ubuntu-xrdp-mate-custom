@@ -25,7 +25,7 @@ RUN apt-get update -y && \
     dpkg -i skypeforlinux-64.deb; apt-get install -f -y   && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
-    rm -f *.deb && \
+    rm -f *.deb 
     #apt-get -y autoclean && apt-get -y autoremove && \
     #apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     #rm -rf /var/lib/apt/lists/*
