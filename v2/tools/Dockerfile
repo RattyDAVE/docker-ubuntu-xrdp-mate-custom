@@ -30,7 +30,7 @@ RUN apt-get update -y && \
     git clone https://github.com/trcwm/rocket2014.git && \
     cd /root/rocket2014/src && \
     qmake && \
-    make && \
+    make -j4 && \
     cp Rocket2014 /usr/bin && \
     mkdir -p /opt/rocket2014  && \
     cd ../examples && \
