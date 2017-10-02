@@ -27,6 +27,10 @@ RUN apt-get update -y && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     rm -f *.deb  && \
+    git clone https://github.com/jeroennijhof/vncpwd.git && \
+    cd vncpwd && \
+    make -j4 && \
+    cd /root  && \
     git clone https://github.com/trcwm/rocket2014.git && \
     cd /root/rocket2014/src && \
     qmake && \
