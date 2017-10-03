@@ -30,6 +30,8 @@ RUN apt-get update -y && \
     git clone https://github.com/jeroennijhof/vncpwd.git && \
     cd vncpwd && \
     make -j4 && \
+    cp vncpwd /usr/bin && \
+    rm -R /root/vncpwd && \
     cd /root  && \
     git clone https://github.com/trcwm/rocket2014.git && \
     cd /root/rocket2014/src && \
