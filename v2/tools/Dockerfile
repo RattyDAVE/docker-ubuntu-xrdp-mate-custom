@@ -55,10 +55,11 @@ RUN apt-get update -y && \
     echo "Type=Application" >> /usr/share/applications/rocket2014.desktop    
 
 RUN echo "#!/bin/bash" > /usr/bin/sysinfo && \
-    echo "echo \"You are connected to display ${DISPLAY:1:2}\" > ~/Desktop/session_info.txt" >> /usr/bin/sysinfo && \
-    echo "echo \"VNC Authentication file is ~/.vnc/sesman_$(whoami)_passwd:${DISPLAY:1:2}" >> ~/Desktop/session_info.txt\" > ~/Desktop/session_info.txt" >> /usr/bin/sysinfo && \
-    echo "vncpwd ~/.vnc/sesman_$(whoami)_passwd:${DISPLAY:1:2} >> ~/Desktop/session_info.txt" >> /usr/bin/sysinfo  && \
-    echo "[Desktop Entry]" > /etc/xdg/autostart/sysinfo.desktop && \
+    echo "echo 'You are connected to display ${DISPLAY:1:2}' > ~/Desktop/session_info.txt" >> /usr/bin/sysinfo && \
+    echo "echo 'VNC Authentication file is ~/.vnc/sesman_$(whoami)_passwd:${DISPLAY:1:2}' >> ~/Desktop/session_info.txt" > ~/Desktop/session_info.txt" >> /usr/bin/sysinfo && \
+    echo "vncpwd ~/.vnc/sesman_$(whoami)_passwd:${DISPLAY:1:2} >> ~/Desktop/session_info.txt" >> /usr/bin/sysinfo
+
+RUN echo "[Desktop Entry]" > /etc/xdg/autostart/sysinfo.desktop && \
     echo "Name=SystemInfo" >> /etc/xdg/autostart/sysinfo.desktop && \
     echo "Comment=Put System Info in File" >> /etc/xdg/autostart/sysinfo.desktop && \
     echo "Exec=sysinfo" >> /etc/xdg/autostart/sysinfo.desktop && \
