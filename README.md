@@ -78,14 +78,14 @@ I doubt most people would want this version but I have made available. This rele
 - Rocket2014 (A RC2014 Z80 emulator - https://github.com/trcwm/rocket2014 - ROMs located in /opt/rocket2014/examples)
 
 Screen sharing:
--           On the master user connect using the Xvnc option and login as normal.
--           On the desktop there is a file called session_info.txt this will contain the display number and password.
--           
--           On the other clients connect using the Reconnect option.
--           Using the information in the session_info file:
--                PORT = 5900 + display number. (So if display is 11 then the port would be 5911)
--                USERNAME = Username of the master account.
--                PASSWORD = the password in the Session_info.txt file. (e.g. 1a2b3c4d)
+           On the master user connect using the Xvnc option and login as normal.
+           On the desktop there is a file called session_info.txt this will contain the display number and password.
+           
+           On the other clients connect using the Reconnect option.
+           Using the information in the session_info file:
+                PORT = 5900 + display number. (So if display is 11 then the port would be 5911)
+                USERNAME = Username of the master account.
+                PASSWORD = the password in the Session_info.txt file. (e.g. 1a2b3c4d)
                 
 
 Example of a working command line.
