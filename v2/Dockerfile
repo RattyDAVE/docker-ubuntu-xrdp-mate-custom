@@ -114,7 +114,7 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "[program:xrdp]">> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
@@ -122,7 +122,7 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
     echo "Exec=setxkbmap gb" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Hidden=false" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "X-MATE-Autostart-enabled=true" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Name[C]=SetKeyBoard GB" > /etc/xdg/autostart/setxkbmap.desktop && \
+    echo "Name[C]=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Name=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
