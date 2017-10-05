@@ -2,8 +2,6 @@ FROM rattydave/docker-ubuntu-xrdp-mate-custom:v2
 
 WORKDIR /root
 
-#ADD rocket2014.tar.gz /opt
-
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
         filezilla \
@@ -35,7 +33,7 @@ RUN apt-get update -y && \
     cd /root  && \
     git clone https://github.com/BleuLlama/z80-machine.git && \
     cp -R z80-machine/prg /opt/rocket2014 && \
-    git clone https://github.com/feilipu/NASCOM_BASIC_4.7.git && \
+    rm -R /root/z80-machine && \
     git clone https://github.com/ancientcomputing/rc2014.git && \
     cp rc2014/rom/z80/68B50/*.* /opt/rocket2014 && \
     git clone https://github.com/trcwm/rocket2014.git && \
@@ -57,14 +55,13 @@ RUN apt-get update -y && \
     echo "Comment=RC2014 Z80 emulator" >> /usr/share/applications/rocket2014.desktop && \
     echo "Exec=/usr/bin/Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
     echo "Terminal=false" >> /usr/share/applications/rocket2014.desktop && \
-    echo "Type=Application" >> /usr/share/applications/rocket2014.desktop    
-
-COPY sysinfo /usr/bin
-RUN chmod 755 /usr/bin/sysinfo
-
-RUN echo "[Desktop Entry]" > /etc/xdg/autostart/sysinfo.desktop && \
+    echo "Type=Application" >> /usr/share/applications/rocket2014.desktop && \
+    echo "[Desktop Entry]" > /etc/xdg/autostart/sysinfo.desktop && \
     echo "Name=SystemInfo" >> /etc/xdg/autostart/sysinfo.desktop && \
     echo "Comment=Put System Info in File" >> /etc/xdg/autostart/sysinfo.desktop && \
     echo "Exec=sysinfo" >> /etc/xdg/autostart/sysinfo.desktop && \
     echo "Terminal=false" >> /etc/xdg/autostart/sysinfo.desktop && \
     echo "Type=Application" >> /etc/xdg/autostart/sysinfo.desktop
+
+COPY sysinfo /usr/bin
+RUN chmod 755 /usr/bin/sysinfo
