@@ -33,9 +33,11 @@ RUN apt-get update -y && \
     cp vncpwd /usr/bin && \
     rm -R /root/vncpwd && \
     cd /root  && \
-    git clone https://github.com/BleuLlama/z80-machine.git && \ 
+    git clone https://github.com/BleuLlama/z80-machine.git && \
+    cp -R z80-machine/prg /opt/rocket2014 && \
     git clone https://github.com/feilipu/NASCOM_BASIC_4.7.git && \
     git clone https://github.com/ancientcomputing/rc2014.git && \
+    cp rc2014/rom/z80/68B50/*.* /opt/rocket2014 && \
     git clone https://github.com/trcwm/rocket2014.git && \
     cd /root/rocket2014/src && \
     qmake && \
