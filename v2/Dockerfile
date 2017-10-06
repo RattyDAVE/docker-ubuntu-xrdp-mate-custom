@@ -39,6 +39,7 @@ RUN cd /root && \
         xterm \
         curl \
         wget \
+        firefox \
         chromium-browser && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y install \
