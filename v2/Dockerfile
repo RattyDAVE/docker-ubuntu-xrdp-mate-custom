@@ -1,11 +1,9 @@
 FROM ubuntu:latest
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV LANG en_GB.UTF-8
-ENV LANGUAGE en_GB:GB
-ENV LC_ALL en_GB.UTF-8
-
-WORKDIR /root
+#ENV DEBIAN_FRONTEND noninteractive
+#ENV LANG en_GB.UTF-8
+#ENV LANGUAGE en_GB:GB
+#ENV LC_ALL en_GB.UTF-8
 
 #apt-get install -yqq \
 #        mate-desktop-environment-core \
@@ -17,7 +15,8 @@ WORKDIR /root
 #RUN sed -i 's/^#\s*\(deb.*main restricted\)$/\1/g' /etc/apt/sources.list
 #RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 #RUN sed -i 's/^#\s*\(deb.*multiverse\)$/\1/g' /etc/apt/sources.list
-RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \ 
+RUN cd /root && \
+    sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \ 
     apt-get update -y && \ 
     apt-get install -yqq locales  && \ 
     echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
@@ -26,10 +25,9 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
     locale-gen en_GB.UTF-8 && \ 
     update-locale LANG=en_GB.UTF-8  && \ 
     apt-get install -yqq \
-        mate-desktop-environment-extras \
+        mate-desktop-environment-core \
         mate-themes \
-        tightvncserver \
-        chromium-browser && \ 
+        tightvncserver && \ 
     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
@@ -40,7 +38,8 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
         ca-certificates \
         xterm \
         curl \
-        wget && \
+        wget \
+        chromium-browser && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y install \
         git \
