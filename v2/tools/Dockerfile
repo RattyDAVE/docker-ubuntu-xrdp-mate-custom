@@ -24,6 +24,8 @@ RUN apt-get update -y && \
     dpkg -i skypeforlinux-64.deb; apt-get install -f -y   && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb  && \ 
+    dpkg -i google-chrome-stable_current_amd64.deb; apt-get install -f -y && \
     rm -f *.deb  && \
     git clone https://github.com/jeroennijhof/vncpwd.git && \
     cd vncpwd && \
