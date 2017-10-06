@@ -8,7 +8,7 @@ ENV LC_ALL en_GB.UTF-8
 WORKDIR /root
 
 #apt-get install -yqq \
-#        mate-desktop-environment \
+#        mate-desktop-environment-core \
 #        mate-themes \
 #        tightvncserver \
 #        x11vnc && \ 
@@ -26,15 +26,15 @@ RUN sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
     locale-gen en_GB.UTF-8 && \ 
     update-locale LANG=en_GB.UTF-8  && \ 
     apt-get install -yqq \
-        mate-desktop-environment-core \
+        mate-desktop-environment-extras \
+        mate-themes \
         tightvncserver \
-        x11vnc && \ 
+        chromium-browser && \ 
     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
         openssh-server \
         tzdata \
-        chromium-browser \
         vim \
         mc \
         ca-certificates \
