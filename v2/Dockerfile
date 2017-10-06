@@ -1,9 +1,9 @@
 FROM ubuntu:latest
 
-#ENV DEBIAN_FRONTEND noninteractive
-#ENV LANG en_GB.UTF-8
-#ENV LANGUAGE en_GB:GB
-#ENV LC_ALL en_GB.UTF-8
+ENV DEBIAN_FRONTEND noninteractive
+ENV LANG en_GB.UTF-8
+ENV LANGUAGE en_GB:GB
+ENV LC_ALL en_GB.UTF-8
 
 #apt-get install -yqq \
 #        mate-desktop-environment-core \
