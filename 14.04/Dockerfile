@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:17.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG en_GB.UTF-8
