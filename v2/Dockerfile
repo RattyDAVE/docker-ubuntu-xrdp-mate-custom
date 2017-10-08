@@ -25,6 +25,9 @@ RUN cd /root && \
     locale-gen en_GB.UTF-8 && \ 
     update-locale LANG=en_GB.UTF-8  && \ 
     apt-get install -yqq \
+        mate-notification-daemon \
+        gconf-service libnspr4 libnss3 fonts-liberation \
+        libappindicator1 libcurl3 fonts-wqy-microhei \
         mate-desktop-environment-core \
         mate-themes \
         tightvncserver && \ 
