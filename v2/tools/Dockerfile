@@ -1,6 +1,7 @@
 FROM rattydave/docker-ubuntu-xrdp-mate-custom:v2
 
 WORKDIR /root
+#         apt-transport-https \
 
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
@@ -12,7 +13,6 @@ RUN apt-get update -y && \
         mysql-workbench \
         caja-dropbox \
         remmina* \
-        apt-transport-https \
         openjdk-9-jre \
         libreoffice \
         pasmo \
@@ -24,8 +24,6 @@ RUN apt-get update -y && \
     dpkg -i skypeforlinux-64.deb; apt-get install -f -y   && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb  && \ 
-    dpkg -i google-chrome-stable_current_amd64.deb; apt-get install -f -y && \
     rm -f *.deb  && \
     git clone https://github.com/jeroennijhof/vncpwd.git && \
     cd vncpwd && \
