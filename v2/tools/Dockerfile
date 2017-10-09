@@ -4,10 +4,10 @@ WORKDIR /root
 
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
-        apt-transport-https && \
-    add-apt-repository ppa:mozillateam/firefox-next  && \
-    apt-get update -y && \
-    apt-get install -y firefox 
+        apt-transport-https
+RUN add-apt-repository ppa:mozillateam/firefox-next
+RUN apt-get update -y
+RUN apt-get install -y firefox 
 
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
