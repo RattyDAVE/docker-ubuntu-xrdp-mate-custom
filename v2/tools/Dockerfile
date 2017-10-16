@@ -4,11 +4,6 @@ WORKDIR /root
 
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
-        apt-transport-https \
-        software-properties-common && \ 
-    add-apt-repository ppa:mozillateam/firefox-next && \ 
-    apt-get update -y && \ 
-    apt-get install --no-install-recommends -yqq \
         firefox \
         filezilla \
         netbeans \
