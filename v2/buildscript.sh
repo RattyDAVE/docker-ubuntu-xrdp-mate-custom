@@ -86,6 +86,8 @@ echo "mate-session" > /etc/skel/.xsession
 sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
 sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
 xrdp-keygen xrdp auto
+update-rc.d xrdp.sh defaults
+
 
 cd /etc/xrdp
 curl -LO https://raw.githubusercontent.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/master/v2/xrdp.ini
