@@ -17,6 +17,7 @@ apt-get install -y locales
 apt-get install -y \
         mate-desktop-environment-core \
         mate-themes \
+        xterm \
         tightvncserver
 apt-get install --no-install-recommends -y \
         sudo \
@@ -56,6 +57,15 @@ git clone https://github.com/neutrinolabs/xrdp.git
 git clone https://github.com/neutrinolabs/xorgxrdp.git
 cd /root/xrdp && ./bootstrap && ./configure --enable-jpeg && make && make install
 cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install
+
+cd /root
+git clone https://github.com/jeroennijhof/vncpwd.git
+cd vncpwd
+make
+cp vncpwd /usr/bin 
+cd /root
+rm -R /root/vncpwd
+
 apt-get -y purge \
         git \
         libxfont1-dev \
@@ -86,9 +96,17 @@ echo "mate-session" > /etc/skel/.xsession
 sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini
 sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini
 xrdp-keygen xrdp auto
-update-rc.d xrdp.sh defaults
-
+update-rc.d xrdp defaults
 
 cd /etc/xrdp
 curl -LO https://raw.githubusercontent.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/master/v2/xrdp.ini
+cd /usr/bin
+curl -LO https://raw.githubusercontent.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/master/v2/tools/sysinfo
+chmod 755 /usr/bin/sysinfo
 
+echo "[Desktop Entry]" > /etc/xdg/autostart/sysinfo.desktop
+echo "Name=SystemInfo" >> /etc/xdg/autostart/sysinfo.desktop
+echo "Comment=Put System Info in File" >> /etc/xdg/autostart/sysinfo.desktop
+echo "Exec=sysinfo" >> /etc/xdg/autostart/sysinfo.desktop
+echo "Terminal=false" >> /etc/xdg/autostart/sysinfo.desktop
+echo "Type=Application" >> /etc/xdg/autostart/sysinfo.desktop
