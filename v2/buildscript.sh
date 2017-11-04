@@ -18,6 +18,7 @@ apt-get install -y \
         mate-desktop-environment-core \
         mate-themes \
         xterm \
+        ttf-ubuntu-font-family \
         tightvncserver
 apt-get install --no-install-recommends -y \
         sudo \
