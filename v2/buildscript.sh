@@ -9,10 +9,10 @@ echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
 locale-gen en_GB.UTF-8  
 update-locale LANG=en_GB.UTF-8
 
-apt-add-repository ppa:ubuntu-mate-dev/ppa
-apt-add-repository ppa:ubuntu-mate-dev/trusty-mate
+apt-add-repository -y ppa:ubuntu-mate-dev/ppa
+apt-add-repository -y ppa:ubuntu-mate-dev/trusty-mate
 apt-get update -y
-apt-get install -yqq locales
+apt-get install -y locales
 
 apt-get install -y \
         mate-desktop-environment-core \
