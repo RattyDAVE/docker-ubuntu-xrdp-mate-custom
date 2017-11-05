@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 ENV LANG en_GB.UTF-8
 ENV LANGUAGE en_GB:GB
 ENV LC_ALL en_GB.UTF-8
@@ -27,7 +28,8 @@ RUN cd /root && \
     apt-get install -yqq \
         mate-desktop-environment-core \
         mate-themes \
-        tightvncserver && \ 
+        tightvncserver && \
+    apt-get install -y dbus-x11 && \   
     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
