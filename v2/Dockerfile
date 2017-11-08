@@ -128,7 +128,7 @@ RUN cd /root && \
     echo "Name=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    cd /usr/lib/pulse-4.0/modules && \
+    cd /usr/lib/pulse-8.0/modules && \
     curl -LO https://raw.githubusercontent.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/master/v2/module-xrdp-sink.so
 
 ADD   xrdp.ini /etc/xrdp/xrdp.ini
