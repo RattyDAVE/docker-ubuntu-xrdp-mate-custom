@@ -101,6 +101,8 @@ update-rc.d xrdp defaults
 
 cd /etc/xrdp
 curl -LO https://raw.githubusercontent.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/master/v2/xrdp.ini
+cd /usr/lib/pulse-4.0/modules
+curl -LO https://raw.githubusercontent.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/master/v2/module-xrdp-sink.so
 cd /usr/bin
 curl -LO https://raw.githubusercontent.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/master/v2/tools/sysinfo
 chmod 755 /usr/bin/sysinfo
