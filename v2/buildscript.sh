@@ -9,6 +9,7 @@ echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale
 locale-gen en_GB.UTF-8  
 update-locale LANG=en_GB.UTF-8
 
+apt-get install -y software-properties-common
 apt-add-repository -y ppa:ubuntu-mate-dev/ppa
 apt-add-repository -y ppa:ubuntu-mate-dev/trusty-mate
 apt-get update -y
