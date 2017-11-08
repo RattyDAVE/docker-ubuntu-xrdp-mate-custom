@@ -28,7 +28,8 @@ RUN cd /root && \
     apt-get install -yqq \
         mate-desktop-environment-core \
         mate-themes \
-        tightvncserver && \
+        tightvncserver \
+        pulseaudio && \
     apt-get install -y dbus-x11 && \   
     apt-get install --no-install-recommends -yqq \
         supervisor \
@@ -126,7 +127,9 @@ RUN cd /root && \
     echo "Name[C]=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Name=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
+    echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
+    cd /usr/lib/pulse-4.0/modules && \
+    curl -LO https://raw.githubusercontent.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/master/v2/module-xrdp-sink.so
 
 ADD   xrdp.ini /etc/xrdp/xrdp.ini
 ADD   km-0809.ini /etc/xrdp/km-0809.ini
