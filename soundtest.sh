@@ -38,7 +38,8 @@ sed -i "s\/tmp/pulseaudio-10.0\/root/pulseaudio-4.0\g" /root/xrdp/sesman/chansrv
 make
 
 cp module-xrdp-sink.so /usr/lib/pulse-*/modules
+cd /root
 
 apt-get autoremove $(apt-cache showsrc pulseaudio | sed -e '/Build-Depends/!d;s/Build-Depends: \|,\|([^)]*),*\|\[[^]]*\]//g')
-
+rm -R pulseaudio*
 
