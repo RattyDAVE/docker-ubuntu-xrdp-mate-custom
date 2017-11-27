@@ -35,7 +35,6 @@ RUN cd /root && \
     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
-        openssh-server \
         tzdata \
         vim \
         mc \
@@ -113,7 +112,6 @@ RUN cd /root && \
     echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "stderr_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
-    mkdir /var/run/sshd && chmod 0755 /var/run/sshd && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
