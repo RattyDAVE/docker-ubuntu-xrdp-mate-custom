@@ -46,6 +46,13 @@ RUN apt-get update -y && \
     cp *.* /opt/rocket2014 && \
     cd /root && \
     rm -R /root/rocket2014 && \
+\    
+\    
+    curl 'https://dl.google.com/dl/android/studio/ide-zips/3.0.1.0/android-studio-ide-171.4443003-linux.zip' > /tmp/studio.zip  && \
+    unzip -d /opt /tmp/studio.zip && \
+    rm /tmp/studio.zip && \
+\    
+\   
     apt-get -y purge git build-essential qt5-default  && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
