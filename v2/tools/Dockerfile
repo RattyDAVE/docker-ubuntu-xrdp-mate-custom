@@ -18,6 +18,14 @@ RUN apt-get update -y && \
         pasmo \
         git build-essential qt5-default \
         libqt5widgets5 && \
+    \
+    \
+    apt- get install -y software-properties-common && \
+    add-apt-repository -y ppa:maarten-fonville/android-studio && \
+    apt update && \
+    apt install -y android-studio && \
+    \
+    \
     wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
     dpkg -i gitkraken-amd64.deb; apt-get install -f -y && \
     wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb && \ 
@@ -48,9 +56,9 @@ RUN apt-get update -y && \
     rm -R /root/rocket2014 && \
 \    
 \    
-    curl 'https://dl.google.com/dl/android/studio/ide-zips/3.0.1.0/android-studio-ide-171.4443003-linux.zip' > /tmp/studio.zip  && \
-    unzip -d /opt /tmp/studio.zip && \
-    rm /tmp/studio.zip && \
+    #curl 'https://dl.google.com/dl/android/studio/ide-zips/3.0.1.0/android-studio-ide-171.4443003-linux.zip' > /tmp/studio.zip  && \
+    #unzip -d /opt /tmp/studio.zip && \
+    #rm /tmp/studio.zip && \
 \    
 \   
     apt-get -y purge git build-essential qt5-default  && \
