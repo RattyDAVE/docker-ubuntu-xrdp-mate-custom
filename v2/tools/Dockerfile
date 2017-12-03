@@ -4,7 +4,7 @@ WORKDIR /root
 
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
-        freeplane labyrinth  treesheets vym \
+        freeplane labyrinth \
         filezilla \
         netbeans \
         dia \
