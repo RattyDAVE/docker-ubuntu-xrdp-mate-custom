@@ -42,7 +42,7 @@ RUN cd /root && \
         xterm \
         curl \
         wget \
-        chromium-browser && \
+        midori && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y install \
         git \
