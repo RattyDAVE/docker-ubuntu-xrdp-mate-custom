@@ -4,7 +4,8 @@ WORKDIR /root
 
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
-        freeplane labyrinth \
+        vym \
+        midori \
         filezilla \
         netbeans \
         dia \
@@ -20,16 +21,16 @@ RUN apt-get update -y && \
         libqt5widgets5 && \
     \
     \
-    apt- get install -y software-properties-common && \
-    add-apt-repository -y ppa:maarten-fonville/android-studio && \
-    apt update && \
-    apt install -y android-studio && \
+    #apt- get install -y software-properties-common && \
+    #add-apt-repository -y ppa:maarten-fonville/android-studio && \
+    #apt update && \
+    #apt install -y android-studio && \
     \
     \
-    wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
-    dpkg -i gitkraken-amd64.deb; apt-get install -f -y && \
-    wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb && \ 
-    dpkg -i skypeforlinux-64.deb; apt-get install -f -y   && \
+    #wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
+    #dpkg -i gitkraken-amd64.deb; apt-get install -f -y && \
+    #wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb && \ 
+    #dpkg -i skypeforlinux-64.deb; apt-get install -f -y   && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     rm -f *.deb  && \
