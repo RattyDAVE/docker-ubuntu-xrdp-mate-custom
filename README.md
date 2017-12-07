@@ -12,7 +12,7 @@ Contents:
 - XRDP built from source
 - XRPDXORG built from source
 - tightvncserver (ubuntu repo)
-- X11vnc (ubuntu repo)
+- Midori web browser (ubuntu repo)
 - openssh-server (always useful)
 - Custom xrdp.ini script
 - UK Keyboard layout
@@ -67,13 +67,10 @@ I doubt most people would want this version but I have made available. This rele
 - geany
 - putty
 - mysql-workbench
-- caja-dropbox
 - remmina 
 - openjdk-9-jre
 - libreoffice
 - pasmo
-- gitkraken
-- skypeforlinux
 - BlueJ
 - Rocket2014 (A RC2014 Z80 emulator - https://github.com/trcwm/rocket2014 - ROMs located in /opt/rocket2014/examples)
 
