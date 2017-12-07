@@ -112,10 +112,10 @@ RUN cd /root && \
     echo "stderr_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
-    echo "command=/usr/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Type=Application" >> /etc/xdg/autostart/setxkbmap.desktop && \
