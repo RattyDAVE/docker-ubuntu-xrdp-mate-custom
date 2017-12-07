@@ -5,32 +5,18 @@ WORKDIR /root
 RUN apt-get update -y && \ 
     apt-get install --no-install-recommends -yqq \
         vym \
-        midori \
         filezilla \
         netbeans \
         dia \
         geany \
         putty \
         mysql-workbench \
-        caja-dropbox \
         remmina* \
         openjdk-9-jre \
         libreoffice \
         pasmo \
         git build-essential qt5-default \
         libqt5widgets5 && \
-    \
-    \
-    #apt- get install -y software-properties-common && \
-    #add-apt-repository -y ppa:maarten-fonville/android-studio && \
-    #apt update && \
-    #apt install -y android-studio && \
-    \
-    \
-    #wget --no-check-certificate https://release.gitkraken.com/linux/gitkraken-amd64.deb && \
-    #dpkg -i gitkraken-amd64.deb; apt-get install -f -y && \
-    #wget --no-check-certificate https://go.skype.com/skypeforlinux-64.deb && \ 
-    #dpkg -i skypeforlinux-64.deb; apt-get install -f -y   && \
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     rm -f *.deb  && \
@@ -48,20 +34,14 @@ RUN apt-get update -y && \
     git clone https://github.com/trcwm/rocket2014.git && \
     cd /root/rocket2014/src && \
     qmake && \
+    cat /proc/cpuinfo && \
     make -j4 && \
     cp Rocket2014 /usr/bin && \
     mkdir -p /opt/rocket2014  && \
     cd ../examples && \
     cp *.* /opt/rocket2014 && \
     cd /root && \
-    rm -R /root/rocket2014 && \
-\    
-\    
-    #curl 'https://dl.google.com/dl/android/studio/ide-zips/3.0.1.0/android-studio-ide-171.4443003-linux.zip' > /tmp/studio.zip  && \
-    #unzip -d /opt /tmp/studio.zip && \
-    #rm /tmp/studio.zip && \
-\    
-\   
+    rm -R /root/rocket2014 && \   
     apt-get -y purge git build-essential qt5-default  && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
