@@ -39,8 +39,61 @@ RUN cd /root && \
         ca-certificates \
         xterm \
         curl \
-        wget \
-        xrdp && \
+        wget && \
+        \
+        apt-get -y install \
+        git \
+        libxfont1-dev \
+        xserver-xorg-core \
+        libx11-dev \
+        libxfixes-dev \
+        libssl-dev \
+        libpam0g-dev \
+        libtool \
+        libjpeg-dev \
+        flex \
+        bison \
+        gettext \
+        autoconf \
+        libxml-parser-perl \
+        libfuse-dev \
+        xsltproc \
+        libxrandr-dev \
+        python-libxml2 \
+        nasm \
+        xserver-xorg-dev \
+        fuse \
+        build-essential \
+        pkg-config && \
+    git clone https://github.com/neutrinolabs/xrdp.git  && \
+    git clone https://github.com/neutrinolabs/xorgxrdp.git && \
+    cd /root/xrdp && ./bootstrap && ./configure --enable-jpeg && make && make install  && \
+    cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install  && \
+    apt-get -y purge \
+        git \
+        libxfont1-dev \
+        libx11-dev \
+        libxfixes-dev \
+        libssl-dev \
+        libpam0g-dev \
+        libtool \
+        libjpeg-dev \
+        flex \
+        bison \
+        gettext \
+        autoconf \
+        libxml-parser-perl \
+        libfuse-dev \
+        xsltproc \
+        libxrandr-dev \
+        python-libxml2 \
+        nasm \
+        xserver-xorg-dev \
+        fuse \
+        build-essential \
+        pkg-config && \
+        \
+        \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
