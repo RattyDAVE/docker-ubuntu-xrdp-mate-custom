@@ -21,7 +21,7 @@ Contents:
 Reasons for choosing the souce of XRDP and XRDPXORG over the repo versions is that the display can resized. Also xorg is far more effecient at memory and processing. 
 
 ```
-docker run -d --name RattyDAVEv2 \
+docker run --name RattyDAVEv2 \
            -p 3389:3389 \
            -p 2222:22 \
            -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
