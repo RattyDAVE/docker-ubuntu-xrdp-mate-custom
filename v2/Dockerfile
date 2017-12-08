@@ -29,8 +29,7 @@ RUN cd /root && \
     apt-get install -yqq \
         mate-desktop-environment-core \
         mate-themes \
-        tightvncserver \
-        caja-dropbox  && \
+        tightvncserver && \
     #apt-get install -y dbus-x11 && \   
     apt-get install --no-install-recommends -yqq \
         supervisor \
@@ -42,7 +41,7 @@ RUN cd /root && \
         xterm \
         curl \
         wget \
-        midori && \
+        epiphany-browser && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y install \
         git \
