@@ -29,8 +29,9 @@ RUN cd /root && \
     apt-get install -yqq \
         mate-desktop-environment-core \
         mate-themes \
-        tightvncserver && \
-    apt-get install -y dbus-x11 && \   
+        tightvncserver \
+        caja-dropbox  && \
+    #apt-get install -y dbus-x11 && \   
     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
