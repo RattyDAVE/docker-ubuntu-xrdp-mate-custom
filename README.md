@@ -9,16 +9,16 @@ This image is automatically rebuilt when updates are realeased for Ubuntu.
 Contents:
 - Ubuntu 16.04
 - Mate Desktop (ubuntu repo)
-- XRDP built from source
-- XRPDXORG built from source
+- XRDP built from source (devel branch)
+- XRPDXORG built from source (devel branch)
 - tightvncserver (ubuntu repo)
-- Midori web browser (ubuntu repo)
+- Epiphany web browser (ubuntu repo)
 - openssh-server (always useful)
 - Custom xrdp.ini script
 - UK Keyboard layout
 - UK Timezone
 
-Reasons for choosing the souce of XRDP and XRDPXORG over the repo versions is that the display can resized. Also xorg is far more effecient at memory and processing. 
+Reasons for choosing the souce of XRDP and XRDPXORG over the repo versions is that the display can resized. Also xorg is far more effecient at memory and processing. (At present. I have experimented with ubuntu 17.xx and this is not the case anymore)
 
 ```
 docker run --name RattyDAVEv2 \
@@ -37,17 +37,20 @@ docker run --name RattyDAVEv2 \
 This file contains 3 fields (username:password:is_sudo). Where username is the login id. Password is the password. is_sudo does the user have sudo access(only Y is recognised).
 
 Example
+
 ```
 mickey:mouse:N
 daisy:duke:Y
 dog:flash:n
 morty:rick:wubba
 ```
+
 In this example 4 users will be created and only daisy will have sudo rights.
 
 At every reboot it will check this file and ADD any new users.
 
 Example of a working command line.
+
 ```
 docker run -d --name RattyDAVEv2 \
            -p 3389:3389 \
@@ -86,6 +89,7 @@ Screen sharing:
                 
 
 Example of a working command line.
+
 ```
 docker run -d --name RattyDAVEv2-tools \
            -p 3389:3389 -p 2222:22 \
@@ -125,12 +129,14 @@ As core.
 Started implmentation for external users. 
 
 Local users only.
+
 ```
 docker run -d --name Desktop -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
 ```
 
 External User support. 
 Change %HOST_VOLUME_FOR_HOME% to the external volume.
+
 ```
 docker run -d --name Desktop -v %HOST_VOLUME_FOR_HOME%:/home_ext -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
 ```
