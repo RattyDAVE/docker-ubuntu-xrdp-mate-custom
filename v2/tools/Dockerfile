@@ -3,8 +3,7 @@ FROM rattydave/docker-ubuntu-xrdp-mate-custom:v2
 WORKDIR /root
 
 RUN apt-get update -y && \ 
-    apt-get install -yqq \
-        caja-dropbox && \
+    #apt-get install -yqq caja-dropbox && \
     apt-get install --no-install-recommends -yqq \
         vym \
         filezilla \
