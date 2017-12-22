@@ -64,6 +64,7 @@ docker run -d --name RattyDAVEv2 \
 
 I doubt most people would want this version but I have made available. This release contains development tools.
 
+- x3270
 - filezilla
 - netbeans
 - dia
