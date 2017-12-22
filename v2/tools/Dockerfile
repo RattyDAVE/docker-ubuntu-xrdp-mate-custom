@@ -6,6 +6,7 @@ RUN apt-get update -y && \
     #apt-get install -yqq caja-dropbox && \
     apt-get install --no-install-recommends -yqq \
         vym \
+        x3270 \
         filezilla \
         netbeans \
         dia \
