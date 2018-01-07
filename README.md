@@ -1,5 +1,7 @@
 # Ubuntu 16.04 with XRDP and MATE. Version 2
 
+Use https://github.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/issues to send feedback, issues, comments and general chat.
+
 ## rattydave/docker-ubuntu-xrdp-mate-custom:latest points to v2
 
 A virtual desktop docker conainer with persistant user information.
