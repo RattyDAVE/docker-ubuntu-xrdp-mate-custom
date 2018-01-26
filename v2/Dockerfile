@@ -106,26 +106,32 @@ RUN cd /root && \
     chmod 2775 /var/run/xrdp  && \
     mkdir -p /var/run/xrdp/sockdir && \
     chmod 3777 /var/run/xrdp/sockdir && \
-    echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
-    echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/sshd.conf && \
-    echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
-    echo "stderr_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
-    echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
-    echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
-    echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Type=Application" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Exec=setxkbmap gb" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Hidden=false" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "X-MATE-Autostart-enabled=true" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Name[C]=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Name=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
+    cat <<EOF > /etc/supervisor/conf.d/sshd.conf
+[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
+command=/usr/sbin/sshd -D
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+autorestart=true
+EOF  && \
+    cat <<EOF > /etc/supervisor/conf.d/xrdp.conf
+[program:xrdp-sesman]
+command=/usr/local/sbin/xrdp-sesman --nodaemon
+process_name = xrdp-sesman
+[program:xrdp]
+command=/usr/local/sbin/xrdp -nodaemon
+process_name = xrdp
+EOF  && \
+    cat <<EOF > /etc/xdg/autostart/setxkbmap.desktop
+[Desktop Entry]
+Type=Application
+Exec=setxkbmap gb
+Hidden=false
+X-MATE-Autostart-enabled=true
+Name[C]=SetKeyBoard GB
+Name=SetKeyBoard GB
+Comment[C]=Sets the keyboard to GB
+Comment=Sets the keyboard to GB
+EOF
 
 ADD   xrdp.ini /etc/xrdp/xrdp.ini
 ADD   km-0809.ini /etc/xrdp/km-0809.ini
