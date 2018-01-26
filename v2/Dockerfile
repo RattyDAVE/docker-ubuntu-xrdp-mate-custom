@@ -107,7 +107,7 @@ RUN cd /root && \
     mkdir -p /var/run/xrdp/sockdir && \
     chmod 3777 /var/run/xrdp/sockdir && \
     cat <<EOF > /etc/supervisor/conf.d/sshd.conf
-[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
+[program:sshd]
 command=/usr/sbin/sshd -D
 stdout_logfile=/var/log/supervisor/%(program_name)s.log
 stderr_logfile=/var/log/supervisor/%(program_name)s.log
