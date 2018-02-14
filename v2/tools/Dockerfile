@@ -5,6 +5,7 @@ WORKDIR /root
 RUN apt-get update -y && \ 
     #apt-get install -yqq caja-dropbox && \
     apt-get install --no-install-recommends -yqq \
+        telnet \
         vym \
         x3270 \
         filezilla \
