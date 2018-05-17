@@ -28,12 +28,9 @@ RUN cd /root && \
         mate-calc-common \
         mate-dock-applet \
         mate-hud \
-        mate-indicator-applet \
-        mate-indicator-applet-common \
         mate-menu \
         mate-notification-daemon \
         mate-notification-daemon-common \
-        mate-optimus \
         mate-utils \
         mate-utils-common \
         mate-window-applets-common \
@@ -41,6 +38,7 @@ RUN cd /root && \
         mate-window-menu-applet \
         mate-window-title-applet \
         ubuntu-mate-icon-themes \
+        ubuntu-mate-themes \
         xrdp \
         xorgxrdp \
         tightvncserver && \
@@ -78,16 +76,16 @@ RUN cd /root && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Type=Application" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Exec=setxkbmap gb" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Hidden=false" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "X-MATE-Autostart-enabled=true" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Name[C]=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Name=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
+    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
+    #echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
+    #echo "Type=Application" >> /etc/xdg/autostart/setxkbmap.desktop && \
+    #echo "Exec=setxkbmap gb" >> /etc/xdg/autostart/setxkbmap.desktop && \
+    #echo "Hidden=false" >> /etc/xdg/autostart/setxkbmap.desktop && \
+    #echo "X-MATE-Autostart-enabled=true" >> /etc/xdg/autostart/setxkbmap.desktop && \
+    #echo "Name[C]=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
+    #echo "Name=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
+    #echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
+    #echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
 
 ADD   xrdp.ini /etc/xrdp/xrdp.ini
 
