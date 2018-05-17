@@ -19,6 +19,28 @@ RUN cd /root && \
     apt-get install -yqq \
         mate-desktop-environment-core \
         mate-themes \
+        mate-accessibility-profiles \
+        mate-applet-appmenu \
+        mate-applet-brisk-menu \
+        mate-applets \
+        mate-applets-common \
+        mate-calc \
+        mate-calc-common \
+        mate-dock-applet \
+        mate-hud \
+        mate-indicator-applet \
+        mate-indicator-applet-common \
+        mate-menu \
+        mate-notification-daemon \
+        mate-notification-daemon-common \
+        mate-optimus \
+        mate-utils \
+        mate-utils-common \
+        mate-window-applets-common \
+        mate-window-buttons-applet \
+        mate-window-menu-applet \
+        mate-window-title-applet \
+        ubuntu-mate-icon-themes \
         xrdp \
         xorgxrdp \
         tightvncserver && \
@@ -67,9 +89,7 @@ RUN cd /root && \
     echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
     echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
 
-#ADD   xrdp.ini /etc/xrdp/xrdp.ini
-#ADD   km-0809.ini /etc/xrdp/km-0809.ini
-#RUN   chmod 644 /etc/xrdp/km-0809.ini
+ADD   xrdp.ini /etc/xrdp/xrdp.ini
 
 ADD startup.sh /root/startup.sh
 CMD ["/bin/bash", "/root/startup.sh"]
