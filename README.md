@@ -1,12 +1,68 @@
-# Ubuntu 16.04 with XRDP and MATE. Version 2
+# Ubuntu 18.04 with XRDP and MATE. Version 18.04
 
 Use https://github.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/issues to send feedback, issues, comments and general chat.
 
-## rattydave/docker-ubuntu-xrdp-mate-custom:latest points to v2
+## rattydave/docker-ubuntu-xrdp-mate-custom:latest points to 18.04
 
 A virtual desktop docker conainer with persistant user information.
 
 This image is automatically rebuilt when updates are realeased for Ubuntu.
+
+## rattydave/docker-ubuntu-xrdp-mate-custom:18.04
+
+Contents:
+- Ubuntu 18.04
+- Mate Desktop (ubuntu repo)
+- XRDP built from source (ubuntu repo)
+- XRPDXORG built from source (ubuntu repo)
+- tightvncserver (ubuntu repo)
+- Epiphany web browser (ubuntu repo)
+- openssh-server (always useful)
+- Custom xrdp.ini script
+- UK Keyboard layout 
+- UK Timezone
+
+```
+docker run --name RattyDAVE18.04 \
+           -p 3389:3389 \
+           -p 2222:22 \
+           -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
+           -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
+           -dit --restart unless-stopped \
+           rattydave/docker-ubuntu-xrdp-mate-custom:18.04
+```
+
+- Replace %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE% with the local filename of the createusers file.
+- Replace %LOCAL_PATH_TO_HOME_DIRECTORY% with the local directory of the /home directorys.
+- You do not need to publish port 22 only use if needed.
+
+This file contains 3 fields (username:password:is_sudo). Where username is the login id. Password is the password. is_sudo does the user have sudo access(only Y is recognised).
+
+Example
+
+```
+mickey:mouse:N
+daisy:duke:Y
+dog:flash:n
+morty:rick:wubba
+```
+
+In this example 4 users will be created and only daisy will have sudo rights.
+
+At every reboot it will check this file and ADD any new users.
+
+Example of a working command line.
+
+```
+docker run -d --name RattyDAVE18.04 \
+           -p 3389:3389 \
+           -v /root/createusers.txt:/root/createusers.txt \
+           -v /root/home:/home \
+           -dit --restart unless-stopped \
+           rattydave/docker-ubuntu-xrdp-mate-custom:18.04
+```
+
+## rattydave/docker-ubuntu-xrdp-mate-custom:v2
 
 Contents:
 - Ubuntu 16.04
