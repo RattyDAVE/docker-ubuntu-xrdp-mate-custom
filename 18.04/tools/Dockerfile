@@ -15,7 +15,7 @@ RUN apt-get update -y && \
         putty \
         mysql-workbench \
         remmina* \
-        openjdk-9-jre \
+        openjdk-11-jre \
         libreoffice \
         pasmo \
         git build-essential qt5-default \
