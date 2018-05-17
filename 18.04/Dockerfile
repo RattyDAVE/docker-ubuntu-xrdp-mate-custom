@@ -28,6 +28,8 @@ RUN cd /root && \
         mate-calc-common \
         mate-dock-applet \
         mate-hud \
+        mate-indicator-applet \
+        mate-indicator-applet-common \
         mate-menu \
         mate-notification-daemon \
         mate-notification-daemon-common \
