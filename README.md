@@ -4,7 +4,7 @@ Use https://github.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/issues to send f
 
 ## rattydave/docker-ubuntu-xrdp-mate-custom:latest points to 18.04
 
-A virtual desktop docker conainer with persistant user information.
+A virtual desktop docker container with persistant user information.
 
 This image is automatically rebuilt when updates are realeased for Ubuntu.
 
