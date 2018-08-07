@@ -23,6 +23,7 @@ Contents:
 - UK Timezone
 
 ```
+
 docker run --name RattyDAVE18.04 \
            -p 3389:3389 \
            -p 2222:22 \
@@ -30,6 +31,7 @@ docker run --name RattyDAVE18.04 \
            -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:18.04
+
 ```
 
 - Replace %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE% with the local filename of the createusers file.
@@ -41,10 +43,12 @@ This file contains 3 fields (username:password:is_sudo). Where username is the l
 Example
 
 ```
+
 mickey:mouse:N
 daisy:duke:Y
 dog:flash:n
 morty:rick:wubba
+
 ```
 
 In this example 4 users will be created and only daisy will have sudo rights.
@@ -54,12 +58,14 @@ At every reboot it will check this file and ADD any new users.
 Example of a working command line.
 
 ```
+
 docker run -d --name RattyDAVE18.04 \
            -p 3389:3389 \
            -v /root/createusers.txt:/root/createusers.txt \
            -v /root/home:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:18.04
+
 ```
 
 ## rattydave/docker-ubuntu-xrdp-mate-custom:18.04-tools
@@ -94,12 +100,14 @@ Screen sharing:
 Example of a working command line.
 
 ```
+
 docker run -d --name RattyDAVE18.04-tools \
            -p 3389:3389 -p 2222:22 \
            -v /root/createusers.txt:/root/createusers.txt \
            -v /root/home:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:18.04-tools
+
 ```
 
 ## Previous Versions.
@@ -121,6 +129,7 @@ Contents:
 Reasons for choosing the souce of XRDP and XRDPXORG over the repo versions is that the display can resized. Also xorg is far more effecient at memory and processing. (At present. I have experimented with ubuntu 17.xx and this is not the case anymore)
 
 ```
+
 docker run --name RattyDAVEv2 \
            -p 3389:3389 \
            -p 2222:22 \
@@ -128,6 +137,7 @@ docker run --name RattyDAVEv2 \
            -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:latest
+
 ```
 
 - Replace %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE% with the local filename of the createusers file.
@@ -139,10 +149,12 @@ This file contains 3 fields (username:password:is_sudo). Where username is the l
 Example
 
 ```
+
 mickey:mouse:N
 daisy:duke:Y
 dog:flash:n
 morty:rick:wubba
+
 ```
 
 In this example 4 users will be created and only daisy will have sudo rights.
@@ -152,12 +164,14 @@ At every reboot it will check this file and ADD any new users.
 Example of a working command line.
 
 ```
+
 docker run -d --name RattyDAVEv2 \
            -p 3389:3389 \
            -v /root/createusers.txt:/root/createusers.txt \
            -v /root/home:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:latest
+
 ```
 
 ## rattydave/docker-ubuntu-xrdp-mate-custom:v2-tools
@@ -192,12 +206,14 @@ Screen sharing:
 Example of a working command line.
 
 ```
+
 docker run -d --name RattyDAVEv2-tools \
            -p 3389:3389 -p 2222:22 \
            -v /root/createusers.txt:/root/createusers.txt \
            -v /root/home:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:v2-tools
+
 ```
 
 ## Previous Versions.
@@ -215,7 +231,9 @@ Build contains.
 - UK Timezone
 
 ```
+
 docker run -d --name Desktop -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1
+
 ```
 
 ### rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
@@ -232,12 +250,16 @@ Started implmentation for external users.
 Local users only.
 
 ```
+
 docker run -d --name Desktop -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
+
 ```
 
 External User support. 
 Change %HOST_VOLUME_FOR_HOME% to the external volume.
 
 ```
+
 docker run -d --name Desktop -v %HOST_VOLUME_FOR_HOME%:/home_ext -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
+
 ```
