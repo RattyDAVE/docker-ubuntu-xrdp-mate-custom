@@ -46,6 +46,7 @@ RUN apt-get update -y && \
     cd /root && \
     rm -R /root/rocket2014 && \ 
     wget -O /opt/rocket2014/SCMonitor-v100-R1-RC2014-08k-ROM.BIN https://github.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/raw/master/SCMonitor-v100-R1-RC2014-08k-ROM.BIN && \ 
+    wget -O /opt/rocket2014/SCMonitor-v100-R2-RC2014-16k-ROM.BIN https://github.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/raw/master/SCMonitor-v100-R2-RC2014-16k-ROM.BIN && \ 
     apt-get -y purge git build-essential qt5-default  && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
