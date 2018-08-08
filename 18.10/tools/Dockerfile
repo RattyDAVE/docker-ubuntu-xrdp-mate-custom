@@ -43,6 +43,7 @@ RUN apt-get update -y && \
     mkdir -p /opt/rocket2014  && \
     cd ../examples && \
     cp *.* /opt/rocket2014 && \
+    wget https://github.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/raw/master/SCMonitor-v100-R1-RC2014-08k-ROM.BIN && \ 
     cd /root && \
     rm -R /root/rocket2014 && \   
     apt-get -y purge git build-essential qt5-default  && \
