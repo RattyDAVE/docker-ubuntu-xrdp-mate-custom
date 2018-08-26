@@ -1,4 +1,3 @@
-#FROM ubuntu:latest
 FROM rattydave/ubuntu-ssh:18.10
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -56,6 +55,7 @@ RUN cd /root && \
         wget \
         epiphany-browser && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
+    apt-get install -yqq chromium-browser gcc make ruby ruby-dev rubygems zlibc zlib1g zlib1g-dev libxml2 libxml2-dev gedit git npm firefox && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
@@ -78,40 +78,24 @@ RUN cd /root && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
-    #echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Type=Application" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Exec=setxkbmap gb" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Hidden=false" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "X-MATE-Autostart-enabled=true" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Name[C]=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Name=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
 
 ADD xrdp.ini /etc/xrdp/xrdp.ini
 
 ADD startup.sh  /root/startup.sh
 
-RUN apt-get update
-RUN apt-get install -yqq chromium-browser
+RUN gem install bddfire 
+
 RUN sed 's#PLUGIN_PARAMETERS=""#PLUGIN_PARAMETERS="--no-sandbox"#g' /usr/bin/chromium-browser -i
 
-RUN apt-get install -yqq gcc make ruby ruby-dev rubygems zlibc zlib1g zlib1g-dev libxml2 libxml2-dev
-#ruby-nokogiri ruby-websocket-driver ruby-ffi ruby-unf-ext ruby-redcarpet
-
-RUN gem install bddfire
-
-RUN apt-get install -yqq phantomjs
-
-RUN apt-get install -yqq gedit
-
 ADD gherkin.lang /usr/share/gtksourceview-3.0/language-specs/gherkin.lang
-
-RUN apt-get install -yqq git
 
 RUN useradd -ms /bin/bash ubuntu && \
     echo "ubuntu:ubuntu" | chpasswd && \
     usermod -aG sudo ubuntu
+
+RUN su - ubuntu -c "npm config set prefix '~/.npm-global'" && \
+    su - ubuntu -c "echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc" && \
+    su - ubuntu -c "npm install -g phantomjs-prebuilt geckodriver"
 
 RUN git clone https://github.com/red-panda-ci/ci-scripts /opt/duingdemo/ci-scripts/common && \
     cd /opt/duingdemo && \
