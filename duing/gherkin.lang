@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Author: 2011 Ransford Okpoti -->
+<language id="gherkin" _name="Gherkin" version="2.0" _section="Scripts">
+      <metadata>
+            <property name="mimetypes">text/x-feature</property>
+            <property name="globs">*.feature</property>
+      </metadata>
+      <styles>
+            <style id="keyword"  _name="Keyword"     map-to="def:keyword"/>
+            <style id="feature"  _name="Feature"     map-to="def:type"/>
+            <style id="steps_keywords"   _name="Steps Keywords"  map-to="def:keyword"/>
+            <style id="constructors"     _name="Constructors"    map-to="def:type"/>
+            <style id="variables"    _name="Variables"   map-to="def:comment"/>
+            <style id="comments"     _name="Comments"    map-to="def:comment"/>
+      </styles>
+      <definitions>
+            <context id="gherkin" class="no-spell-check">
+                  <include>
+                        <!-- Keywords -->
+                        <context id="steps_keywords" style-ref="steps_keywords">
+                              <keyword>Given</keyword>
+                              <keyword>When</keyword>
+                              <keyword>Then</keyword>
+                              <keyword>And</keyword>
+                              <keyword>But</keyword>
+                        </context>
+ 
+                        <context id="comments" style-ref="comments" end-at-line-end="true">
+                              <start>#</start>
+                              <end>\n</end>
+                        </context>
+ 
+                        <context id="feature" style-ref="feature">
+                              <keyword>Feature</keyword>
+                        </context>
+ 
+                        <context id="constructors" style-ref="constructors">
+                              <keyword>Scenario</keyword>
+                              <keyword>Scenarios</keyword>
+                              <keyword>Outline</keyword>
+                              <keyword>Background</keyword>
+                        </context>
+ 
+                        <context id="variables" style-ref="variables">
+                              <match>(&lt;)(\w+)(&gt;)</match>
+                        </context>
+ 
+                        <context id="arguments" end-at-line-end="true">
+                              <start>\|</start>
+                              <end>\n</end>
+                              <include>
+                                    <context ref="def:decimal" />
+                                    <context ref="def:float" />
+                                    <context ref="def:string" />
+                                    <context id="table_headings">
+                                          <match>\w+</match>
+                                    </context>
+                              </include>
+                        </context>
+                  </include>
+            </context>
+      </definitions>
+</language>
