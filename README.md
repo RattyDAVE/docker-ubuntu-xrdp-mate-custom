@@ -271,3 +271,7 @@ Change %HOST_VOLUME_FOR_HOME% to the external volume.
 docker run -d --name Desktop -v %HOST_VOLUME_FOR_HOME%:/home_ext -p 3389:3389 rattydave/docker-ubuntu-xrdp-mate-custom:v1-users
 
 ```
+
+# Red Panda CI duing
+
+Look at the [duing readme](duing/README.md)
