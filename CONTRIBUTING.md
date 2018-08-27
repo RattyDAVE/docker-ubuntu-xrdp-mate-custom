@@ -61,8 +61,8 @@ As part of the test process, all commit messages will be linted, and your PR wil
 
 ## Publishing a new release
 
-1. Ensure that latest build on master is green
-1. Ensure your local code is up to date (`git pull origin master`)
+1. Ensure that latest build on the `develop` branch is green
+1. Ensure your local code on the `develop` branch is up to date (`git pull origin develop`)
 1. Create a new release with git flow and the `major(X) minor(Y) patch(Z)` (`git flow release start vX.Y.Z`) (see [Semantic Versioning](http://semver.org))
 1. Publish the release `git flow feature publish vX.Y.Z`
 
