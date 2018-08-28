@@ -1,3 +1,13 @@
+<a name="0.2.0"></a>
+# 0.2.0 (2018-08-28)
+
+
+### Update
+
+* Use new release of ci-scripts ([6da35601bd1ef389a1ba62ecc4a22f75dd9d47a5](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/6da35601bd1ef389a1ba62ecc4a22f75dd9d47a5))
+
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2018-08-27)
 
@@ -5,6 +15,7 @@
 ### Build
 
 * Add Jenkinsfile ([344be31112858396624ad03b3b7783d4126b1709](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/344be31112858396624ad03b3b7783d4126b1709))
+* Update CHANGELOG.md to v0.1.0 with Red Panda JPL ([7af1bfca3545af2c1114bd080ded47e7112bafc1](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/7af1bfca3545af2c1114bd080ded47e7112bafc1))
 
 ### Docs
 
