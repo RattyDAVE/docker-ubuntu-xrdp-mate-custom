@@ -99,7 +99,7 @@ RUN su - ubuntu -c "npm config set prefix '~/.npm-global'" && \
 
 RUN git clone https://github.com/red-panda-ci/ci-scripts /opt/duingdemo/ci-scripts/common && \
     cd /opt/duingdemo && \
-    ci-scripts/common/bin/install.sh cucumber && \
+    bash ci-scripts/common/bin/_install.sh cucumber && \
     cd ci-scripts/test/cucumber && \
     bundle install && \
     sed "s/default_wait_time/default_max_wait_time/g" -i features/support/env.rb && \
