@@ -1,6 +1,20 @@
+<a name="0.3.0"></a>
+# 0.3.0 (2018-08-28)
+
+
+### New
+
+* Add proxy with privoxy to duing image ([83c0c8677285ded04695b8a151c043a7db5f82ec](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/83c0c8677285ded04695b8a151c043a7db5f82ec))
+
+
+
 <a name="0.2.0"></a>
 # 0.2.0 (2018-08-28)
 
+
+### Build
+
+* Update CHANGELOG.md to v0.2.0 with Red Panda JPL ([cf10e312adfebc65d86b10acf03d5cef50804091](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/cf10e312adfebc65d86b10acf03d5cef50804091))
 
 ### Update
 
