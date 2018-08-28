@@ -106,6 +106,14 @@ RUN git clone https://github.com/red-panda-ci/ci-scripts /opt/duingdemo/ci-scrip
     cp config.yml.dist config.yml && \
     chown -R ubuntu:ubuntu /opt/duingdemo
 
+RUN apt-get update && \
+    apt-get install -y privoxy
+
+RUN sed -i "s#listen-address  \[::1\]:8118##g" /etc/privoxy/config && \
+    echo "[program:privoxy]" > /etc/supervisor/conf.d/privoxy.conf && \
+    echo "command=/usr/sbin/privoxy --no-daemon /etc/privoxy/config" >> /etc/supervisor/conf.d/privoxy.conf && \
+    echo "process_name = privoxy" >> /etc/supervisor/conf.d/privoxy.conf
+
 CMD ["/bin/bash", "/root/startup.sh"]
                                     
 EXPOSE 3389
