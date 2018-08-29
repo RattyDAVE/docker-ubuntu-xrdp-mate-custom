@@ -1,6 +1,20 @@
+<a name="0.3.1"></a>
+## 0.3.1 (2018-08-29)
+
+
+### New
+
+* Configure local proxy in chromium-browser and firefox ([72c1206252772dbfb773d657fbeaa7784e4cea79](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/72c1206252772dbfb773d657fbeaa7784e4cea79))
+
+
+
 <a name="0.3.0"></a>
 # 0.3.0 (2018-08-28)
 
+
+### Build
+
+* Update CHANGELOG.md to v0.3.0 with Red Panda JPL ([38ed542fe2a077a4fd8eac89d6c57e0362195816](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/38ed542fe2a077a4fd8eac89d6c57e0362195816))
 
 ### New
 
