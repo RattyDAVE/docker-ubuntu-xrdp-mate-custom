@@ -1,6 +1,20 @@
+<a name="0.3.2"></a>
+## 0.3.2 (2018-08-29)
+
+
+### Build
+
+* Build and push a docker image with the semantic release tag number ([9ee42de64ad1148ad32319ecbbf0ffbc45e3e1c4](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/9ee42de64ad1148ad32319ecbbf0ffbc45e3e1c4))
+
+
+
 <a name="0.3.1"></a>
 ## 0.3.1 (2018-08-29)
 
+
+### Build
+
+* Update CHANGELOG.md to v0.3.1 with Red Panda JPL ([387fc7ae406e1ba01852a0c4f7e451e55ff4885c](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/387fc7ae406e1ba01852a0c4f7e451e55ff4885c))
 
 ### New
 
