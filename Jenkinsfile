@@ -40,6 +40,7 @@ pipeline {
             when { expression { cfg.BRANCH_NAME.startsWith('release/v') && cfg.promoteBuild.enabled } }
             steps {
                 sh "docker rmi redpandaci/duing:test redpanda-ci/duing:latest redpandaci/duing:18.10 || true"
+                jplDockerPush (cfg, "redpandaci/duing", cfg.releaseTag, "duing", "https://registry.hub.docker.com", "redpandaci-docker-credentials")
                 jplDockerPush (cfg, "redpandaci/duing", "18.10", "duing", "https://registry.hub.docker.com", "redpandaci-docker-credentials")
                 jplDockerPush (cfg, "redpandaci/duing", "latest", "duing", "https://registry.hub.docker.com", "redpandaci-docker-credentials")
                 jplCloseRelease(cfg)
