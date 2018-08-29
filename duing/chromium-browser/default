@@ -1,0 +1,1 @@
+CHROMIUM_FLAGS="--no-sandbox --proxy-server=localhost:8118"

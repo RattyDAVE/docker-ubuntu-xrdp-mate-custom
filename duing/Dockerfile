@@ -85,8 +85,6 @@ ADD startup.sh  /root/startup.sh
 
 RUN gem install bddfire 
 
-RUN sed 's#PLUGIN_PARAMETERS=""#PLUGIN_PARAMETERS="--no-sandbox"#g' /usr/bin/chromium-browser -i
-
 ADD gherkin.lang /usr/share/gtksourceview-3.0/language-specs/gherkin.lang
 
 RUN useradd -ms /bin/bash ubuntu && \
@@ -110,9 +108,16 @@ RUN apt-get update && \
     apt-get install -y privoxy
 
 RUN sed -i "s#listen-address  \[::1\]:8118##g" /etc/privoxy/config && \
+    echo "debug 1" >> /etc/privoxy/config && \
     echo "[program:privoxy]" > /etc/supervisor/conf.d/privoxy.conf && \
     echo "command=/usr/sbin/privoxy --no-daemon /etc/privoxy/config" >> /etc/supervisor/conf.d/privoxy.conf && \
-    echo "process_name = privoxy" >> /etc/supervisor/conf.d/privoxy.conf
+    echo "process_name = privoxy" >> /etc/supervisor/conf.d/privoxy.conf && \
+    echo "stdout_logfile = /var/log/privoxy/privoxy.log" >> /etc/supervisor/conf.d/privoxy.conf && \
+    echo "stderr_logfile = /var/log/privoxy/privoxy.err" >> /etc/supervisor/conf.d/privoxy.conf
+
+ADD firefox/syspref.js       /etc/firefox/syspref.js
+
+ADD chromium-browser/default /etc/chromium-browser/default
 
 CMD ["/bin/bash", "/root/startup.sh"]
                                     
