@@ -9,7 +9,6 @@ RUN apt-get update -y && \
         vym \
         x3270 \
         filezilla \
-        netbeans \
         dia \
         geany \
         putty \
