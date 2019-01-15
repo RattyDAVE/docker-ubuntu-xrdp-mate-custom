@@ -5,6 +5,7 @@ WORKDIR /root
 RUN apt-get update -y && \ 
     #apt-get install -yqq caja-dropbox && \
     apt-get install --no-install-recommends -yqq \
+        git \
         telnet \
         vym \
         x3270 \
@@ -12,7 +13,6 @@ RUN apt-get update -y && \
         dia \
         geany \
         putty \
-        mysql-workbench \
         remmina* \
         openjdk-11-jre \
         libreoffice \
