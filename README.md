@@ -1,8 +1,8 @@
-# Ubuntu 18.10 with XRDP and MATE. Version 18.10
+# Ubuntu 19.04 with XRDP and MATE. Version 19.04
 
 Undergoing testing. 
-- rattydave/docker-ubuntu-xrdp-mate-custom:18.10
-- rattydave/docker-ubuntu-xrdp-mate-custom:18.10-tools
+- rattydave/docker-ubuntu-xrdp-mate-custom:19.04
+- rattydave/docker-ubuntu-xrdp-mate-custom:19.04-tools
 
 Use same instructions for 18.04
 
