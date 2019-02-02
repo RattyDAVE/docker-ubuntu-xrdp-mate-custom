@@ -54,8 +54,9 @@ RUN cd /root && \
         curl \
         wget \
         epiphany-browser && \
-    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
-    apt-get -y install \
+    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
+    
+RUN    apt-get -y install \
         git \
         libxfont1-dev \
         xserver-xorg-core \
@@ -78,12 +79,14 @@ RUN cd /root && \
         xserver-xorg-dev \
         fuse \
         build-essential \
-        pkg-config && \
-    git clone -b devel https://github.com/neutrinolabs/xrdp.git  && \
-    git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
-    cd /root/xrdp && ./bootstrap && ./configure --enable-jpeg && make && make install  && \
-    cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install  && \
-    apt-get -y purge \
+        pkg-config
+
+RUN    git clone -b devel https://github.com/neutrinolabs/xrdp.git
+RUN    git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git 
+RUN    cd /root/xrdp && ./bootstrap && ./configure --enable-jpeg && make && make install
+RUN    cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install
+
+RUN    apt-get -y purge \
         git \
         libxfont1-dev \
         libx11-dev \
@@ -105,8 +108,9 @@ RUN cd /root && \
         xserver-xorg-dev \
         fuse \
         build-essential \
-        pkg-config && \
-    apt-get -y autoclean && apt-get -y autoremove && \
+        pkg-config
+        
+RUN apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
     echo "mate-session" > /etc/skel/.xsession && \
