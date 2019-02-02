@@ -56,59 +56,59 @@ RUN cd /root && \
         epiphany-browser && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
     
-RUN    apt-get -y install \
-        git \
-        libxfont1-dev \
-        xserver-xorg-core \
-        libx11-dev \
-        libxfixes-dev \
-        libssl-dev \
-        libpam0g-dev \
-        libtool \
-        libjpeg-dev \
-        flex \
-        bison \
-        gettext \
-        autoconf \
-        libxml-parser-perl \
-        libfuse-dev \
-        xsltproc \
-        libxrandr-dev \
-        python-libxml2 \
-        nasm \
-        xserver-xorg-dev \
-        fuse \
-        build-essential \
-        pkg-config
+#RUN    apt-get -y install \
+#        git \
+#        libxfont1-dev \
+#        xserver-xorg-core \
+#        libx11-dev \
+#        libxfixes-dev \
+#        libssl-dev \
+#        libpam0g-dev \
+#        libtool \
+#        libjpeg-dev \
+#        flex \
+#        bison \
+#        gettext \
+#        autoconf \
+#        libxml-parser-perl \
+#        libfuse-dev \
+#        xsltproc \
+#        libxrandr-dev \
+#        python-libxml2 \
+#        nasm \
+#        xserver-xorg-dev \
+#        fuse \
+#        build-essential \
+#        pkg-config
 
-RUN    git clone -b devel https://github.com/neutrinolabs/xrdp.git
-RUN    git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git 
-RUN    cd /root/xrdp && ./bootstrap && ./configure --enable-jpeg && make && make install
-RUN    cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install
+#RUN    git clone -b devel https://github.com/neutrinolabs/xrdp.git
+#RUN    git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git 
+#RUN    cd /root/xrdp && ./bootstrap && ./configure --enable-jpeg && make && make install
+#RUN    cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install
 
-RUN    apt-get -y purge \
-        git \
-        libxfont1-dev \
-        libx11-dev \
-        libxfixes-dev \
-        libssl-dev \
-        libpam0g-dev \
-        libtool \
-        libjpeg-dev \
-        flex \
-        bison \
-        gettext \
-        autoconf \
-        libxml-parser-perl \
-        libfuse-dev \
-        xsltproc \
-        libxrandr-dev \
-        python-libxml2 \
-        nasm \
-        xserver-xorg-dev \
-        fuse \
-        build-essential \
-        pkg-config
+#RUN    apt-get -y purge \
+#        git \
+#        libxfont1-dev \
+#        libx11-dev \
+#        libxfixes-dev \
+#        libssl-dev \
+#        libpam0g-dev \
+#        libtool \
+#        libjpeg-dev \
+#        flex \
+#        bison \
+#        gettext \
+#        autoconf \
+#        libxml-parser-perl \
+#        libfuse-dev \
+#        xsltproc \
+#        libxrandr-dev \
+#        python-libxml2 \
+#        nasm \
+#        xserver-xorg-dev \
+#        fuse \
+#        build-essential \
+#        pkg-config
         
 RUN apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
