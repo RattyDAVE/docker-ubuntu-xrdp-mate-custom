@@ -24,7 +24,7 @@ RUN apt-get update -y && \
     rm -f *.deb  && \
     git clone https://github.com/jeroennijhof/vncpwd.git && \
     cd vncpwd && \
-    make -j4 && \
+    make && \
     cp vncpwd /usr/bin && \
     rm -R /root/vncpwd && \
     cd /root  && \
@@ -36,8 +36,7 @@ RUN apt-get update -y && \
     git clone https://github.com/trcwm/rocket2014.git && \
     cd /root/rocket2014/src && \
     qmake && \
-    cat /proc/cpuinfo && \
-    make -j4 && \
+    make && \
     cp Rocket2014 /usr/bin && \
     mkdir -p /opt/rocket2014  && \
     cd ../examples && \
