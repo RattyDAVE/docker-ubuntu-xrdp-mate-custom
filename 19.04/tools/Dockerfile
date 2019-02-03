@@ -14,7 +14,7 @@ RUN apt-get update -y && \
         geany \
         putty \
         remmina* \
-        openjdk-11-jre \
+        openjdk-12-jdk \
         libreoffice \
         pasmo \
         git build-essential qt5-default \
@@ -59,7 +59,7 @@ RUN apt-get update -y && \
     echo "[Desktop Entry]" > /usr/share/applications/robocode.desktop && \
     echo "Name=Robocode" >> /usr/share/applications/robocode.desktop && \
     echo "Comment=Robocode" >> /usr/share/applications/robocode.desktop && \
-    echo "Exec=/opt/robocode.sh" >> /usr/share/applications/robocode.desktop && \
+    echo "Exec=/opt/robocode/robocode.sh" >> /usr/share/applications/robocode.desktop && \
     echo "Terminal=false" >> /usr/share/applications/robocode.desktop && \
     echo "Type=Application" >> /usr/share/applications/robocode.desktop && \
     \
