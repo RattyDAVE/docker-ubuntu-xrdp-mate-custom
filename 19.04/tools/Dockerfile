@@ -56,6 +56,7 @@ RUN apt-get update -y && \
     unzip robocode-setup.jar && \
     rm robocode-setup.jar && \
     chmod 755 robocode.sh && \
+    chmod -R 777 battles compilers roborumble robots && \
     echo "[Desktop Entry]" > /usr/share/applications/robocode.desktop && \
     echo "Name=Robocode" >> /usr/share/applications/robocode.desktop && \
     echo "Comment=Robocode" >> /usr/share/applications/robocode.desktop && \
