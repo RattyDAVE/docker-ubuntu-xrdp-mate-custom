@@ -103,9 +103,9 @@ RUN cd /root && \
         python-libxml2 \
         nasm \
         xserver-xorg-dev \
-        fuse \
         build-essential \
         pkg-config && \
+        #        fuse \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
