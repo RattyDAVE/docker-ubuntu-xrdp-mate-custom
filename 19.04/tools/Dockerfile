@@ -50,7 +50,7 @@ RUN apt-get update -y && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
-    /
+    \
     mkdir -p /opt/robocode && \
     cd /opt/robocode && \
     wget -O robocode-setup.jar https://downloads.sourceforge.net/project/robocode/robocode/1.9.3.4/robocode-1.9.3.4-setup.jar && \
@@ -63,7 +63,7 @@ RUN apt-get update -y && \
     echo "Exec=/opt/robocode.sh" >> /usr/share/applications/robocode.desktop && \
     echo "Terminal=false" >> /usr/share/applications/robocode.desktop && \
     echo "Type=Application" >> /usr/share/applications/robocode.desktop && \
-    /
+    \
     echo "[Desktop Entry]" > /usr/share/applications/rocket2014.desktop && \
     echo "Name=Rocket2014" >> /usr/share/applications/rocket2014.desktop && \
     echo "Comment=RC2014 Z80 emulator" >> /usr/share/applications/rocket2014.desktop && \
