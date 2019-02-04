@@ -16,6 +16,9 @@ docker run --name RattyDAVE19.04 \
            rattydave/docker-ubuntu-xrdp-mate-custom:19.04
 ```
 
+Linux example of how to run ```xfreerdp /v:xxx.xxx.xxx.xxx /drive:home,/home/xxxx +clipboard```
+
+
 Use same instructions for 18.04
 
 # Ubuntu 18.04 with XRDP and MATE. Version 18.04 (latest)
