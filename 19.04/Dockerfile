@@ -79,7 +79,7 @@ RUN cd /root && \
         pkg-config && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
-    cd /root/xrdp && ./bootstrap && ./configure --enable-jpeg && make && make install && \
+    cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg && make && make install && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
     rm -R /root/xrdp && \
     rm -R /root/xorgxrdp && \
