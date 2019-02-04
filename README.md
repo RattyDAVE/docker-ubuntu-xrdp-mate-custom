@@ -4,6 +4,18 @@ Undergoing testing.
 - rattydave/docker-ubuntu-xrdp-mate-custom:19.04
 - rattydave/docker-ubuntu-xrdp-mate-custom:19.04-tools
 
+This version supports local drive mapping and clipboard sharing. Also manual mounting of file systems. To use these features you will need to add the elevated rights with this parameter ```--privileged=true``` also this could be a securty risk.
+
+```
+docker run --name RattyDAVE19.04 \
+           --privileged=true \
+           -p 3389:3389 \
+           -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
+           -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
+           -dit --restart unless-stopped \
+           rattydave/docker-ubuntu-xrdp-mate-custom:19.04
+```
+
 Use same instructions for 18.04
 
 # Ubuntu 18.04 with XRDP and MATE. Version 18.04 (latest)
