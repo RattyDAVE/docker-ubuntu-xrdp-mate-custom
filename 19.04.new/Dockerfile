@@ -12,6 +12,7 @@ RUN apt-get -yy install  sudo apt-utils software-properties-common $BUILD_DEPS
 WORKDIR /tmp
 RUN apt-get source pulseaudio
 RUN apt-get build-dep -yy pulseaudio
+RUN ls
 WORKDIR /tmp/pulseaudio-11.1
 RUN dpkg-buildpackage -rfakeroot -uc -b
 WORKDIR /tmp
