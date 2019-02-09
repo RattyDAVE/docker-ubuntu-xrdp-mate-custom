@@ -23,18 +23,7 @@ RUN ./configure
 RUN make
 RUN make install
 WORKDIR /tmp/xrdp/sesman/chansrv/pulse
-RUN echo .
-RUN echo .
-RUN echo .
-RUN echo .
-RUN echo .
-RUN cat Makefile
-RUN echo .
-RUN echo .
-RUN echo .
-RUN echo .
-RUN echo .
-RUN sed -i "s/\/tmp\/pulseaudio\-10\.0/\/tmp\/pulseaudio\-11\.1/g" Makefile
+RUN sed -i "s/\/tmp\/pulseaudio\-10\.0/\/tmp\/pulseaudio\-12\.2/g" Makefile
 RUN make
 RUN mkdir -p /tmp/so
 RUN cp *.so /tmp/so
