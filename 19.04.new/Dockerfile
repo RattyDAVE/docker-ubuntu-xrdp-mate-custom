@@ -1,5 +1,4 @@
-#FROM ubuntu:19.04
-FROM ubuntu:18.10
+FROM ubuntu:19.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
@@ -8,7 +7,8 @@ ENV LANGUAGE en_GB:GB
 ENV LC_ALL en_GB.UTF-8
 
 RUN cd /root && \
-    sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \ 
+    sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
+    sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list && \
     apt-get update -y && \ 
     apt-get install -yqq locales  && \ 
     echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
@@ -78,13 +78,27 @@ RUN cd /root && \
         fuse \
         build-essential \
         pkg-config && \
+    \
+    \
+    apt-get source pulseaudio && \
+    #apt-get build-dep -yy pulseaudio && \
+    ls && \
+    cd pulseaudio-11.1 && \
+    dpkg-buildpackage -rfakeroot -uc -b && \
+    
+    \    
+    \
+    cd /root && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
     cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg && make && make install && \
+\    
+    cd /root/xrdp/sesman/chansrv/pulse && sed -i "s/\/tmp\/pulseaudio\-10\.0/\/tmp\/pulseaudio\-11\.1/g" Makefile && make && \
+\        
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
-    rm -R /root/xrdp && \
+    #rm -R /root/xrdp && \
     rm -R /root/xorgxrdp && \
-   apt-get -y purge \
+    apt-get -y purge \
         git \
         libxfont-dev \
         libx11-dev \
@@ -118,6 +132,7 @@ RUN cd /root && \
     xrdp-keygen xrdp auto  && \
     mkdir -p /var/run/xrdp && \
     chmod 2775 /var/run/xrdp  && \
+    mkdir /var/run/dbus && \
     mkdir -p /var/run/xrdp/sockdir && \
     chmod 3777 /var/run/xrdp/sockdir && \
     echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
