@@ -169,6 +169,8 @@ RUN cd /root && \
     mkdir -p /var/lib/xrdp-pulseaudio-installer
 
 ADD xrdp.ini /etc/xrdp/xrdp.ini
+ADD asound.conf /etc/asound.conf
+
 COPY --from=builder /tmp/so/module-xrdp-source.so /var/lib/xrdp-pulseaudio-installer
 COPY --from=builder /tmp/so/module-xrdp-sink.so /var/lib/xrdp-pulseaudio-installer
 
