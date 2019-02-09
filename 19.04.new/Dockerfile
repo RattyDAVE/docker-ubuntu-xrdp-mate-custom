@@ -1,3 +1,34 @@
+FROM ubuntu:19.04 as builder
+
+ENV DEBIAN_FRONTEND noninteractive
+RUN sed -i "s/# deb-src/deb-src/g" /etc/apt/sources.list
+RUN apt-get -y update
+RUN apt-get -yy upgrade
+ENV BUILD_DEPS="git autoconf pkg-config libssl-dev libpam0g-dev \
+    libx11-dev libxfixes-dev libxrandr-dev nasm xsltproc flex \
+    bison libxml2-dev dpkg-dev libcap-dev"
+RUN apt-get -yy install  sudo apt-utils software-properties-common $BUILD_DEPS
+
+WORKDIR /tmp
+RUN apt-get source pulseaudio
+RUN apt-get build-dep -yy pulseaudio
+WORKDIR /tmp/pulseaudio-11.1
+RUN dpkg-buildpackage -rfakeroot -uc -b
+WORKDIR /tmp
+RUN git clone --branch v0.9.7 --recursive https://github.com/neutrinolabs/xrdp.git
+WORKDIR /tmp/xrdp
+RUN ./bootstrap
+RUN ./configure
+RUN make
+RUN make install
+WORKDIR /tmp/xrdp/sesman/chansrv/pulse
+RUN sed -i "s/\/tmp\/pulseaudio\-10\.0/\/tmp\/pulseaudio\-11\.1/g" Makefile
+RUN make
+RUN mkdir -p /tmp/so
+RUN cp *.so /tmp/so
+
+
+
 FROM ubuntu:19.04
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -8,7 +39,6 @@ ENV LC_ALL en_GB.UTF-8
 
 RUN cd /root && \
     sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
-    sed -i 's/# deb-src/deb-src/g' /etc/apt/sources.list && \
     apt-get update -y && \ 
     apt-get install -yqq locales  && \ 
     echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
@@ -41,7 +71,9 @@ RUN cd /root && \
         mate-window-title-applet \
         ubuntu-mate-icon-themes \
         ubuntu-mate-themes \
-        tightvncserver && \
+        tightvncserver \
+        pulseaudio \
+        uuid-runtime && \
     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
@@ -78,25 +110,12 @@ RUN cd /root && \
         fuse \
         build-essential \
         pkg-config && \
-    \
-    \
-    apt-get source pulseaudio && \
-    #apt-get build-dep -yy pulseaudio && \
-    ls && \
-    cd pulseaudio-11.1 && \
-    dpkg-buildpackage -rfakeroot -uc -b && \
-    
-    \    
-    \
     cd /root && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
     cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg && make && make install && \
-\    
-    cd /root/xrdp/sesman/chansrv/pulse && sed -i "s/\/tmp\/pulseaudio\-10\.0/\/tmp\/pulseaudio\-11\.1/g" Makefile && make && \
-\        
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
-    #rm -R /root/xrdp && \
+    rm -R /root/xrdp && \
     rm -R /root/xorgxrdp && \
     apt-get -y purge \
         git \
@@ -132,7 +151,6 @@ RUN cd /root && \
     xrdp-keygen xrdp auto  && \
     mkdir -p /var/run/xrdp && \
     chmod 2775 /var/run/xrdp  && \
-    mkdir /var/run/dbus && \
     mkdir -p /var/run/xrdp/sockdir && \
     chmod 3777 /var/run/xrdp/sockdir && \
     echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
@@ -145,11 +163,16 @@ RUN cd /root && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
+    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
+    mkdir /var/run/dbus && \
+    mkdir -p /var/lib/xrdp-pulseaudio-installer
 
 ADD xrdp.ini /etc/xrdp/xrdp.ini
+COPY --from=builder /tmp/so/module-xrdp-source.so /var/lib/xrdp-pulseaudio-installer
+COPY --from=builder /tmp/so/module-xrdp-sink.so /var/lib/xrdp-pulseaudio-installer
 
 ADD startup.sh /root/startup.sh
 CMD ["/bin/bash", "/root/startup.sh"]
                                     
 EXPOSE 3389
+
