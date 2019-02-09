@@ -13,7 +13,7 @@ WORKDIR /tmp
 RUN apt-get source pulseaudio
 RUN apt-get build-dep -yy pulseaudio
 RUN ls
-WORKDIR /tmp/pulseaudio-11.1
+WORKDIR /tmp/pulseaudio-12.2
 RUN dpkg-buildpackage -rfakeroot -uc -b
 WORKDIR /tmp
 RUN git clone --branch v0.9.7 --recursive https://github.com/neutrinolabs/xrdp.git
@@ -23,6 +23,17 @@ RUN ./configure
 RUN make
 RUN make install
 WORKDIR /tmp/xrdp/sesman/chansrv/pulse
+RUN echo .
+RUN echo .
+RUN echo .
+RUN echo .
+RUN echo .
+RUN cat Makefile
+RUN echo .
+RUN echo .
+RUN echo .
+RUN echo .
+RUN echo .
 RUN sed -i "s/\/tmp\/pulseaudio\-10\.0/\/tmp\/pulseaudio\-11\.1/g" Makefile
 RUN make
 RUN mkdir -p /tmp/so
