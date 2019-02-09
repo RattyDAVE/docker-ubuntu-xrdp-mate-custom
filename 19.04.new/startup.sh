@@ -17,6 +17,7 @@ if [ -f $file ]
               else
                 useradd -ms /bin/bash $username
                 echo "$username:$password" | chpasswd
+                gpasswd -a $username audio
                 if [ "$is_sudo" = "Y" ]
                   then
                     usermod -aG sudo $username
