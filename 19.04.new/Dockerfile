@@ -137,7 +137,7 @@ RUN sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
     mkdir -p /var/run/xrdp/sockdir && \
     chmod 3777 /var/run/xrdp/sockdir && \
     mkdir /var/run/dbus && \
-    chmod 3777 /var/run/dbus && \
+    chmod 3777 /var/run/dbus
 
 COPY /filesystem /
 
