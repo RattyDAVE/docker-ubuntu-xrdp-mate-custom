@@ -1,3 +1,17 @@
+<a name="0.3.3"></a>
+## 0.3.3 (2019-02-12)
+
+
+### Build
+
+* Force pull on docker build image ([f7f5cecb3406afa0b57583ce7c4a1e22e559ba9a](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/f7f5cecb3406afa0b57583ce7c4a1e22e559ba9a))
+
+### Docs
+
+* Update main readme ([e5226af73522f2d8429c49e021abd1814bc2e95d](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/e5226af73522f2d8429c49e021abd1814bc2e95d))
+
+
+
 <a name="0.3.2"></a>
 ## 0.3.2 (2018-08-29)
 
@@ -5,6 +19,7 @@
 ### Build
 
 * Build and push a docker image with the semantic release tag number ([9ee42de64ad1148ad32319ecbbf0ffbc45e3e1c4](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/9ee42de64ad1148ad32319ecbbf0ffbc45e3e1c4))
+* Update CHANGELOG.md to v0.3.2 with Red Panda JPL ([2dbb26c676b36044135ab33e1126d04ad263fa6d](https://github.com/red-panda-ci/docker-ubuntu-xrdp-mate-custom/commit/2dbb26c676b36044135ab33e1126d04ad263fa6d))
 
 
 
