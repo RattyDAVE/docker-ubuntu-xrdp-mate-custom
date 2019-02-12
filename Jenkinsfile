@@ -19,7 +19,7 @@ pipeline {
             agent { label 'docker' }
             steps {
                 script {
-                    docker.build('redpandaci/duing:test', '--no-cache ./duing')
+                    docker.build('redpandaci/duing:test', '--pull --no-cache ./duing')
                 }
             }
         }
