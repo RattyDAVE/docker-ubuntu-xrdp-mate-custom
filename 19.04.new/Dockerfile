@@ -42,7 +42,6 @@ RUN cd /root && \
         ubuntu-mate-themes \
         tightvncserver \
         pulseaudio \
-        pavometer \
         chromium-browser \
         uuid-runtime && \
     apt-get install --no-install-recommends -yqq \
