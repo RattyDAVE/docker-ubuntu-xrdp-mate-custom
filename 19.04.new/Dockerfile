@@ -127,8 +127,7 @@ RUN echo "START BUILD" && \
     echo "END BUILD"
     
     
-RUN echo "mate-session" > /etc/skel/.xsession && \
-    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
+RUN sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini  && \
     sed -i -e '/DisconnectedTimeLimit=/ s/=.*/=300/' /etc/xrdp/sesman.ini && \
     sed -i -e '/IdleTimeLimit=/ s/=.*/=300/' /etc/xrdp/sesman.ini && \
