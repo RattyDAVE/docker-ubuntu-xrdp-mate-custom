@@ -66,7 +66,7 @@ RUN  apt-get update -y && \
     rm -rf /var/lib/apt/lists/* 
     
 RUN echo "START BUILD" && \
-    apt-get update -y && \ 
+    apt-get update -yqq && \ 
     apt-get -y install \
         git \
         libxfont-dev \
