@@ -42,6 +42,7 @@ RUN cd /root && \
         ubuntu-mate-themes \
         tightvncserver \
         pulseaudio \
+        pavumeter \
         chromium-browser \
         uuid-runtime && \
     apt-get -y autoclean && apt-get -y autoremove && \
@@ -90,11 +91,15 @@ RUN echo "START BUILD" && \
         xserver-xorg-dev \
         fuse \
         build-essential \
+        libmp3lame-dev \
+        libavformat-dev \
         pkg-config && \
     cd /root && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
-    cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg && make && make install && \
+    cd /root/xrdp && ./bootstrap && \
+    ./configure --enable-fuse --enable-jpeg  --enable-mp3lame --enable-pixman --enable-sound  && \
+    make -j4 && make install && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
     #rm -R /root/xrdp && \
     #rm -R /root/xorgxrdp && \
