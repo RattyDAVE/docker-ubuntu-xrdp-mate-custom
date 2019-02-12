@@ -139,7 +139,7 @@ RUN sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
     mkdir /var/run/dbus && \
     chmod 3777 /var/run/dbus && \
 
-ADD /filesystem /
+COPY /filesystem /
 
 CMD ["/bin/bash", "/root/startup.sh"]
                                     
