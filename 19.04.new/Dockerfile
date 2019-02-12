@@ -44,7 +44,12 @@ RUN cd /root && \
         pulseaudio \
         chromium-browser \
         uuid-runtime && \
-    apt-get install --no-install-recommends -yqq \
+    apt-get -y autoclean && apt-get -y autoremove && \
+    apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
+    rm -rf /var/lib/apt/lists/* 
+    
+RUN  apt-get update -y && \ 
+     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
         tzdata \
@@ -56,6 +61,12 @@ RUN cd /root && \
         wget \
         epiphany-browser && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
+    apt-get -y autoclean && apt-get -y autoremove && \
+    apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
+    rm -rf /var/lib/apt/lists/* 
+    
+RUN echo "START BUILD" && \
+    apt-get update -y && \ 
     apt-get -y install \
         git \
         libxfont-dev \
@@ -113,7 +124,10 @@ RUN cd /root && \
     #apt-get -y autoclean && apt-get -y autoremove && \
     #apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     #rm -rf /var/lib/apt/lists/*  && \
-    echo "mate-session" > /etc/skel/.xsession && \
+    echo "END BUILD"
+    
+    
+RUN echo "mate-session" > /etc/skel/.xsession && \
     sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini  && \
     sed -i -e '/DisconnectedTimeLimit=/ s/=.*/=300/' /etc/xrdp/sesman.ini && \
