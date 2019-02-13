@@ -46,7 +46,6 @@ RUN cd /root && \
         chromium-browser \
         xrdp \
         xorgxrdp \
-        xorgxrdp \
         uuid-runtime && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
