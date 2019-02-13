@@ -132,7 +132,7 @@ RUN  apt-get update -y && \
     #apt-get -y autoclean && apt-get -y autoremove && \
     #apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     #rm -rf /var/lib/apt/lists/*  && \
-    echo "END BUILD"
+    #echo "END BUILD"
     
     
 RUN sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
