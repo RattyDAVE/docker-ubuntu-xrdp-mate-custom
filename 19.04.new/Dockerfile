@@ -44,6 +44,9 @@ RUN cd /root && \
         pulseaudio \
         pavumeter \
         chromium-browser \
+        xrdp \
+        xorgxrdp \
+        xorgrdp \
         uuid-runtime && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
@@ -66,41 +69,41 @@ RUN  apt-get update -y && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/* 
     
-RUN echo "START BUILD" && \
-    apt-get update -yqq && \ 
-    apt-get -y install \
-        git \
-        libxfont-dev \
-        xserver-xorg-core \
-        libx11-dev \
-        libxfixes-dev \
-        libssl-dev \
-        libpam0g-dev \
-        libtool \
-        libjpeg-dev \
-        flex \
-        bison \
-        gettext \
-        autoconf \
-        libxml-parser-perl \
-        libfuse-dev \
-        xsltproc \
-        libxrandr-dev \
-        python-libxml2 \
-        nasm \
-        xserver-xorg-dev \
-        fuse \
-        build-essential \
-        libmp3lame-dev \
-        libavformat-dev \
-        pkg-config && \
-    cd /root && \
-    git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
-    git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
-    cd /root/xrdp && ./bootstrap && \
-    ./configure --enable-fuse --enable-jpeg  --enable-mp3lame --enable-pixman --enable-sound  && \
-    make -j4 && make install && \
-    cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
+#RUN echo "START BUILD" && \
+    #apt-get update -yqq && \ 
+    #apt-get -y install \
+    #    git \
+    #    libxfont-dev \
+    #    xserver-xorg-core \
+    #    libx11-dev \
+    #    libxfixes-dev \
+    #    libssl-dev \
+    #    libpam0g-dev \
+    #    libtool \
+    #    libjpeg-dev \
+    #    flex \
+    #    bison \
+    #    gettext \
+    #    autoconf \
+    #    libxml-parser-perl \
+    #    libfuse-dev \
+    #    xsltproc \
+    #    libxrandr-dev \
+    #    python-libxml2 \
+    #    nasm \
+    #   xserver-xorg-dev \
+    #    fuse \
+    #    build-essential \
+    #    libmp3lame-dev \
+    #    libavformat-dev \
+    #    pkg-config && \
+    #cd /root && \
+    #git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
+    #git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
+    #cd /root/xrdp && ./bootstrap && \
+    #./configure --enable-fuse --enable-jpeg  --enable-mp3lame --enable-pixman --enable-sound  && \
+    #make -j4 && make install && \
+    #cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
     #rm -R /root/xrdp && \
     #rm -R /root/xorgxrdp && \
     #apt-get -y purge \
