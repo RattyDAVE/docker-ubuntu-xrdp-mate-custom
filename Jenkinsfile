@@ -39,7 +39,7 @@ pipeline {
             agent { label 'docker' }
             when { expression { cfg.BRANCH_NAME.startsWith('release/v') && cfg.promoteBuild.enabled } }
             steps {
-                sh "docker rmi kairops/duing:test redpanda-ci/duing:latest kairops/duing:18.10 || true"
+                sh "docker rmi kairops/duing:test kairops/duing:18.10 || true"
                 jplDockerPush (cfg, "kairops/duing", cfg.releaseTag, "duing", "https://registry.hub.docker.com", "kairops-docker-credentials")
                 jplDockerPush (cfg, "kairops/duing", "18.10", "duing", "https://registry.hub.docker.com", "kairops-docker-credentials")
                 jplDockerPush (cfg, "kairops/duing", "latest", "duing", "https://registry.hub.docker.com", "kairops-docker-credentials")
