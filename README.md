@@ -272,6 +272,6 @@ docker run -d --name Desktop -v %HOST_VOLUME_FOR_HOME%:/home_ext -p 3389:3389 ra
 
 ```
 
-# Red Panda CI duing
+# Kairops duing
 
 Look at the [duing readme](duing/README.md)
