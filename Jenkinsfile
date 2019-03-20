@@ -19,7 +19,7 @@ pipeline {
             agent { label 'docker' }
             steps {
                 script {
-                    docker.build('redpandaci/duing:test', '--pull --no-cache ./duing')
+                    docker.build('kairops/duing:test', '--pull --no-cache ./duing')
                 }
             }
         }
@@ -39,10 +39,10 @@ pipeline {
             agent { label 'docker' }
             when { expression { cfg.BRANCH_NAME.startsWith('release/v') && cfg.promoteBuild.enabled } }
             steps {
-                sh "docker rmi redpandaci/duing:test redpanda-ci/duing:latest redpandaci/duing:18.10 || true"
-                jplDockerPush (cfg, "redpandaci/duing", cfg.releaseTag, "duing", "https://registry.hub.docker.com", "redpandaci-docker-credentials")
-                jplDockerPush (cfg, "redpandaci/duing", "18.10", "duing", "https://registry.hub.docker.com", "redpandaci-docker-credentials")
-                jplDockerPush (cfg, "redpandaci/duing", "latest", "duing", "https://registry.hub.docker.com", "redpandaci-docker-credentials")
+                sh "docker rmi kairops/duing:test redpanda-ci/duing:latest kairops/duing:18.10 || true"
+                jplDockerPush (cfg, "kairops/duing", cfg.releaseTag, "duing", "https://registry.hub.docker.com", "kairops-docker-credentials")
+                jplDockerPush (cfg, "kairops/duing", "18.10", "duing", "https://registry.hub.docker.com", "kairops-docker-credentials")
+                jplDockerPush (cfg, "kairops/duing", "latest", "duing", "https://registry.hub.docker.com", "kairops-docker-credentials")
                 jplCloseRelease(cfg)
             }
         }
