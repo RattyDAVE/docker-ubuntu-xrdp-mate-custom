@@ -1,9 +1,9 @@
 #!groovy
 
-@Library('github.com/red-panda-ci/jenkins-pipeline-library@v2.6.2') _
+@Library('github.com/red-panda-ci/jenkins-pipeline-library@v2.7.0') _
 
 // Initialize global config
-cfg = jplConfig('duing', 'docker', '', [slack: '#integrations', email:'redpandaci+duing@gmail.com'])
+cfg = jplConfig('duing', 'docker', '', [slack: '', email:'redpandaci+duing@gmail.com'])
 
 pipeline {
     agent none
@@ -19,7 +19,7 @@ pipeline {
             agent { label 'docker' }
             steps {
                 script {
-                    docker.build('redpandaci/duing:test', '--pull --no-cache ./duing')
+                    docker.build('kairops/duing:test', '--pull --no-cache ./duing')
                 }
             }
         }
@@ -39,10 +39,10 @@ pipeline {
             agent { label 'docker' }
             when { expression { cfg.BRANCH_NAME.startsWith('release/v') && cfg.promoteBuild.enabled } }
             steps {
-                sh "docker rmi redpandaci/duing:test redpanda-ci/duing:latest redpandaci/duing:18.10 || true"
-                jplDockerPush (cfg, "redpandaci/duing", cfg.releaseTag, "duing", "https://registry.hub.docker.com", "redpandaci-docker-credentials")
-                jplDockerPush (cfg, "redpandaci/duing", "18.10", "duing", "https://registry.hub.docker.com", "redpandaci-docker-credentials")
-                jplDockerPush (cfg, "redpandaci/duing", "latest", "duing", "https://registry.hub.docker.com", "redpandaci-docker-credentials")
+                sh "docker rmi kairops/duing:test kairops/duing:18.10 || true"
+                jplDockerPush (cfg, "kairops/duing", cfg.releaseTag, "duing", "https://registry.hub.docker.com", "cikairos-docker-credentials")
+                jplDockerPush (cfg, "kairops/duing", "18.10", "duing", "https://registry.hub.docker.com", "cikairos-docker-credentials")
+                jplDockerPush (cfg, "kairops/duing", "latest", "duing", "https://registry.hub.docker.com", "cikairos-docker-credentials")
                 jplCloseRelease(cfg)
             }
         }

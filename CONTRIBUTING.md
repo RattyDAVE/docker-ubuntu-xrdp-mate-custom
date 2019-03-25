@@ -10,7 +10,7 @@ Issues are always very welcome - after all. However, there are a couple of thing
   * Post a _minimal_ code sample and particular use case that reproduces the issue
   * What do you expect to happen?
   * What is actually happening?
-* Which redpanda/duing version are you using?
+* Which kairops/duing version are you using?
 
 When you post code, please use [Github flavored markdown](https://help.github.com/articles/github-flavored-markdown), in order to get proper syntax highlighting!
 
@@ -35,7 +35,7 @@ If running on macOS, install [Docker for Mac](https://docs.docker.com/docker-for
 
 ### 2. Run the tests
 
-All tests scripts and jobs are located in the `test` folder, and are executed with "bin/test.sh" script within `redpandaci/duing:test` docker container
+All tests scripts and jobs are located in the `test` folder, and are executed with "bin/test.sh" script within `kairops/duing:test` docker container
 
 ### 3. Check the documentation
 

@@ -40,7 +40,7 @@ $ docker run -d --name duing \
            -p 3389:3389 \
            --shm-size 1g \
            -dit --restart unless-stopped \
-           redpandaci/duing
+           kairops/duing
 ```
 
 2. Access with remote desktop to localhost:3389 with "ubuntu" user and "ubuntu" password
@@ -92,7 +92,7 @@ $ mkdir -m 777 -p reports
 2. Run the test suite
 
 ```console
-$ docker run --rm -t -v `pwd`/reports:/opt/duingdemo/ci-scripts/test/cucumber/reports -u ubuntu redpandaci/duing bash -i -c "cd /opt/duingdemo/ci-scripts/test/cucumber; rake poltergeist"
+$ docker run --rm -t -v `pwd`/reports:/opt/duingdemo/ci-scripts/test/cucumber/reports -u ubuntu kairops/duing bash -i -c "cd /opt/duingdemo/ci-scripts/test/cucumber; rake poltergeist"
 To run a command as administrator (user "root"), use "sudo <command>".
 See "man sudo_root" for details.
 
