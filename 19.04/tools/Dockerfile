@@ -18,7 +18,9 @@ RUN apt-get update -y && \
         libreoffice \
         pasmo \
         git build-essential qt5-default \
+        chromium-browser \
         libqt5widgets5 && \
+    sed 's#PLUGIN_PARAMETERS=""#PLUGIN_PARAMETERS="--no-sandbox"#g' /usr/bin/chromium-browser -i  && \        
     wget http://www.bluej.org/download/files/BlueJ-linux-410.deb  && \ 
     dpkg -i BlueJ-linux-410.deb; apt-get install -f -y && \
     rm -f *.deb  && \
