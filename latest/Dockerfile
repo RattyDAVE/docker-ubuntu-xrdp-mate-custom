@@ -1,1 +1,1 @@
-FROM rattydave/docker-ubuntu-xrdp-mate-custom:18.04
+FROM rattydave/docker-ubuntu-xrdp-mate-custom:19.04
