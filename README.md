@@ -44,12 +44,10 @@ This file contains 3 fields (username:password:is_sudo). Where username is the l
 Example
 
 ```
-
 mickey:mouse:N
 daisy:duke:Y
 dog:flash:n
 morty:rick:wubba
-
 ```
 
 In this example 4 users will be created and only daisy will have sudo rights.
@@ -59,7 +57,6 @@ At every reboot it will check this file and ADD any new users.
 Example of a working command line.
 
 ```
-
 docker run -d --name RattyDAVE19.04 \
            -p 3389:3389 \
            -v /root/createusers.txt:/root/createusers.txt \
@@ -106,14 +103,12 @@ Screen sharing:
 Example of a working command line.
 
 ```
-
 docker run -d --name RattyDAVE19.04-tools \
            -p 3389:3389 \
            -v /root/createusers.txt:/root/createusers.txt \
            -v /root/home:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:19.04-tools
-
 ```
 
 Please note some clients need an extra parameter set glyph-cache. xfreerdp and remmina and other need this set.
