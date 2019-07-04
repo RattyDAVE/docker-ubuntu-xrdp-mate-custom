@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "You are connected to display ${DISPLAY:1:2}" > ~/Desktop/session_info.txt
+echo "VNC Authentication file is ~/.vnc/sesman_$(whoami)_passwd:${DISPLAY:1:2}" >> ~/Desktop/session_info.txt
+vncpwd ~/.vnc/sesman_$(whoami)_passwd:${DISPLAY:1:2} >> ~/Desktop/session_info.txt
