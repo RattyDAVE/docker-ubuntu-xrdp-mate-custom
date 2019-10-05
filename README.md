@@ -39,7 +39,7 @@ docker run --name RattyDAVE19.04 \
 - Replace %LOCAL_PATH_TO_HOME_DIRECTORY% with the local directory of the /home directorys.
 - You do not need to publish port 22 only use if needed.
 
-This file contains 3 fields (username:password:is_sudo). Where username is the login id. Password is the password. is_sudo does the user have sudo access(only Y is recognised).
+This file contains 3 fields (username:password:is_sudo). Where username is the login id. Password is the password. is_sudo does the user have sudo access(only Y is recognised). It also needs a "newline" at the end of the line.  
 
 Example
 
