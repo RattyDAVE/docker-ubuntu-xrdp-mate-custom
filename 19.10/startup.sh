@@ -25,5 +25,13 @@ if [ -f $file ]
     done <"$file"
 fi
 
+
+startfile="/root/startup.sh"
+if [ -f $startfile ]
+  then
+    sh $startfile
+fi
+
+
 #This has to be the last command!
 /usr/bin/supervisord -n
