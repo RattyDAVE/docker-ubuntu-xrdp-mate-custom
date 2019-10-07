@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#Set Timezone
+if [[ -z "${TZ}" ]]; then
+   ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
+   dpkg-reconfigure -f noninteractive tzdata
+else
+   ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime
+   dpkg-reconfigure -f noninteractive tzdata
+fi
+
 #CREATE USERS.
 # username:passsword:Y
 # username2:password2:Y
