@@ -6,6 +6,36 @@ A virtual desktop docker container with persistant user information.
 
 This image is automatically rebuilt when updates are realeased for Ubuntu.
 
+# Ubuntu 19.10 with XRDP and MATE.
+
+- rattydave/docker-ubuntu-xrdp-mate-custom:19.10
+- rattydave/docker-ubuntu-xrdp-mate-custom:19.10-tools
+
+All features as 19.04 with a 1 NEW feature.
+ - Ability to run a script on container startup. This is useful for installing packages that are needed.
+ 
+ ```
+ docker run --name RattyDAVE19.10 \
+           --privileged=true \
+           -p 3389:3389 \
+           -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
+           -v %LOCAL_PATH_TO_STARTUP.SH_FILE%:/root/createusers.txt \
+           -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
+           -dit --restart unless-stopped \
+           rattydave/docker-ubuntu-xrdp-mate-custom:19.04
+```
+
+- Replace %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE% with the local filename of the createusers file.
+- Replace %LOCAL_PATH_TO_STARTUP.SH_FILE% with the local filename of the startup.sh script. This is run after the user creation and before the service start.
+- Replace %LOCAL_PATH_TO_HOME_DIRECTORY% with the local directory of the /home directorys.
+- You do not need to publish port 22 only use if needed.
+
+Example startup.sh
+```
+apt install htop
+```
+
+
 # Ubuntu 19.04 with XRDP and MATE. Version 19.04 (latest)
 
 - rattydave/docker-ubuntu-xrdp-mate-custom:19.04
