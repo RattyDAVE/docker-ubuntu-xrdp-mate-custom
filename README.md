@@ -6,7 +6,7 @@ A virtual desktop docker container with persistant user information.
 
 This image is automatically rebuilt when updates are realeased for Ubuntu.
 
-# Ubuntu 19.10 with XRDP and MATE.
+# Ubuntu 19.10 with XRDP and MATE. - BETA
 
 - rattydave/docker-ubuntu-xrdp-mate-custom:19.10
 - rattydave/docker-ubuntu-xrdp-mate-custom:19.10-tools
