@@ -27,7 +27,7 @@ All features as 19.04 with the following new features.
            -v %LOCAL_PATH_TO_STARTUP.SH_FILE%:/root/createusers.txt \
            -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
            -dit --restart unless-stopped \
-           rattydave/docker-ubuntu-xrdp-mate-custom:19.04
+           rattydave/docker-ubuntu-xrdp-mate-custom:19.10
 ```
 
 - Replace %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE% with the local filename of the createusers file.
