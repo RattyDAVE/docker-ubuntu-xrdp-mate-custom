@@ -2,9 +2,9 @@ FROM ubuntu:19.10
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
-ENV LANG en_GB.UTF-8
-ENV LANGUAGE en_GB:GB
-ENV LC_ALL en_GB.UTF-8
+#ENV LANG en_GB.UTF-8
+#ENV LANGUAGE en_GB:GB
+#ENV LC_ALL en_GB.UTF-8
 
 RUN cd /root && \
     sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
