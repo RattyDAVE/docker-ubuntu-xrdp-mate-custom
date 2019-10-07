@@ -7,7 +7,8 @@ ENV LANGUAGE en_GB:GB
 ENV LC_ALL en_GB.UTF-8
 
 RUN cd /root && \
-    sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \ 
+    sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
+    sed -i 's/^#\s*\(deb.*restricted\)$/\1/g' /etc/apt/sources.list && \ 
     apt-get update -y && \ 
     apt-get install -yqq locales  && \ 
     echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
@@ -40,7 +41,8 @@ RUN cd /root && \
         mate-window-title-applet \
         ubuntu-mate-icon-themes \
         ubuntu-mate-themes \
-        tightvncserver && \
+        tightvncserver \
+        pulseaudio && \
     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
@@ -76,14 +78,23 @@ RUN cd /root && \
         xserver-xorg-dev \
         fuse \
         build-essential \
-        pkg-config && \
+        pkg-config \
+        libpulse-dev m4 intltool dpkg-dev && \ 
+\ 
+    apt-get update && apt build-dep pulseaudio -y && \
+    cd /tmp && apt source pulseaudio && \
+    pulsever=$(pulseaudio --version | awk '{print $2}') && cd /tmp/pulseaudio-$pulsever && ./configure  && \
+    git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR="/tmp/pulseaudio-$pulsever" && make && \
+    cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so  && \
+\       
+    cd /root && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
     cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg && make && make install && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
     rm -R /root/xrdp && \
     rm -R /root/xorgxrdp && \
-   apt-get -y purge \
+    apt-get -y purge \
         git \
         libxfont-dev \
         libx11-dev \
