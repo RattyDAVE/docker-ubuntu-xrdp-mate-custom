@@ -11,13 +11,16 @@ This image is automatically rebuilt when updates are realeased for Ubuntu.
 - rattydave/docker-ubuntu-xrdp-mate-custom:19.10
 - rattydave/docker-ubuntu-xrdp-mate-custom:19.10-tools
 
-All features as 19.04 with a 1 NEW feature.
+All features as 19.04 with the following new features.
  - Ability to run a script on container startup. This is useful for installing packages that are needed.
+ - You are now able to set the time zone with the TZ varable
+ 
  
  ```
  docker run --name RattyDAVE19.10 \
            --privileged=true \
            -p 3389:3389 \
+           -e TZ="Europe/London"
            -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
            -v %LOCAL_PATH_TO_STARTUP.SH_FILE%:/root/createusers.txt \
            -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
