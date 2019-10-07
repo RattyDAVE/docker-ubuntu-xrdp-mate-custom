@@ -9,6 +9,17 @@ else
    dpkg-reconfigure -f noninteractive tzdata
 fi
 
+#Set Timezone
+if [[ -z "${LOCALE}" ]]; then
+    locale-gen en_GB.UTF-8
+    update-locale LANG=en_GB.UTF-8 
+else
+    locale-gen en_GB.UTF-8
+    update-locale LANG=en_GB.UTF-8
+fi
+
+
+
 #CREATE USERS.
 # username:passsword:Y
 # username2:password2:Y
