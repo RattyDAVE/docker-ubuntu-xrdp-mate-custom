@@ -14,7 +14,6 @@ This image is automatically rebuilt when updates are realeased for Ubuntu.
 All features as 19.04 with the following new features.
  - Ability to run a script on container startup. This is useful for installing packages that are needed.
  - You are now able to set the time zone with the TZ variable
- - Language and keyboard layout can be set using the LOCALE variable
  
  
  ```
@@ -22,7 +21,6 @@ All features as 19.04 with the following new features.
            --privileged=true \
            -p 3389:3389 \
            -e TZ="Europe/London"
-           -e LOCALE="en_GB.UTF-8"
            -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
            -v %LOCAL_PATH_TO_STARTUP.SH_FILE%:/root/startup.sh \
            -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
@@ -35,10 +33,12 @@ All features as 19.04 with the following new features.
 - Replace %LOCAL_PATH_TO_HOME_DIRECTORY% with the local directory of the /home directorys.
 - You do not need to publish port 22 only use if needed.
 
-Example startup.sh
+Example startup.sh to change locale.
 ```
 apt-get update
-apt-get install htop -y
+apt-get -y install language-pack-de language-pack-gnome-de
+locale-gen de_DE.UTF-8
+update-locale LANG=de_DE.UTF-8
 ```
 
 
