@@ -37,7 +37,8 @@ All features as 19.04 with the following new features.
 
 Example startup.sh
 ```
-apt install htop
+apt-get update
+apt-get install htop -y
 ```
 
 
