@@ -120,7 +120,8 @@ RUN cd /root && \
         epiphany-browser \
         firefox \
         fuse \
-        git && \
+        git \
+        ssl-cert && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y install \
         xserver-xorg-core && \       
