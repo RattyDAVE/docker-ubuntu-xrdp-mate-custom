@@ -126,8 +126,8 @@ RUN cd /root && \
         xserver-xorg-core && \       
     mkdir -p /var/lib/xrdp-pulseaudio-installer
     
-COPY --from=builder /usr/lib/pulse-11.1/modules/module-xrdp-sink.so \
-                    /usr/lib/pulse-11.1/modules/module-xrdp-source.so \
+COPY --from=builder /usr/lib/pulse-13.0/modules/module-xrdp-sink.so \
+                    /usr/lib/pulse-13.0/modules/module-xrdp-source.so \
                     /var/lib/xrdp-pulseaudio-installer/
 
 COPY --from=builder /tmp/xrdp_${XRDP_VER}-1_amd64.deb /tmp/xorgxrdp_${XORGXRDP_VER}-1_amd64.deb /tmp/
