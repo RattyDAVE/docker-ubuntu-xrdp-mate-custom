@@ -45,7 +45,7 @@ RUN dpkg -i /tmp/xorgxrdp_"${XORGXRDP_VER}"-1_amd64.deb
 WORKDIR /tmp
 RUN apt-get source pulseaudio
 RUN apt-get build-dep -yy pulseaudio
-WORKDIR /tmp/pulseaudio-11.1
+WORKDIR /tmp/pulseaudio-13.0
 RUN dpkg-buildpackage -rfakeroot -uc -b
 
 # Build Pulse Audio module
