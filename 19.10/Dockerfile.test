@@ -117,15 +117,13 @@ RUN cd /root && \
         xterm \
         curl \
         wget \
-        epiphany-browser 
-        firefox 
-        fuse 
+        epiphany-browser \
+        firefox \
+        fuse \
         git && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y install \
-        git \
-        xserver-xorg-core \
-        fuse && \       
+        xserver-xorg-core && \       
     mkdir -p /var/lib/xrdp-pulseaudio-installer
     
 COPY --from=builder /usr/lib/pulse-11.1/modules/module-xrdp-sink.so \
