@@ -24,7 +24,7 @@ All features as 19.04 with the following new features.
            -e TZ="Europe/London"
            -e LOCALE="en_GB.UTF-8"
            -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
-           -v %LOCAL_PATH_TO_STARTUP.SH_FILE%:/root/createusers.txt \
+           -v %LOCAL_PATH_TO_STARTUP.SH_FILE%:/root/startup.sh \
            -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:19.10
