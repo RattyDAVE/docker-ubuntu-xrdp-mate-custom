@@ -130,11 +130,11 @@ RUN cd /root && \
     chmod 2775 /var/run/xrdp  && \
     mkdir -p /var/run/xrdp/sockdir && \
     chmod 3777 /var/run/xrdp/sockdir && \
-    echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
-    echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/sshd.conf && \
-    echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
-    echo "stderr_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
-    echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
+    #echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
+    #echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/sshd.conf && \
+    #echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
+    #echo "stderr_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
+    #echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
@@ -144,7 +144,7 @@ RUN cd /root && \
 
 ADD xrdp.ini /etc/xrdp/xrdp.ini
 
-ADD startup.sh /root/startup.sh
-CMD ["/bin/bash", "/root/startup.sh"]
+ADD autostartup.sh /root/autostartup.sh
+CMD ["/bin/bash", "/root/autostartup.sh"]
                                     
 EXPOSE 3389
