@@ -55,7 +55,7 @@ RUN wget https://github.com/neutrinolabs/pulseaudio-module-xrdp/archive/v"${XRDP
 RUN tar -zxf pulseaudio-module-xrdp-"${XRDPPULSE_VER}".tar.gz
 WORKDIR /tmp/pulseaudio-module-xrdp-"${XRDPPULSE_VER}"
 RUN ./bootstrap
-RUN ./configure PULSE_DIR=/tmp/pulseaudio-11.1
+RUN ./configure PULSE_DIR=/tmp/pulseaudio-13.0
 RUN make
 RUN make install
 
