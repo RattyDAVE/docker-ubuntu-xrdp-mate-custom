@@ -44,7 +44,7 @@ if [ -f $file ]
 fi
 
 
-startfile="/root/extrastartup.sh"
+startfile="/root/startup.sh"
 if [ -f $startfile ]
   then
     sh $startfile
