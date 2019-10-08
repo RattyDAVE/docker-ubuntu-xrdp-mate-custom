@@ -1,5 +1,7 @@
 #!/bin/bash
 
+uuidgen > /etc/machine-id
+
 #Set Timezone
 if [[ -z "${TZ}" ]]; then
    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
