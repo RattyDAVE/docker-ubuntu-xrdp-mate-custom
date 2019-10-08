@@ -14,8 +14,8 @@ RUN cd /root && \
     #echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
     #echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale && \ 
     #echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale && \ 
-    locale-gen en_GB.UTF-8 && \ 
-    update-locale LANG=en_GB.UTF-8  && \ 
+    #locale-gen en_GB.UTF-8 && \ 
+    #update-locale LANG=en_GB.UTF-8  && \ 
     apt-get install -yqq \
         mate-desktop-environment-core \
         mate-themes \
