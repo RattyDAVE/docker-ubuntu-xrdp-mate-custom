@@ -14,7 +14,10 @@ if [[ -z "${LOCALE}" ]]; then
     locale-gen en_GB.UTF-8
     update-locale LANG=en_GB.UTF-8 
 else
+    apt-get update -y
+    echo "locale-gen ${LOCALE}"
     locale-gen ${LOCALE}
+    echo "update-locale LANG=${LOCALE}"
     update-locale LANG=${LOCALE}
 fi
 
