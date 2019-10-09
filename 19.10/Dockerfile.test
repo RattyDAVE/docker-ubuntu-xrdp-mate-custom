@@ -65,10 +65,6 @@ RUN make install
 FROM base
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
-#ENV LANG en_GB.UTF-8
-#ENV LANGUAGE en_GB:GB
-#ENV LC_ALL en_GB.UTF-8
 
 RUN cd /root && \
     sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
@@ -139,7 +135,7 @@ RUN dpkg -i /tmp/xrdp_"${XRDP_VER}"-1_amd64.deb /tmp/xorgxrdp_"${XORGXRDP_VER}"-
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
-    echo "mate-session" > /etc/skel/.xsession && \
+    echo "mate-session" > /etc/skel/.Xclients && \
     sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini  && \
     sed -i -e '/DisconnectedTimeLimit=/ s/=.*/=0/' /etc/xrdp/sesman.ini && \
