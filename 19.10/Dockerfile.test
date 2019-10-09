@@ -122,7 +122,17 @@ RUN cd /root && \
     apt-get -y install \
         xserver-xorg-core && \       
     mkdir -p /var/lib/xrdp-pulseaudio-installer
-    
+
+RUN apt-get install -y xfce4 \
+  xfce4-clipman-plugin \
+  xfce4-cpugraph-plugin \
+  xfce4-netload-plugin \
+  xfce4-screenshooter \
+  xfce4-taskmanager \
+  xfce4-terminal \
+  xfce4-xkb-plugin
+
+
 COPY --from=builder /usr/lib/pulse-13.0/modules/module-xrdp-sink.so \
                     /usr/lib/pulse-13.0/modules/module-xrdp-source.so \
                     /var/lib/xrdp-pulseaudio-installer/
