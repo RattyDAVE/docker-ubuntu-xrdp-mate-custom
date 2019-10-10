@@ -145,4 +145,4 @@ RUN apt-get -y autoclean && apt-get -y autoremove && \
 ADD autostartup.sh /root/autostartup.sh
 CMD ["/bin/bash", "/root/autostartup.sh"]
                                     
-EXPOSE 3389
+EXPOSE 3389 22
