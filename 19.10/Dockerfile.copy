@@ -104,7 +104,7 @@ RUN dpkg -i /tmp/xrdp_"${XRDP_VER}"-1_amd64.deb /tmp/xorgxrdp_"${XORGXRDP_VER}"-
 
 COPY bin /usr/bin
 COPY etc /etc
-COPY autostart /etc/xdg/autostart
+#COPY autostart /etc/xdg/autostart
 
 # Configure
 RUN mkdir /var/run/dbus && \
