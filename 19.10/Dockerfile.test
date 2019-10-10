@@ -106,8 +106,10 @@ RUN mkdir /var/run/dbus && \
   cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
   sed -i "s/console/anybody/g" /etc/X11/Xwrapper.config && \
   sed -i "s/xrdp\/xorg/xorg/g" /etc/xrdp/sesman.ini && \
-  echo "xfce4-session" > /etc/skel/.Xclients && \  
-    apt-get -y autoclean && apt-get -y autoremove && \
+  echo "xfce4-session" > /etc/skel/.Xclients
+ 
+ 
+RUN apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/cache/apt /var/lib/apt/lists && \
     sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
