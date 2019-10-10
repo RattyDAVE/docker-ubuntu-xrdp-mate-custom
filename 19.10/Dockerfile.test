@@ -106,11 +106,10 @@ RUN mkdir /var/run/dbus && \
   cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
   sed -i "s/console/anybody/g" /etc/X11/Xwrapper.config && \
   sed -i "s/xrdp\/xorg/xorg/g" /etc/xrdp/sesman.ini && \
-  echo "xfce4-session" > /etc/skel/.Xclients
+  echo "xfce4-session" > /etc/skel/.Xclients && \
   
 RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime  && \
    dpkg-reconfigure -f noninteractive tzdata
- 
  
 RUN apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
@@ -119,11 +118,6 @@ RUN apt-get -y autoclean && apt-get -y autoremove && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini  && \
     sed -i -e '/DisconnectedTimeLimit=/ s/=.*/=0/' /etc/xrdp/sesman.ini && \
     sed -i -e '/IdleTimeLimit=/ s/=.*/=0/' /etc/xrdp/sesman.ini && \
-    xrdp-keygen xrdp auto  && \
-    mkdir -p /var/run/xrdp && \
-    chmod 2775 /var/run/xrdp  && \
-    mkdir -p /var/run/xrdp/sockdir && \
-    chmod 3777 /var/run/xrdp/sockdir && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
