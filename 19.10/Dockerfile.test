@@ -107,6 +107,9 @@ RUN mkdir /var/run/dbus && \
   sed -i "s/console/anybody/g" /etc/X11/Xwrapper.config && \
   sed -i "s/xrdp\/xorg/xorg/g" /etc/xrdp/sesman.ini && \
   echo "xfce4-session" > /etc/skel/.Xclients
+  
+RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime  && \
+   dpkg-reconfigure -f noninteractive tzdata
  
  
 RUN apt-get -y autoclean && apt-get -y autoremove && \
