@@ -26,8 +26,8 @@ if [ -f $file ]
               then
                 echo "User Exists"
               else
-                useradd -ms /bin/bash $username
-                echo "$username:$password" | chpasswd
+                useradd -ms /bin/bash -g ubuntu $username
+                #echo "$username:$password" | chpasswd
                 if [ "$is_sudo" = "Y" ]
                   then
                     usermod -aG sudo $username
@@ -36,13 +36,13 @@ if [ -f $file ]
     done <"$file"
 fi
 
-
 startfile="/root/startup.sh"
 if [ -f $startfile ]
   then
     sh $startfile
 fi
 
+echo "export QT_XKB_CONFIG_ROOT=/usr/share/X11/locale" >> /etc/profile
 
 #This has to be the last command!
 /usr/bin/supervisord -n
