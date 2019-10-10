@@ -91,7 +91,6 @@ RUN apt update && apt -y full-upgrade && apt install -y \
   xfce4-xkb-plugin \
   xprintidle \
   && \
-  rm -rf /var/cache/apt /var/lib/apt/lists && \
   mkdir -p /var/lib/xrdp-pulseaudio-installer
 COPY --from=builder /usr/lib/pulse-"${PULSE_VER}"/modules/module-xrdp-sink.so \
                     /usr/lib/pulse-"${PULSE_VER}"/modules/module-xrdp-source.so \
@@ -110,7 +109,7 @@ RUN mkdir /var/run/dbus && \
   echo "xfce4-session" > /etc/skel/.Xclients && \  
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
-    rm -rf /var/lib/apt/lists/*  && \
+    rm -rf /var/cache/apt /var/lib/apt/lists && \
     sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini  && \
     sed -i -e '/DisconnectedTimeLimit=/ s/=.*/=0/' /etc/xrdp/sesman.ini && \
