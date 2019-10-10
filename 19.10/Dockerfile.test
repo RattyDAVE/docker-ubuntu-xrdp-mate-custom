@@ -126,7 +126,7 @@ RUN mkdir /var/run/dbus && \
     echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
 
-ADD xrdp.ini /etc/xrdp/xrdp.ini
+#ADD xrdp.ini /etc/xrdp/xrdp.ini
 
 ADD autostartup.sh /root/autostartup.sh
 CMD ["/bin/bash", "/root/autostartup.sh"]
