@@ -132,8 +132,14 @@ RUN apt-get -y autoclean && apt-get -y autoremove && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "user=root" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "autorestart=true" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "priority=400" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "[program:ssh]" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "process_name = ssh" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "user=root" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "autorestart=true" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "priority=400" >> /etc/supervisor/conf.d/xrdp.conf
-
+    
 #ADD xrdp.ini /etc/xrdp/xrdp.ini
 
 ADD autostartup.sh /root/autostartup.sh
