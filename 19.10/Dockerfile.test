@@ -62,8 +62,6 @@ RUN make
 RUN make install
 
 FROM base
-ARG ADDITIONAL_PACKAGES=""
-ENV ADDITIONAL_PACKAGES=${ADDITIONAL_PACKAGES}
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && apt -y full-upgrade && apt install -y \
@@ -92,7 +90,6 @@ RUN apt update && apt -y full-upgrade && apt install -y \
   xfce4-terminal \
   xfce4-xkb-plugin \
   xprintidle \
-  $ADDITIONAL_PACKAGES \
   && \
   rm -rf /var/cache/apt /var/lib/apt/lists && \
   mkdir -p /var/lib/xrdp-pulseaudio-installer
@@ -104,7 +101,6 @@ RUN dpkg -i /tmp/xrdp_"${XRDP_VER}"-1_amd64.deb /tmp/xorgxrdp_"${XORGXRDP_VER}"-
     rm -rf /tmp/xrdp_"${XRDP_VER}"-1_amd64.deb /tmp/xorgxrdp_"${XORGXRDP_VER}"-1_amd64.deb
 
 COPY etc /etc
-COPY autostart /etc/xdg/autostart
 
 # Configure
 RUN mkdir /var/run/dbus && \
