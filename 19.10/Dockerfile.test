@@ -7,6 +7,8 @@ ARG XORGXRDP_VER="0.2.10"
 ENV XORGXRDP_VER=${XORGXRDP_VER}
 ARG XRDPPULSE_VER="0.3"
 ENV XRDPPULSE_VER=${XRDPPULSE_VER}
+ARG PULSE_VER="13.0"
+ENV PULSE_VER=${XRDPPULSE_VER}
 
 FROM base as builder
 
@@ -45,7 +47,7 @@ RUN dpkg -i /tmp/xorgxrdp_"${XORGXRDP_VER}"-1_amd64.deb
 WORKDIR /tmp
 RUN apt-get source pulseaudio
 RUN apt-get build-dep -yy pulseaudio
-WORKDIR /tmp/pulseaudio-13.0
+WORKDIR /tmp/pulseaudio-"${PULSE_VER}"
 RUN dpkg-buildpackage -rfakeroot -uc -b
 
 # Build Pulse Audio module
@@ -55,97 +57,65 @@ RUN wget https://github.com/neutrinolabs/pulseaudio-module-xrdp/archive/v"${XRDP
 RUN tar -zxf pulseaudio-module-xrdp-"${XRDPPULSE_VER}".tar.gz
 WORKDIR /tmp/pulseaudio-module-xrdp-"${XRDPPULSE_VER}"
 RUN ./bootstrap
-RUN ./configure PULSE_DIR=/tmp/pulseaudio-13.0
+RUN ./configure PULSE_DIR=/tmp/pulseaudio-"${PULSE_VER}"
 RUN make
 RUN make install
 
-
-
-
 FROM base
+ARG ADDITIONAL_PACKAGES=""
+ENV ADDITIONAL_PACKAGES=${ADDITIONAL_PACKAGES}
 
 ENV DEBIAN_FRONTEND noninteractive
-
-RUN cd /root && \
-    sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
-    sed -i 's/^#\s*\(deb.*restricted\)$/\1/g' /etc/apt/sources.list && \ 
-    apt-get update -y && \ 
-    apt-get install -yqq locales  && \ 
-    #echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
-    #echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale && \ 
-    #echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale && \ 
-    locale-gen en_GB.UTF-8 && \ 
-    update-locale LANG=en_GB.UTF-8  && \ 
-    apt-get install -yqq \
-        mate-desktop-environment-core \
-        mate-themes \
-        mate-accessibility-profiles \
-        mate-applet-appmenu \
-        mate-applet-brisk-menu \
-        mate-applets \
-        mate-applets-common \
-        mate-calc \
-        mate-calc-common \
-        mate-dock-applet \
-        mate-hud \
-        mate-indicator-applet \
-        mate-indicator-applet-common \
-        mate-menu \
-        mate-notification-daemon \
-        mate-notification-daemon-common \
-        mate-utils \
-        mate-utils-common \
-        mate-window-applets-common \
-        mate-window-buttons-applet \
-        mate-window-menu-applet \
-        mate-window-title-applet \
-        ubuntu-mate-icon-themes \
-        ubuntu-mate-themes \
-        tightvncserver \
-        pulseaudio && \
-    apt-get install --no-install-recommends -yqq \
-        supervisor \
-        sudo \
-        tzdata \
-        vim \
-        mc \
-        ca-certificates \
-        xterm \
-        curl \
-        wget \
-        epiphany-browser \
-        firefox \
-        fuse \
-        git \
-        ssl-cert && \
-    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
-    apt-get -y install \
-        xserver-xorg-core && \       
-    mkdir -p /var/lib/xrdp-pulseaudio-installer
-
-RUN apt-get install -y xfce4 \
+RUN apt update && apt -y full-upgrade && apt install -y \
+  ca-certificates \
+  crudini \
+  firefox \
+  less \
+  locales \
+  openssh-server \
+  pepperflashplugin-nonfree \
+  pulseaudio \
+  ssl-cert \
+  sudo \
+  supervisor \
+  uuid-runtime \
+  vim \
+  wget \
+  xauth \
+  xautolock \
+  xfce4 \
   xfce4-clipman-plugin \
   xfce4-cpugraph-plugin \
   xfce4-netload-plugin \
   xfce4-screenshooter \
   xfce4-taskmanager \
   xfce4-terminal \
-  xfce4-xkb-plugin
-
-
-COPY --from=builder /usr/lib/pulse-13.0/modules/module-xrdp-sink.so \
-                    /usr/lib/pulse-13.0/modules/module-xrdp-source.so \
+  xfce4-xkb-plugin \
+  xprintidle \
+  $ADDITIONAL_PACKAGES \
+  && \
+  rm -rf /var/cache/apt /var/lib/apt/lists && \
+  mkdir -p /var/lib/xrdp-pulseaudio-installer
+COPY --from=builder /usr/lib/pulse-"${PULSE_VER}"/modules/module-xrdp-sink.so \
+                    /usr/lib/pulse-"${PULSE_VER}"/modules/module-xrdp-source.so \
                     /var/lib/xrdp-pulseaudio-installer/
-
 COPY --from=builder /tmp/xrdp_${XRDP_VER}-1_amd64.deb /tmp/xorgxrdp_${XORGXRDP_VER}-1_amd64.deb /tmp/
-
 RUN dpkg -i /tmp/xrdp_"${XRDP_VER}"-1_amd64.deb /tmp/xorgxrdp_"${XORGXRDP_VER}"-1_amd64.deb && \
-    rm -rf /tmp/xrdp_"${XRDP_VER}"-1_amd64.deb /tmp/xorgxrdp_"${XORGXRDP_VER}"-1_amd64.deb && \
-\
+    rm -rf /tmp/xrdp_"${XRDP_VER}"-1_amd64.deb /tmp/xorgxrdp_"${XORGXRDP_VER}"-1_amd64.deb
+
+COPY etc /etc
+COPY autostart /etc/xdg/autostart
+
+# Configure
+RUN mkdir /var/run/dbus && \
+  cp /etc/X11/xrdp/xorg.conf /etc/X11 && \
+  sed -i "s/console/anybody/g" /etc/X11/Xwrapper.config && \
+  sed -i "s/xrdp\/xorg/xorg/g" /etc/xrdp/sesman.ini && \
+  echo "xfce4-session" > /etc/skel/.Xclients && \  
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
-    echo "mate-session" > /etc/skel/.Xclients && \
+    echo "mate-session" > /etc/skel/.xsession && \
     sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini  && \
     sed -i -e '/DisconnectedTimeLimit=/ s/=.*/=0/' /etc/xrdp/sesman.ini && \
@@ -161,11 +131,12 @@ RUN dpkg -i /tmp/xrdp_"${XRDP_VER}"-1_amd64.deb /tmp/xorgxrdp_"${XORGXRDP_VER}"-
     #echo "stderr_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
     #echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
-    echo "command=/usr/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
+
 
 ADD xrdp.ini /etc/xrdp/xrdp.ini
 
