@@ -1,5 +1,4 @@
 FROM ubuntu:18.04 as base
-LABEL maintainer="Daniel Guerra"
 
 # Versions
 ARG XRDP_VER="0.9.10"
