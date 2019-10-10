@@ -124,9 +124,15 @@ RUN apt-get -y autoclean && apt-get -y autoremove && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "user=root" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "autorestart=true" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "priority=400" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
+    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "user=root" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "autorestart=true" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "priority=400" >> /etc/supervisor/conf.d/xrdp.conf
 
 #ADD xrdp.ini /etc/xrdp/xrdp.ini
 
