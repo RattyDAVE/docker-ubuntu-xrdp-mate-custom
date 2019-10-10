@@ -27,7 +27,7 @@ if [ -f $file ]
                 echo "User Exists"
               else
                 useradd -ms /bin/bash -g ubuntu $username
-                #echo "$username:$password" | chpasswd
+                echo "$username:$password" | chpasswd
                 if [ "$is_sudo" = "Y" ]
                   then
                     usermod -aG sudo $username
