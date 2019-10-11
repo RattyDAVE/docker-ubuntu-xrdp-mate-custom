@@ -1,0 +1,29 @@
+Protocol 2
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+
+Port 3322
+ListenAddress 0.0.0.0
+
+StrictModes yes
+
+UsePAM yes
+PermitRootLogin no
+PubkeyAuthentication yes
+PasswordAuthentication yes
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+TCPKeepAlive yes
+LoginGraceTime 30
+ClientAliveInterval 300
+ClientAliveCountMax 1
+
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost no
+
+PrintMotd no
+PrintLastLog yes
+
+SyslogFacility AUTH
+LogLevel INFO

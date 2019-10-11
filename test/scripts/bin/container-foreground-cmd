@@ -1,0 +1,70 @@
+#!/bin/sh
+
+set -eu
+
+# Create unprivileged user and group
+groupadd \
+	--gid "${UNPRIVILEGED_USER_GID:?}" \
+	"${UNPRIVILEGED_USER_NAME:?}"
+useradd \
+	--uid "${UNPRIVILEGED_USER_UID:?}" \
+	--gid "${UNPRIVILEGED_USER_GID:?}" \
+	--groups "${UNPRIVILEGED_USER_GROUPS:?}" \
+	--shell "${UNPRIVILEGED_USER_SHELL:?}" \
+	--create-home \
+	"${UNPRIVILEGED_USER_NAME:?}"
+
+# Copy /etc/skel/ to unprivileged user home if empty
+UNPRIVILEGED_USER_HOME=$(getent passwd "${UNPRIVILEGED_USER_NAME:?}" | cut -d: -f6)
+if [ -z "$(ls -A "${UNPRIVILEGED_USER_HOME:?}")" ]; then
+	cp -aT /etc/skel/ "${UNPRIVILEGED_USER_HOME:?}"
+	chown -R "${UNPRIVILEGED_USER_NAME:?}:" "${UNPRIVILEGED_USER_HOME:?}"
+fi
+
+# Create /run/user/${UNPRIVILEGED_USER_UID}/dbus-1/ directory
+mkdir -p /run/user/"${UNPRIVILEGED_USER_UID:?}"/dbus-1/
+chmod -R 700 /run/user/"${UNPRIVILEGED_USER_UID:?}"/
+chown -R "${UNPRIVILEGED_USER_NAME:?}:" /run/user/"${UNPRIVILEGED_USER_UID:?}"/
+
+# Set unprivileged user password
+printf '%s' "${UNPRIVILEGED_USER_NAME:?}:${UNPRIVILEGED_USER_PASSWORD:?}" | chpasswd
+unset UNPRIVILEGED_USER_PASSWORD
+
+# Dump environment variables
+export-env > /etc/profile.d/env.sh
+
+# Disable xdummy if there is no graphics card
+if [ "${DISABLE_GPU:?}" = 'true' ] || [ ! -d /dev/dri/ ]; then
+	unlink /etc/service/xdummy
+fi
+
+# Create RANDFILE if it does not exist
+RANDFILE=${RANDFILE-${HOME:?}/.rnd}
+if [ ! -f "${RANDFILE:?}" ]; then
+	dd if=/dev/urandom of="${RANDFILE:?}" bs=256 count=1 >/dev/null 2>&1
+fi
+
+# Generate SSH keys if they do not exist
+if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
+	DEBIAN_FRONTEND=noninteractive dpkg-reconfigure openssh-server
+fi
+
+# Generate self-signed certificate
+if [ ! -f "${RDP_TLS_KEY_PATH:?}" ] || [ ! -f "${RDP_TLS_CERT_PATH:?}" ]; then
+	KEY_FILE=${RDP_TLS_KEY_PATH:?}
+	CRT_FILE=${RDP_TLS_CERT_PATH:?}
+	CSR_FILE=$(mktemp -u)
+
+	(umask 077 \
+		&& openssl genrsa -out "${KEY_FILE:?}" 2048 \
+	) >/dev/null
+
+	(umask 022 \
+		&& openssl req -new -subj "/CN=$(uname -n)" -key "${KEY_FILE:?}" -out "${CSR_FILE:?}" \
+		&& openssl x509 -req -days 3650 -signkey "${KEY_FILE:?}" -in "${CSR_FILE:?}" -out "${CRT_FILE:?}" \
+		&& rm -f "${CSR_FILE:?}" \
+	) >/dev/null
+fi
+
+# Start all services
+exec runsvdir -P /etc/service/
