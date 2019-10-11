@@ -336,36 +336,25 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		/var/lib/apt/lists/* \
 		/etc/ssh/ssh_host_*
 
-# Copy Tini build
-COPY --from=docker.io/hectormolinero/tini:latest --chown=root:root /usr/bin/tini /usr/bin/tini
+##D# Copy Tini build
+##D# COPY --from=docker.io/hectormolinero/tini:latest --chown=root:root /usr/bin/tini /usr/bin/tini
 
 # Install libjpeg-turbo from package
 COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build/libjpeg-turbo_*.deb /tmp/libjpeg-turbo.deb
-RUN dpkg -i --force-architecture /tmp/libjpeg-turbo.deb && rm -f /tmp/libjpeg-turbo.deb
 COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build32/libjpeg-turbo32_*.deb /tmp/libjpeg-turbo32.deb
-RUN dpkg -i --force-architecture /tmp/libjpeg-turbo32.deb && rm -f /tmp/libjpeg-turbo32.deb
-
-# Install VirtualGL from package
 COPY --from=build --chown=root:root /tmp/virtualgl/build/virtualgl_*.deb /tmp/virtualgl.deb
-RUN dpkg -i --force-architecture /tmp/virtualgl.deb && rm -f /tmp/virtualgl.deb
 COPY --from=build --chown=root:root /tmp/virtualgl/build32/virtualgl32_*.deb /tmp/virtualgl32.deb
-RUN dpkg -i --force-architecture /tmp/virtualgl32.deb && rm -f /tmp/virtualgl32.deb
-
-## Install TurboVNC from package
-#COPY --from=build --chown=root:root /tmp/turbovnc/build/turbovnc_*.deb /tmp/turbovnc.deb
-#RUN dpkg -i --force-architecture /tmp/turbovnc.deb && rm -f /tmp/turbovnc.deb
-
-# Install XRDP from package
-COPY --from=build --chown=root:root /tmp/xrdp/xrdp_*.deb /tmp/xrdp.deb
-RUN dpkg -i /tmp/xrdp.deb && rm -f /tmp/xrdp.deb
-
-# Install xorgxrdp from package
 COPY --from=build --chown=root:root /tmp/xorgxrdp/xorgxrdp_*.deb /tmp/xorgxrdp.deb
-RUN dpkg -i /tmp/xorgxrdp.deb && rm -f /tmp/xorgxrdp.deb
-
-# Install XRDP PulseAudio module from package
+COPY --from=build --chown=root:root /tmp/xorgxrdp/xorgxrdp_*.deb /tmp/xorgxrdp.deb
 COPY --from=build --chown=root:root /tmp/xrdp-pulseaudio/xrdp-pulseaudio_*.deb /tmp/xrdp-pulseaudio.deb
-RUN dpkg -i /tmp/xrdp-pulseaudio.deb && rm -f /tmp/xrdp-pulseaudio.deb
+
+RUN dpkg -i --force-architecture /tmp/libjpeg-turbo.deb && rm -f /tmp/libjpeg-turbo.deb && \
+    dpkg -i --force-architecture /tmp/libjpeg-turbo32.deb && rm -f /tmp/libjpeg-turbo32.deb && \
+    dpkg -i --force-architecture /tmp/virtualgl.deb && rm -f /tmp/virtualgl.deb && \
+    dpkg -i --force-architecture /tmp/virtualgl32.deb && rm -f /tmp/virtualgl32.deb && \
+    dpkg -i /tmp/xrdp.deb && rm -f /tmp/xrdp.deb && \
+    dpkg -i /tmp/xorgxrdp.deb && rm -f /tmp/xorgxrdp.deb && \
+    dpkg -i /tmp/xrdp-pulseaudio.deb && rm -f /tmp/xrdp-pulseaudio.deb
 
 # Environment
 ENV UNPRIVILEGED_USER_UID=1000
@@ -387,29 +376,21 @@ ENV VGL_FORCEALPHA=1
 ENV QT_STYLE_OVERRIDE=Adwaita
 
 # Setup locale
-RUN printf '%s\n' 'en_US.UTF-8 UTF-8' > /etc/locale.gen
-RUN localedef -c -i en_US -f UTF-8 en_US.UTF-8 ||:
+RUN printf '%s\n' 'en_US.UTF-8 UTF-8' > /etc/locale.gen && \
+    localedef -c -i en_US -f UTF-8 en_US.UTF-8 ||: && \
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 # Setup timezone
 ENV TZ=UTC
-RUN ln -snf "/usr/share/zoneinfo/${TZ:?}" /etc/localtime
-RUN printf '%s\n' "${TZ:?}" > /etc/timezone
-
-# Setup D-Bus
-RUN mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/
-RUN dbus-uuidgen > /etc/machine-id && ln -sf /var/lib/dbus/machine-id /etc/machine-id
-
-# Forward logs to Docker log collector
-RUN ln -sf /dev/stdout /var/log/xdummy.log
-RUN ln -sf /dev/stdout /var/log/xrdp.log
-RUN ln -sf /dev/stdout /var/log/xrdp-sesman.log
-
-# Create /etc/skel/.xsession file
-RUN printf '%s\n' 'exec xfce4-session' > /etc/skel/.xsession
-
-# Create /etc/skel/.xsessionrc file
-RUN printf '%s\n' \
+RUN ln -snf "/usr/share/zoneinfo/${TZ:?}" /etc/localtime  && \
+    printf '%s\n' "${TZ:?}" > /etc/timezone  && \
+    mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/  && \
+    dbus-uuidgen > /etc/machine-id && ln -sf /var/lib/dbus/machine-id /etc/machine-id && \
+    ln -sf /dev/stdout /var/log/xdummy.log  && \
+    ln -sf /dev/stdout /var/log/xrdp.log && \
+    ln -sf /dev/stdout /var/log/xrdp-sesman.log && \
+    printf '%s\n' 'exec xfce4-session' > /etc/skel/.xsession && \
+    printf '%s\n' \
 		'export XDG_CACHE_HOME=${HOME:?}/.cache' \
 		'export XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg' \
 		'export XDG_CONFIG_HOME=${HOME:?}/.config' \
@@ -419,39 +400,23 @@ RUN printf '%s\n' \
 		'export XDG_MENU_PREFIX=xfce-' \
 		'export XDG_RUNTIME_DIR=/run/user/$(id -u)' \
 		'export XDG_SESSION_DESKTOP=xubuntu' \
-		> /etc/skel/.xsessionrc
+		> /etc/skel/.xsessionrc  && \
+    touch /etc/skel/.Xauthority && \
+    mkdir /run/sshd/  && \
+    mkdir /tmp/.X11-unix/  && \
+	chmod 1777 /tmp/.X11-unix/  && \
+	chown root:root /tmp/.X11-unix/ && \
+    vglserver_config -config +s +f -t
 
-# Create /etc/skel/.Xauthority file
-RUN touch /etc/skel/.Xauthority
-
-# Create /run/sshd directory
-RUN mkdir /run/sshd/
-
-# Create socket directory for X server
-RUN mkdir /tmp/.X11-unix/ \
-	&& chmod 1777 /tmp/.X11-unix/ \
-	&& chown root:root /tmp/.X11-unix/
-
-# Configure server for use with VirtualGL
-RUN vglserver_config -config +s +f -t
-
-# Copy config
 COPY --chown=root:root config/ssh/sshd_config /etc/ssh/sshd_config
 COPY --chown=root:root config/xrdp/xrdp.ini /etc/xrdp/xrdp.ini
 COPY --chown=root:root config/xrdp/sesman.ini /etc/xrdp/sesman.ini
-
-# Copy services
 COPY --chown=root:root scripts/service/ /etc/sv/
 RUN find /etc/sv/ -type d -mindepth 1 -maxdepth 1 -exec ln -sv '{}' /etc/service/ ';'
-
-# Copy scripts
 COPY --chown=root:root scripts/bin/ /usr/local/bin/
 
-# Expose SSH port
-EXPOSE 3322/tcp
-# Expose RDP port
 EXPOSE 3389/tcp
 
 WORKDIR /
-ENTRYPOINT ["/usr/bin/tini", "--"]
+##D# ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/usr/local/bin/container-foreground-cmd"]
