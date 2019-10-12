@@ -416,9 +416,9 @@ RUN echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
     echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
     echo "command=/usr/bin/chpst -u messagebus /usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
     echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
-    echo "[program:xdummy]" > /etc/supervisor/conf.d/xdummy.conf && \
-    echo "command=/usr/bin/Xorg -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER -logfile /var/log/xdummy.log :0" >> /etc/supervisor/conf.d/xdummy.conf && \
-    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/xdummy.conf && \
+    #echo "[program:xdummy]" > /etc/supervisor/conf.d/xdummy.conf && \
+    #echo "command=/usr/bin/Xorg -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER -logfile /var/log/xdummy.log :0" >> /etc/supervisor/conf.d/xdummy.conf && \
+    #echo "process_name = xdummy" >> /etc/supervisor/conf.d/xdummy.conf && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
