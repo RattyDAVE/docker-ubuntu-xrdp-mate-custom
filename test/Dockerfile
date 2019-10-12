@@ -338,10 +338,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		/var/lib/apt/lists/* \
 		/etc/ssh/ssh_host_*
 
-##D# Copy Tini build
-##D# COPY --from=docker.io/hectormolinero/tini:latest --chown=root:root /usr/bin/tini /usr/bin/tini
-
-# Install libjpeg-turbo from package
 COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build/libjpeg-turbo_*.deb /tmp/libjpeg-turbo.deb
 COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build32/libjpeg-turbo32_*.deb /tmp/libjpeg-turbo32.deb
 COPY --from=build --chown=root:root /tmp/virtualgl/build/virtualgl_*.deb /tmp/virtualgl.deb
@@ -359,15 +355,15 @@ RUN dpkg -i --force-architecture /tmp/libjpeg-turbo.deb && rm -f /tmp/libjpeg-tu
     dpkg -i /tmp/xrdp-pulseaudio.deb && rm -f /tmp/xrdp-pulseaudio.deb
 
 # Environment
-ENV UNPRIVILEGED_USER_UID=1000
-ENV UNPRIVILEGED_USER_GID=1000
-ENV UNPRIVILEGED_USER_NAME=guest
-ENV UNPRIVILEGED_USER_PASSWORD=password
-ENV UNPRIVILEGED_USER_GROUPS=audio,input,video
-ENV UNPRIVILEGED_USER_SHELL=/bin/bash
-ENV DISABLE_GPU=false
-ENV RDP_TLS_KEY_PATH=/etc/xrdp/key.pem
-ENV RDP_TLS_CERT_PATH=/etc/xrdp/cert.pem
+#ENV UNPRIVILEGED_USER_UID=1000
+#ENV UNPRIVILEGED_USER_GID=1000
+#ENV UNPRIVILEGED_USER_NAME=guest
+#ENV UNPRIVILEGED_USER_PASSWORD=password
+#ENV UNPRIVILEGED_USER_GROUPS=audio,input,video
+#ENV UNPRIVILEGED_USER_SHELL=/bin/bash
+#ENV DISABLE_GPU=false
+#ENV RDP_TLS_KEY_PATH=/etc/xrdp/key.pem
+#ENV RDP_TLS_CERT_PATH=/etc/xrdp/cert.pem
 ENV PATH=/opt/VirtualGL/bin:${PATH}
 #ENV PATH=/opt/TurboVNC/bin:${PATH}
 ENV VGL_DISPLAY=:0
@@ -378,14 +374,10 @@ ENV VGL_FORCEALPHA=1
 ENV QT_STYLE_OVERRIDE=Adwaita
 
 # Setup locale
-RUN printf '%s\n' 'en_US.UTF-8 UTF-8' > /etc/locale.gen && \
-    localedef -c -i en_US -f UTF-8 en_US.UTF-8 ||:
-ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
-
-# Setup timezone
-ENV TZ=UTC
-RUN ln -snf "/usr/share/zoneinfo/${TZ:?}" /etc/localtime  && \
-    printf '%s\n' "${TZ:?}" > /etc/timezone  && \
+RUN printf '%s\n' 'en_GB.UTF-8 UTF-8' > /etc/locale.gen && \
+    localedef -c -i en_GB -f UTF-8 en_GB.UTF-8 ||: && \
+    ln -snf "/usr/share/zoneinfo/Europe/London" /etc/localtime  && \
+    printf '%s\n' "Europe/London" > /etc/timezone  && \
     mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/  && \
     dbus-uuidgen > /etc/machine-id && ln -sf /var/lib/dbus/machine-id /etc/machine-id && \
     ln -sf /dev/stdout /var/log/xdummy.log  && \
@@ -408,9 +400,8 @@ RUN ln -snf "/usr/share/zoneinfo/${TZ:?}" /etc/localtime  && \
     mkdir /tmp/.X11-unix/  && \
 	chmod 1777 /tmp/.X11-unix/  && \
 	chown root:root /tmp/.X11-unix/ && \
-    vglserver_config -config +s +f -t
-
-RUN echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
+    vglserver_config -config +s +f -t && \
+    echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
     echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
@@ -426,19 +417,13 @@ RUN echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
     echo "command=/usr/sbin/xrdp --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
 
-#COPY --chown=root:root config/ssh/sshd_config /etc/ssh/sshd_config
 COPY --chown=root:root config/xrdp/xrdp.ini /etc/xrdp/xrdp.ini
 COPY --chown=root:root config/xrdp/sesman.ini /etc/xrdp/sesman.ini
-#COPY --chown=root:root scripts/service/ /etc/sv/
-#RUN find /etc/sv/ -type d -mindepth 1 -maxdepth 1 -exec ln -sv '{}' /etc/service/ ';'
 COPY --chown=root:root scripts/bin/ /usr/local/bin/
 
 EXPOSE 22/tcp 3389/tcp
 
 WORKDIR /
-##D# ENTRYPOINT ["/usr/bin/tini", "--"]
-##D# CMD ["/usr/local/bin/container-foreground-cmd"]
 
-ADD export-env /root/export-env
 ADD autostartup.sh /root/autostartup.sh
 CMD ["/bin/bash", "/root/autostartup.sh"]
