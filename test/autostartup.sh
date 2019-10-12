@@ -5,9 +5,9 @@ set -eu
 # Dump environment variables
 # export-env > /etc/profile.d/env.sh
 
-# Disable xdummy if there is no graphics card
+# Remove xdummy if there is no graphics card
 if [ "${DISABLE_GPU:?}" = 'true' ] || [ ! -d /dev/dri/ ]; then
-	unlink /etc/service/xdummy
+	rm /etc/supervisor/conf.d/xdummy.conf
 fi
 
 #Set Timezone
