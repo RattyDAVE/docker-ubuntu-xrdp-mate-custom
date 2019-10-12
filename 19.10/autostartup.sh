@@ -24,7 +24,7 @@ if [ -f $file ]
               then
                 echo "User Exists"
               else
-                useradd -ms /bin/bash -g ubuntu $username
+                useradd -ms /bin/bash $username
                 echo "$username:$password" | chpasswd
                 if [ "$is_sudo" = "Y" ]
                   then
