@@ -13,8 +13,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	&& sed -i 's/^#\s*\(deb-src\s\)/\1/g' /etc/apt/sources.list \
 	# Enable multiarch support
 	&& dpkg --add-architecture i386 \
-	&& apt-get update \
-	&& apt-get install -y --no-install-recommends \
+	&& apt-get update -qq \
+	&& apt-get install -y -qq --no-install-recommends \
 		autoconf \
 		automake \
 		bash \
@@ -197,8 +197,8 @@ FROM docker.io/ubuntu:18.04 AS xubuntu
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& dpkg --add-architecture i386 \
-	&& apt-get update \
-	&& apt-get install -y --no-install-recommends \
+	&& apt-get update -qq \
+	&& apt-get install -y -qq --no-install-recommends \
 		apt-transport-https \
 		apt-utils \
 		at-spi2-core \
@@ -280,13 +280,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		xz-utils \
 		zenity \
 		zip \
-	&& apt-get install -y --no-install-recommends \
+	&& apt-get install -y -qq --no-install-recommends \
 		libgl1-mesa-dri:i386 \
 		libgl1-mesa-glx:i386 \
 		libglu1-mesa:i386 \
 		libxtst6:i386 \
 		libxv1:i386 \
-	&& apt-get install -y --no-install-recommends \
+	&& apt-get install -y -qq --no-install-recommends \
 		adwaita-qt \
 		atril \
 		engrampa \
@@ -344,7 +344,7 @@ COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build/libjpeg-turbo_*.deb
 COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build32/libjpeg-turbo32_*.deb /tmp/libjpeg-turbo32.deb
 COPY --from=build --chown=root:root /tmp/virtualgl/build/virtualgl_*.deb /tmp/virtualgl.deb
 COPY --from=build --chown=root:root /tmp/virtualgl/build32/virtualgl32_*.deb /tmp/virtualgl32.deb
-COPY --from=build --chown=root:root /tmp/xorgxrdp/xorgxrdp_*.deb /tmp/xorgxrdp.deb
+COPY --from=build --chown=root:root /tmp/xrdp/xrdp_*.deb /tmp/xrdp.deb
 COPY --from=build --chown=root:root /tmp/xorgxrdp/xorgxrdp_*.deb /tmp/xorgxrdp.deb
 COPY --from=build --chown=root:root /tmp/xrdp-pulseaudio/xrdp-pulseaudio_*.deb /tmp/xrdp-pulseaudio.deb
 
@@ -377,7 +377,7 @@ ENV QT_STYLE_OVERRIDE=Adwaita
 
 # Setup locale
 RUN printf '%s\n' 'en_US.UTF-8 UTF-8' > /etc/locale.gen && \
-    localedef -c -i en_US -f UTF-8 en_US.UTF-8 ||: && \
+    localedef -c -i en_US -f UTF-8 en_US.UTF-8 ||:
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 # Setup timezone
