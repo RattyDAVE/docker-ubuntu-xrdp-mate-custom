@@ -330,8 +330,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		xfce4-whiskermenu-plugin \
 		xfce4-xkb-plugin \
 		xfpanel-switch \
-		xubuntu-default-settings \
-	&& rm -rf \
+		xubuntu-default-settings && \
+        apt-get install -y -qq --no-install-recommends \
+            supervisor && \
+        rm -rf \
 		/tmp/* /var/tmp/* \
 		/var/lib/apt/lists/* \
 		/etc/ssh/ssh_host_*
@@ -408,15 +410,35 @@ RUN ln -snf "/usr/share/zoneinfo/${TZ:?}" /etc/localtime  && \
 	chown root:root /tmp/.X11-unix/ && \
     vglserver_config -config +s +f -t
 
-COPY --chown=root:root config/ssh/sshd_config /etc/ssh/sshd_config
+RUN echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
+    echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/sshd.conf && \
+    echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
+    echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
+    echo "command=/usr/bin/chpst -u messagebus /usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
+    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
+    echo "[program:xdummy]" > /etc/supervisor/conf.d/xdummy.conf && \
+    echo "command=/usr/bin/Xorg -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER -logfile /var/log/xdummy.log :0" >> /etc/supervisor/conf.d/xdummy.conf && \
+    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/xdummy.conf && \
+    echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
+    echo "command=/usr/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "command=/usr/sbin/xrdp --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
+    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
+
+#COPY --chown=root:root config/ssh/sshd_config /etc/ssh/sshd_config
 COPY --chown=root:root config/xrdp/xrdp.ini /etc/xrdp/xrdp.ini
 COPY --chown=root:root config/xrdp/sesman.ini /etc/xrdp/sesman.ini
-COPY --chown=root:root scripts/service/ /etc/sv/
-RUN find /etc/sv/ -type d -mindepth 1 -maxdepth 1 -exec ln -sv '{}' /etc/service/ ';'
+#COPY --chown=root:root scripts/service/ /etc/sv/
+#RUN find /etc/sv/ -type d -mindepth 1 -maxdepth 1 -exec ln -sv '{}' /etc/service/ ';'
 COPY --chown=root:root scripts/bin/ /usr/local/bin/
 
-EXPOSE 3389/tcp
+EXPOSE 22/tcp 3389/tcp
 
 WORKDIR /
 ##D# ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD ["/usr/local/bin/container-foreground-cmd"]
+##D# CMD ["/usr/local/bin/container-foreground-cmd"]
+
+ADD export-env /root/export-env
+ADD autostartup.sh /root/autostartup.sh
+CMD ["/bin/bash", "/root/autostartup.sh"]
