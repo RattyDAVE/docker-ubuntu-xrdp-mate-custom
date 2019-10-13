@@ -420,9 +420,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
     echo "command=/usr/bin/chpst -u messagebus /usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
     echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
-    echo "[program:xdummy]" > /etc/supervisor/conf.d/xdummy.conf && \
-    echo "command=/usr/bin/Xorg -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER -logfile /var/log/xdummy.log :0" >> /etc/supervisor/conf.d/xdummy.conf && \
-    echo "process_name = xdummy" >> /etc/supervisor/conf.d/xdummy.conf && \
+    echo "[program:xdummy]" > /etc/supervisor/conf.d/xdummy.conf.new && \
+    echo "command=/usr/bin/Xorg -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER -logfile /var/log/xdummy.log :0" >> /etc/supervisor/conf.d/xdummy.conf.new && \
+    echo "process_name = xdummy" >> /etc/supervisor/conf.d/xdummy.conf.new && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
@@ -430,10 +430,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     echo "command=/usr/sbin/xrdp --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
     rm -rf \
-		/tmp/* /var/tmp/* \
-		/var/lib/apt/lists/* \
-		/etc/ssh/ssh_host_* && \
-	apt-get -y autoclean && apt-get -y autoremove && \
+	/tmp/* /var/tmp/* \
+	/var/lib/apt/lists/* \
+	/etc/ssh/ssh_host_* && \
+    apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g)
 
 
