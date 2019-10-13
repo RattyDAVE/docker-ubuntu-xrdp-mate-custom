@@ -198,7 +198,7 @@ FROM docker.io/ubuntu:18.04 AS xubuntu
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& dpkg --add-architecture i386 \
 	&& apt-get update -qq \
-	&& apt-get install -y -qq --no-install-recommends \
+	&& apt-get install -y --no-install-recommends \
 		apt-transport-https \
 		apt-utils \
 		at-spi2-core \
@@ -280,13 +280,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		xz-utils \
 		zenity \
 		zip \
-	&& apt-get install -y -qq --no-install-recommends \
+	&& apt-get install -y --no-install-recommends \
 		libgl1-mesa-dri:i386 \
 		libgl1-mesa-glx:i386 \
 		libglu1-mesa:i386 \
 		libxtst6:i386 \
 		libxv1:i386 \
-	&& apt-get install -y -qq --no-install-recommends \
+	&& apt-get install -y --no-install-recommends \
 		adwaita-qt \
 		atril \
 		engrampa \
@@ -331,12 +331,49 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		xfce4-xkb-plugin \
 		xfpanel-switch \
 		xubuntu-default-settings && \
-        apt-get install -y -qq --no-install-recommends \
-            supervisor && \
+	apt-get install -y \
+            	mate-desktop-environment-core \
+            	mate-themes \
+        	mate-accessibility-profiles \
+        	mate-applet-appmenu \
+        	mate-applet-brisk-menu \
+        	mate-applets \
+        	mate-applets-common \
+        	mate-calc \
+        	mate-calc-common \
+        	mate-dock-applet \
+        	mate-hud \
+        	mate-indicator-applet \
+        	mate-indicator-applet-common \
+        	mate-menu \
+        	mate-notification-daemon \
+        	mate-notification-daemon-common \
+        	mate-utils \
+        	mate-utils-common \
+        	mate-window-applets-common \
+        	mate-window-buttons-applet \
+        	mate-window-menu-applet \
+        	mate-window-title-applet \
+        	ubuntu-mate-icon-themes \
+        	ubuntu-mate-themes \
+        	tightvncserver && \
+	apt-get install --no-install-recommends -yqq \
+        	supervisor \
+        	sudo \
+        	tzdata \
+        	vim \
+        	mc \
+        	ca-certificates \
+        	xterm \
+        	curl \
+        	wget \
+        	epiphany-browser && \
         rm -rf \
 		/tmp/* /var/tmp/* \
 		/var/lib/apt/lists/* \
-		/etc/ssh/ssh_host_*
+		/etc/ssh/ssh_host_* && \
+	apt-get -y autoclean && apt-get -y autoremove && \
+        apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g)
 
 COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build/libjpeg-turbo_*.deb /tmp/libjpeg-turbo.deb
 COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build32/libjpeg-turbo32_*.deb /tmp/libjpeg-turbo32.deb
