@@ -297,8 +297,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		libgl1-mesa-glx:i386 \
 		libglu1-mesa:i386 \
 		libxtst6:i386 \
-		libxv1:i386 \
-	&& apt-get install -y --no-install-recommends \
+		libxv1:i386 && \
+	# apt-get install -y --no-install-recommends \
 		adwaita-qt \
 		atril \
 		engrampa \
@@ -344,8 +344,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		xfpanel-switch \
 		xubuntu-default-settings && \
 	apt-get install -y \
-            	mate-desktop-environment-core \
-            	mate-themes \
+            mate-desktop-environment-core \
+            mate-themes \
         	mate-accessibility-profiles \
         	mate-applet-appmenu \
         	mate-applet-brisk-menu \
@@ -396,7 +396,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     ln -sf /dev/stdout /var/log/xdummy.log  && \
     ln -sf /dev/stdout /var/log/xrdp.log && \
     ln -sf /dev/stdout /var/log/xrdp-sesman.log && \
-    printf '%s\n' 'exec xfce4-session' > /etc/skel/.xsession && \
+    printf '%s\n' 'exec mate-session' > /etc/skel/.xsession && \
     printf '%s\n' \
 		'export XDG_CACHE_HOME=${HOME:?}/.cache' \
 		'export XDG_CONFIG_DIRS=/etc/xdg/xdg-xubuntu:/etc/xdg' \
