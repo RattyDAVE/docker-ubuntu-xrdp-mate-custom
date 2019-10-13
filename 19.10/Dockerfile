@@ -79,19 +79,23 @@ RUN cd /root && \
         fuse \
         build-essential \
         pkg-config \
-        libpulse-dev m4 intltool dpkg-dev && \ 
+        libpulse-dev m4 intltool dpkg-dev \
+        libfdk-aac-dev \
+        libopus-dev \
+        libmp3lame-dev && \ 
 \ 
     apt-get update && apt build-dep pulseaudio -y && \
     cd /tmp && apt source pulseaudio && \
     pulsever=$(pulseaudio --version | awk '{print $2}') && cd /tmp/pulseaudio-$pulsever && ./configure  && \
     git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR="/tmp/pulseaudio-$pulsever" && make && \
-    cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so  && \
-\       
-    cd /root && \
+    cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so
+
+RUN cd /root && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
-    cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg && make && make install && \
+    cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg --enable-vsock --enable-fdkaac --enable-opus --enable-mp3lame --enable-pixman && make && make install && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
+    cd /root && \
     rm -R /root/xrdp && \
     rm -R /root/xorgxrdp && \
     apt-get -y purge \
@@ -115,7 +119,10 @@ RUN cd /root && \
         nasm \
         xserver-xorg-dev \
         build-essential \
-        pkg-config && \
+        pkg-config \
+        libfdk-aac-dev \
+        libopus-dev \
+        libmp3lame-dev && \
         #        fuse \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
