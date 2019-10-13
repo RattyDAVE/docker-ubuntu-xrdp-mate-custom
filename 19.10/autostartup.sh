@@ -25,6 +25,9 @@ if [ -f $file ]
                 echo "User Exists"
               else
                 useradd -ms /bin/bash $username
+                usermod -aG audio $username
+                usermod -aG input $username
+                usermod -aG video $username
                 echo "$username:$password" | chpasswd
                 if [ "$is_sudo" = "Y" ]
                   then
