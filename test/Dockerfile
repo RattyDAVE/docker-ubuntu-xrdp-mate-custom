@@ -380,32 +380,14 @@ RUN export DEBIAN_FRONTEND=noninteractive \
         	curl \
         	wget \
         	epiphany-browser && \
-        rm -rf \
-		/tmp/* /var/tmp/* \
-		/var/lib/apt/lists/* \
-		/etc/ssh/ssh_host_* && \
-	apt-get -y autoclean && apt-get -y autoremove && \
-        apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g)
-
-COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build/libjpeg-turbo_*.deb /tmp/libjpeg-turbo.deb
-COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build32/libjpeg-turbo32_*.deb /tmp/libjpeg-turbo32.deb
-COPY --from=build --chown=root:root /tmp/virtualgl/build/virtualgl_*.deb /tmp/virtualgl.deb
-COPY --from=build --chown=root:root /tmp/virtualgl/build32/virtualgl32_*.deb /tmp/virtualgl32.deb
-COPY --from=build --chown=root:root /tmp/xrdp/xrdp_*.deb /tmp/xrdp.deb
-COPY --from=build --chown=root:root /tmp/xorgxrdp/xorgxrdp_*.deb /tmp/xorgxrdp.deb
-COPY --from=build --chown=root:root /tmp/xrdp-pulseaudio/xrdp-pulseaudio_*.deb /tmp/xrdp-pulseaudio.deb
-
-RUN dpkg -i --force-architecture /tmp/libjpeg-turbo.deb && rm -f /tmp/libjpeg-turbo.deb && \
+    dpkg -i --force-architecture /tmp/libjpeg-turbo.deb && rm -f /tmp/libjpeg-turbo.deb && \
     dpkg -i --force-architecture /tmp/libjpeg-turbo32.deb && rm -f /tmp/libjpeg-turbo32.deb && \
     dpkg -i --force-architecture /tmp/virtualgl.deb && rm -f /tmp/virtualgl.deb && \
     dpkg -i --force-architecture /tmp/virtualgl32.deb && rm -f /tmp/virtualgl32.deb && \
     dpkg -i /tmp/xrdp.deb && rm -f /tmp/xrdp.deb && \
     dpkg -i /tmp/xorgxrdp.deb && rm -f /tmp/xorgxrdp.deb && \
-    dpkg -i /tmp/xrdp-pulseaudio.deb && rm -f /tmp/xrdp-pulseaudio.deb
-
-
-# Setup locale
-RUN printf '%s\n' 'en_GB.UTF-8 UTF-8' > /etc/locale.gen && \
+    dpkg -i /tmp/xrdp-pulseaudio.deb && rm -f /tmp/xrdp-pulseaudio.deb  && \
+    printf '%s\n' 'en_GB.UTF-8 UTF-8' > /etc/locale.gen && \
     localedef -c -i en_GB -f UTF-8 en_GB.UTF-8 ||: && \
     ln -snf "/usr/share/zoneinfo/Europe/London" /etc/localtime  && \
     printf '%s\n' "Europe/London" > /etc/timezone  && \
@@ -446,7 +428,14 @@ RUN printf '%s\n' 'en_GB.UTF-8 UTF-8' > /etc/locale.gen && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
+    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
+    rm -rf \
+		/tmp/* /var/tmp/* \
+		/var/lib/apt/lists/* \
+		/etc/ssh/ssh_host_* && \
+	apt-get -y autoclean && apt-get -y autoremove && \
+    apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g)
+
 
 COPY --chown=root:root config/xrdp/xrdp.ini /etc/xrdp/xrdp.ini
 COPY --chown=root:root config/xrdp/sesman.ini /etc/xrdp/sesman.ini
