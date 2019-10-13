@@ -3,7 +3,7 @@
 ## "build" stage
 ##################################################
 
-FROM docker.io/ubuntu:18.04 AS build
+FROM ubuntu:18.04 AS build
 
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -189,10 +189,8 @@ RUN make -j"$(nproc)"
 RUN checkinstall --default --pkgname=xrdp-pulseaudio --pkgversion=0 --pkgrelease=0
 
 ##################################################
-## "xubuntu" stage
-##################################################
 
-FROM docker.io/ubuntu:18.04
+FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH=/opt/VirtualGL/bin:${PATH}
@@ -211,8 +209,6 @@ COPY --from=build --chown=root:root /tmp/xrdp-pulseaudio/xrdp-pulseaudio_*.deb /
 RUN dpkg --add-architecture i386 \
 	&& apt-get update -qq \
 	&& apt-get install -y --no-install-recommends \
-		apt-transport-https \
-		apt-utils \
 		at-spi2-core \
 		bash \
 		bash-completion \
@@ -221,21 +217,11 @@ RUN dpkg --add-architecture i386 \
 		curl \
 		dbus \
 		dbus-x11 \
-		desktop-file-utils \
 		dialog \
 		exo-utils \
 		file \
-		fonts-dejavu \
-		fonts-liberation \
-		fonts-noto \
-		fonts-noto-color-emoji \
 		fuse \
-		git \
 		gnupg \
-		htop \
-		iproute2 \
-		iputils-ping \
-		less \
 		libexo-1-0 \
 		libfdk-aac1 \
 		libgl1-mesa-dri \
@@ -261,24 +247,16 @@ RUN dpkg --add-architecture i386 \
 		menu-xdg \
 		mesa-utils \
 		mesa-utils-extra \
-		mime-support \
-		nano \
-		net-tools \
-		netcat-openbsd \
 		openssh-server \
 		openssl \
-		p7zip-full \
 		pciutils \
 		policykit-1 \
-		procps \
-		psmisc \
 		pulseaudio \
 		pulseaudio-utils \
 		runit \
 		sudo \
 		systemd \
 		tzdata \
-		unzip \
 		usbutils \
 		wget \
 		xauth \
@@ -291,90 +269,41 @@ RUN dpkg --add-architecture i386 \
 		xutils \
 		xz-utils \
 		zenity \
-		zip \
 	&& apt-get install -y --no-install-recommends \
 		libgl1-mesa-dri:i386 \
 		libgl1-mesa-glx:i386 \
 		libglu1-mesa:i386 \
 		libxtst6:i386 \
-		libxv1:i386
-
-RUN	#apt-get install -y --no-install-recommends \
-		adwaita-qt \
-		atril \
-		engrampa \
-		ffmpegthumbnailer \
-		firefox \
-		gnome-keyring \
-		gstreamer1.0-plugins-base \
-		gstreamer1.0-plugins-good \
-		gstreamer1.0-plugins-ugly \
-		gtk2-engines-pixbuf \
-		gtk2-engines-xfce \
-		gtk3-engines-xfce \
-		indicator-application \
-		indicator-datetime \
-		indicator-keyboard \
-		indicator-messages \
-		indicator-session \
-		indicator-sound \
-		libavcodec-extra \
-		libcanberra-gtk-module \
-		libcanberra-gtk3-module \
-		libgtk-3-bin \
-		menulibre \
-		mousepad \
-		mugshot \
-		openjdk-8-jre \
-		pavucontrol \
-		ristretto \
-		thunar-archive-plugin \
-		thunar-volman \
-		tumbler \
-		vlc \
-		xfce4 \
-		xfce4-indicator-plugin \
-		xfce4-notifyd \
-		xfce4-power-manager-plugins \
-		xfce4-pulseaudio-plugin \
-		xfce4-statusnotifier-plugin \
-		xfce4-taskmanager \
-		xfce4-terminal \
-		xfce4-whiskermenu-plugin \
-		xfce4-xkb-plugin \
-		xfpanel-switch \
-		xubuntu-default-settings
-
-RUN apt-get install -y --no-install-recommends \
-		adwaita-qt
-
-RUN	apt-get install -y \
-            mate-desktop-environment-core \
-            mate-themes \
-        	mate-accessibility-profiles \
-        	mate-applet-appmenu \
-        	mate-applet-brisk-menu \
-        	mate-applets \
-        	mate-applets-common \
-        	mate-calc \
-        	mate-calc-common \
-        	mate-dock-applet \
-        	mate-hud \
-        	mate-indicator-applet \
-        	mate-indicator-applet-common \
-        	mate-menu \
-        	mate-notification-daemon \
-        	mate-notification-daemon-common \
-        	mate-utils \
-        	mate-utils-common \
-        	mate-window-applets-common \
-        	mate-window-buttons-applet \
-        	mate-window-menu-applet \
-        	mate-window-title-applet \
-        	ubuntu-mate-icon-themes \
-        	ubuntu-mate-themes \
-        	tightvncserver && \
-	apt-get install --no-install-recommends -yqq \
+		libxv1:i386 && \
+    apt-get install -y --no-install-recommends \
+	adwaita-qt && \
+    apt-get install -y \
+        mate-desktop-environment-core \
+        mate-themes \
+       	mate-accessibility-profiles \
+       	mate-applet-appmenu \
+       	mate-applet-brisk-menu \
+       	mate-applets \
+       	mate-applets-common \
+       	mate-calc \
+       	mate-calc-common \
+       	mate-dock-applet \
+       	mate-hud \
+       	mate-indicator-applet \
+       	mate-indicator-applet-common \
+       	mate-menu \
+       	mate-notification-daemon \
+       	mate-notification-daemon-common \
+       	mate-utils \
+       	mate-utils-common \
+       	mate-window-applets-common \
+       	mate-window-buttons-applet \
+       	mate-window-menu-applet \
+       	mate-window-title-applet \
+       	ubuntu-mate-icon-themes \
+       	ubuntu-mate-themes \
+       	tightvncserver && \
+     apt-get install --no-install-recommends -yqq \
         	supervisor \
         	sudo \
         	tzdata \
@@ -441,10 +370,8 @@ RUN	apt-get install -y \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g)
 
-
 COPY --chown=root:root config/xrdp/xrdp.ini /etc/xrdp/xrdp.ini
 COPY --chown=root:root config/xrdp/sesman.ini /etc/xrdp/sesman.ini
-#COPY --chown=root:root scripts/bin/ /usr/local/bin/
 
 EXPOSE 22/tcp 3389/tcp
 
