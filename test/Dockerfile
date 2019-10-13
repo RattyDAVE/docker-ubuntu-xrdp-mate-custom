@@ -194,7 +194,7 @@ RUN checkinstall --default --pkgname=xrdp-pulseaudio --pkgversion=0 --pkgrelease
 
 FROM docker.io/ubuntu:18.04 AS xubuntu
 
-DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH=/opt/VirtualGL/bin:${PATH}
 ENV VGL_DISPLAY=:0
 ENV VGL_FORCEALPHA=1
