@@ -194,6 +194,7 @@ RUN checkinstall --default --pkgname=xrdp-pulseaudio --pkgversion=0 --pkgrelease
 
 FROM docker.io/ubuntu:18.04 AS xubuntu
 
+DEBIAN_FRONTEND=noninteractive
 ENV PATH=/opt/VirtualGL/bin:${PATH}
 ENV VGL_DISPLAY=:0
 ENV VGL_FORCEALPHA=1
@@ -207,8 +208,7 @@ COPY --from=build --chown=root:root /tmp/xrdp/xrdp_*.deb /tmp/xrdp.deb
 COPY --from=build --chown=root:root /tmp/xorgxrdp/xorgxrdp_*.deb /tmp/xorgxrdp.deb
 COPY --from=build --chown=root:root /tmp/xrdp-pulseaudio/xrdp-pulseaudio_*.deb /tmp/xrdp-pulseaudio.deb
 
-RUN export DEBIAN_FRONTEND=noninteractive \
-	&& dpkg --add-architecture i386 \
+RUN dpkg --add-architecture i386 \
 	&& apt-get update -qq \
 	&& apt-get install -y --no-install-recommends \
 		apt-transport-https \
@@ -297,8 +297,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		libgl1-mesa-glx:i386 \
 		libglu1-mesa:i386 \
 		libxtst6:i386 \
-		libxv1:i386 && \
-	# apt-get install -y --no-install-recommends \
+		libxv1:i386
+
+RUN	#apt-get install -y --no-install-recommends \
 		adwaita-qt \
 		atril \
 		engrampa \
@@ -342,8 +343,12 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 		xfce4-whiskermenu-plugin \
 		xfce4-xkb-plugin \
 		xfpanel-switch \
-		xubuntu-default-settings && \
-	apt-get install -y \
+		xubuntu-default-settings
+
+RUN apt-get install -y --no-install-recommends \
+		adwaita-qt
+
+RUN	apt-get install -y \
             mate-desktop-environment-core \
             mate-themes \
         	mate-accessibility-profiles \
