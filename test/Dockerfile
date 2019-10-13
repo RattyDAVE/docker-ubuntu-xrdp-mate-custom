@@ -3,7 +3,7 @@
 ## "build" stage
 ##################################################
 
-FROM docker.io/ubuntu:19.10 AS build
+FROM docker.io/ubuntu:18.04 AS build
 
 # Install system packages
 RUN export DEBIAN_FRONTEND=noninteractive \
@@ -192,7 +192,7 @@ RUN checkinstall --default --pkgname=xrdp-pulseaudio --pkgversion=0 --pkgrelease
 ## "xubuntu" stage
 ##################################################
 
-FROM docker.io/ubuntu:19.10
+FROM docker.io/ubuntu:18.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH=/opt/VirtualGL/bin:${PATH}
