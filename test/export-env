@@ -1,9 +1,0 @@
-#!/usr/bin/awk -f
-
-BEGIN {for (v in ENVIRON) {
-	if (v !~ /^(_|AWKPATH|AWKLIBPATH|TERM|SHLVL|PWD|HOME|SHELL|HOSTNAME|UID|USER|GID|GROUP)$/) {
-		gsub(/[^0-9A-Za-z_]/, "_", v);
-		gsub(/'/, "'\\''", ENVIRON[v])
-		print("export "v"='"ENVIRON[v]"'")
-	}
-}}
