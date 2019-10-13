@@ -88,9 +88,9 @@ RUN cd /root && \
     cd /tmp && apt source pulseaudio && \
     pulsever=$(pulseaudio --version | awk '{print $2}') && cd /tmp/pulseaudio-$pulsever && ./configure  && \
     git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR="/tmp/pulseaudio-$pulsever" && make && \
-    cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so
-
-RUN cd /root && \
+    cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so && \
+    \
+    cd /root && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
     cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg --enable-vsock --enable-fdkaac --enable-opus --enable-mp3lame --enable-pixman && make && make install && \
@@ -154,4 +154,4 @@ ADD xrdp.ini /etc/xrdp/xrdp.ini
 ADD autostartup.sh /root/autostartup.sh
 CMD ["/bin/bash", "/root/autostartup.sh"]
                                     
-EXPOSE 3389
+EXPOSE 3389 22
