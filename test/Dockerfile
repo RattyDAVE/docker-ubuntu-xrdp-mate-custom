@@ -194,7 +194,19 @@ RUN checkinstall --default --pkgname=xrdp-pulseaudio --pkgversion=0 --pkgrelease
 
 FROM docker.io/ubuntu:18.04 AS xubuntu
 
-# Install system packages
+ENV PATH=/opt/VirtualGL/bin:${PATH}
+ENV VGL_DISPLAY=:0
+ENV VGL_FORCEALPHA=1
+ENV QT_STYLE_OVERRIDE=Adwaita
+
+COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build/libjpeg-turbo_*.deb /tmp/libjpeg-turbo.deb
+COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build32/libjpeg-turbo32_*.deb /tmp/libjpeg-turbo32.deb
+COPY --from=build --chown=root:root /tmp/virtualgl/build/virtualgl_*.deb /tmp/virtualgl.deb
+COPY --from=build --chown=root:root /tmp/virtualgl/build32/virtualgl32_*.deb /tmp/virtualgl32.deb
+COPY --from=build --chown=root:root /tmp/xrdp/xrdp_*.deb /tmp/xrdp.deb
+COPY --from=build --chown=root:root /tmp/xorgxrdp/xorgxrdp_*.deb /tmp/xorgxrdp.deb
+COPY --from=build --chown=root:root /tmp/xrdp-pulseaudio/xrdp-pulseaudio_*.deb /tmp/xrdp-pulseaudio.deb
+
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& dpkg --add-architecture i386 \
 	&& apt-get update -qq \
@@ -375,14 +387,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 	apt-get -y autoclean && apt-get -y autoremove && \
         apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g)
 
-COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build/libjpeg-turbo_*.deb /tmp/libjpeg-turbo.deb
-COPY --from=build --chown=root:root /tmp/libjpeg-turbo/build32/libjpeg-turbo32_*.deb /tmp/libjpeg-turbo32.deb
-COPY --from=build --chown=root:root /tmp/virtualgl/build/virtualgl_*.deb /tmp/virtualgl.deb
-COPY --from=build --chown=root:root /tmp/virtualgl/build32/virtualgl32_*.deb /tmp/virtualgl32.deb
-COPY --from=build --chown=root:root /tmp/xrdp/xrdp_*.deb /tmp/xrdp.deb
-COPY --from=build --chown=root:root /tmp/xorgxrdp/xorgxrdp_*.deb /tmp/xorgxrdp.deb
-COPY --from=build --chown=root:root /tmp/xrdp-pulseaudio/xrdp-pulseaudio_*.deb /tmp/xrdp-pulseaudio.deb
-
 RUN dpkg -i --force-architecture /tmp/libjpeg-turbo.deb && rm -f /tmp/libjpeg-turbo.deb && \
     dpkg -i --force-architecture /tmp/libjpeg-turbo32.deb && rm -f /tmp/libjpeg-turbo32.deb && \
     dpkg -i --force-architecture /tmp/virtualgl.deb && rm -f /tmp/virtualgl.deb && \
@@ -391,24 +395,6 @@ RUN dpkg -i --force-architecture /tmp/libjpeg-turbo.deb && rm -f /tmp/libjpeg-tu
     dpkg -i /tmp/xorgxrdp.deb && rm -f /tmp/xorgxrdp.deb && \
     dpkg -i /tmp/xrdp-pulseaudio.deb && rm -f /tmp/xrdp-pulseaudio.deb
 
-# Environment
-#ENV UNPRIVILEGED_USER_UID=1000
-#ENV UNPRIVILEGED_USER_GID=1000
-#ENV UNPRIVILEGED_USER_NAME=guest
-#ENV UNPRIVILEGED_USER_PASSWORD=password
-#ENV UNPRIVILEGED_USER_GROUPS=audio,input,video
-#ENV UNPRIVILEGED_USER_SHELL=/bin/bash
-#ENV DISABLE_GPU=false
-#ENV RDP_TLS_KEY_PATH=/etc/xrdp/key.pem
-#ENV RDP_TLS_CERT_PATH=/etc/xrdp/cert.pem
-ENV PATH=/opt/VirtualGL/bin:${PATH}
-#ENV PATH=/opt/TurboVNC/bin:${PATH}
-ENV VGL_DISPLAY=:0
-## Workaround for AMDGPU X_GLXCreatePbuffer issue:
-## https://github.com/VirtualGL/virtualgl/issues/85#issuecomment-480291529
-ENV VGL_FORCEALPHA=1
-## Use Adwaita theme in QT applications
-ENV QT_STYLE_OVERRIDE=Adwaita
 
 # Setup locale
 RUN printf '%s\n' 'en_GB.UTF-8 UTF-8' > /etc/locale.gen && \
@@ -444,9 +430,9 @@ RUN printf '%s\n' 'en_GB.UTF-8 UTF-8' > /etc/locale.gen && \
     echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
     echo "command=/usr/bin/chpst -u messagebus /usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
     echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
-    #echo "[program:xdummy]" > /etc/supervisor/conf.d/xdummy.conf && \
-    #echo "command=/usr/bin/Xorg -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER -logfile /var/log/xdummy.log :0" >> /etc/supervisor/conf.d/xdummy.conf && \
-    #echo "process_name = xdummy" >> /etc/supervisor/conf.d/xdummy.conf && \
+    echo "[program:xdummy]" > /etc/supervisor/conf.d/xdummy.conf && \
+    echo "command=/usr/bin/Xorg -noreset -nolisten tcp +extension GLX +extension RANDR +extension RENDER -logfile /var/log/xdummy.log :0" >> /etc/supervisor/conf.d/xdummy.conf && \
+    echo "process_name = xdummy" >> /etc/supervisor/conf.d/xdummy.conf && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
@@ -456,7 +442,7 @@ RUN printf '%s\n' 'en_GB.UTF-8 UTF-8' > /etc/locale.gen && \
 
 COPY --chown=root:root config/xrdp/xrdp.ini /etc/xrdp/xrdp.ini
 COPY --chown=root:root config/xrdp/sesman.ini /etc/xrdp/sesman.ini
-COPY --chown=root:root scripts/bin/ /usr/local/bin/
+#COPY --chown=root:root scripts/bin/ /usr/local/bin/
 
 EXPOSE 22/tcp 3389/tcp
 
