@@ -28,6 +28,9 @@ if [ -f $file ]
                 usermod -aG audio $username
                 usermod -aG input $username
                 usermod -aG video $username
+                mkdir -p /run/user/$(id -u $username)/dbus-1/
+                chmod -R 700 /run/user/$(id -u $username)/
+                chown -R "$username" /run/user/$(id -u $username)/
                 echo "$username:$password" | chpasswd
                 if [ "$is_sudo" = "Y" ]
                   then
