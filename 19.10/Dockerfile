@@ -137,8 +137,9 @@ RUN cd /root && \
     echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
-    echo "command=/usr/bin/chpst -u messagebus /usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
-    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf
+    echo "command=/usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
+    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
+    ecgo "user = messagebus"  >> /etc/supervisor/conf.d/dbus-daemon.conf
 
 ADD xrdp.ini /etc/xrdp/xrdp.ini
 
