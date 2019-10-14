@@ -2,20 +2,12 @@ FROM ubuntu:19.10
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
-#ENV LANG en_GB.UTF-8
-#ENV LANGUAGE en_GB:GB
-#ENV LC_ALL en_GB.UTF-8
 
 RUN cd /root && \
     sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
     sed -i 's/^#\s*\(deb.*restricted\)$/\1/g' /etc/apt/sources.list && \ 
     apt-get update -y && \ 
     apt-get install -yqq locales  && \ 
-    #echo 'LANG="en_GB.UTF-8"' > /etc/default/locale && \ 
-    #echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale && \ 
-    #echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale && \ 
-    #locale-gen en_GB.UTF-8 && \ 
-    #update-locale LANG=en_GB.UTF-8  && \ 
     apt-get install -yqq \
         mate-desktop-environment-core \
         mate-themes \
@@ -140,11 +132,6 @@ RUN cd /root && \
     touch /etc/skel/.Xauthority && \
     mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/  && \
     dbus-uuidgen > /etc/machine-id && ln -sf /var/lib/dbus/machine-id /etc/machine-id && \  
-    #echo "[program:sshd]" >/etc/supervisor/conf.d/sshd.conf && \
-    #echo "command=/usr/sbin/sshd -D" >> /etc/supervisor/conf.d/sshd.conf && \
-    #echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
-    #echo "stderr_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/sshd.conf && \
-    #echo "autorestart=true" >> /etc/supervisor/conf.d/sshd.conf && \
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
@@ -153,7 +140,7 @@ RUN cd /root && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
     echo "command=/usr/bin/chpst -u messagebus /usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
-    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
+    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf
 
 ADD xrdp.ini /etc/xrdp/xrdp.ini
 
