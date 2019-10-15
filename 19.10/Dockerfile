@@ -129,18 +129,18 @@ RUN cd /root && \
     chmod 3777 /var/run/xrdp/sockdir && \
     touch /etc/skel/.Xauthority && \
     mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/ && \
-    dbus-uuidgen > /etc/machine-id && \
-    ln -sf /var/lib/dbus/machine-id /etc/machine-id && \  
+    #dbus-uuidgen > /etc/machine-id && \
+    #ln -sf /var/lib/dbus/machine-id /etc/machine-id && \  
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf && \
-    echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
-    echo "command=/usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
-    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
-    echo "user = messagebus"  >> /etc/supervisor/conf.d/dbus-daemon.conf
+    echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
+#RUN     echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
+#    echo "command=/usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
+#    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
+#    echo "user = messagebus"  >> /etc/supervisor/conf.d/dbus-daemon.conf
 
 ADD xrdp.ini /etc/xrdp/xrdp.ini
 
