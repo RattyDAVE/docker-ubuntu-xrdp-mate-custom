@@ -128,8 +128,11 @@ RUN cd /root && \
     mkdir -p /var/run/xrdp/sockdir && \
     chmod 3777 /var/run/xrdp/sockdir && \
     touch /etc/skel/.Xauthority && \
-    mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/  && \
-    dbus-uuidgen > /etc/machine-id && ln -sf /var/lib/dbus/machine-id /etc/machine-id && \  
+    mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/ 
+
+#RUN dbus-uuidgen > /etc/machine-id  
+
+RUN ln -sf /var/lib/dbus/machine-id /etc/machine-id && \  
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
