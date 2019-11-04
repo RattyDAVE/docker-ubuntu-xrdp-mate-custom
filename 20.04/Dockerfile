@@ -16,6 +16,9 @@ RUN cd /root && \
     locale-gen en_GB.UTF-8 && \ 
     update-locale LANG=en_GB.UTF-8
 
+RUN apt-get install -y apt-utils
+
+
 RUN apt-get install -y mate-desktop-environment-core
 RUN apt-get install -y mate-themes
 RUN apt-get install -y mate-accessibility-profiles
@@ -79,15 +82,6 @@ RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure 
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
-    #echo "[Desktop Entry]" > /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Type=Application" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Exec=setxkbmap gb" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Hidden=false" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "X-MATE-Autostart-enabled=true" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Name[C]=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Name=SetKeyBoard GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Comment[C]=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop && \
-    #echo "Comment=Sets the keyboard to GB" >> /etc/xdg/autostart/setxkbmap.desktop
 
 ADD   xrdp.ini /etc/xrdp/xrdp.ini
 
