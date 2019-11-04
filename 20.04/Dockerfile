@@ -14,8 +14,9 @@ RUN cd /root && \
     echo 'LANGUAGE="en_GB:en"' >> /etc/default/locale && \ 
     echo 'LC_ALL="en_GB.UTF-8"' >> /etc/default/locale && \ 
     locale-gen en_GB.UTF-8 && \ 
-    update-locale LANG=en_GB.UTF-8  && \ 
-    apt-get install -yqq \
+    update-locale LANG=en_GB.UTF-8
+
+RUN apt-get install -yqq \
         mate-desktop-environment-core \
         mate-themes \
         mate-accessibility-profiles \
@@ -42,8 +43,9 @@ RUN cd /root && \
         ubuntu-mate-themes \
         xrdp \
         xorgxrdp \
-        tightvncserver && \
-    apt-get install --no-install-recommends -yqq \
+        tightvncserver
+
+RUN apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
         tzdata \
@@ -53,8 +55,9 @@ RUN cd /root && \
         xterm \
         curl \
         wget \
-        epiphany-browser && \
-    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
+        epiphany-browser
+
+RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
