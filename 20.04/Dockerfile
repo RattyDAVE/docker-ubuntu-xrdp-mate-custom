@@ -17,35 +17,41 @@ RUN cd /root && \
     update-locale LANG=en_GB.UTF-8
 
 RUN apt-get install -y apt-utils
+#RUN apt-get install -y udisks2
+#RUN apt-get install -y gvfs-daemons
+#RUN apt-get install -y gvfs-backends
+#RUN apt-get install -y gvfs:amd64
+#RUN apt-get install -y caja
 
 
-RUN apt-get install -y mate-desktop-environment-core
-RUN apt-get install -y mate-themes
-RUN apt-get install -y mate-accessibility-profiles
-RUN apt-get install -y mate-applet-appmenu
-RUN apt-get install -y mate-applet-brisk-menu
-RUN apt-get install -y mate-applets
-RUN apt-get install -y mate-applets-common
-RUN apt-get install -y mate-calc
-RUN apt-get install -y mate-calc-common
-RUN apt-get install -y mate-dock-applet
+#RUN apt-get install -y mate-desktop-environment-core
+RUN apt-get install -y mate-desktop
+##RUN apt-get install -y mate-themes
+##RUN apt-get install -y mate-accessibility-profiles
+##RUN apt-get install -y mate-applet-appmenu
+#RUN apt-get install -y mate-applet-brisk-menu
+#RUN apt-get install -y mate-applets
+#RUN apt-get install -y mate-applets-common
+##RUN apt-get install -y mate-calc
+##RUN apt-get install -y mate-calc-common
+##RUN apt-get install -y mate-dock-applet
 RUN apt-get install -y mate-hud
 RUN apt-get install -y mate-indicator-applet
 RUN apt-get install -y mate-indicator-applet-common
 RUN apt-get install -y mate-menu
 RUN apt-get install -y mate-notification-daemon
 RUN apt-get install -y mate-notification-daemon-common
-RUN apt-get install -y mate-utils
-RUN apt-get install -y mate-utils-common
-RUN apt-get install -y mate-window-applets-common
-RUN apt-get install -y mate-window-buttons-applet
-RUN apt-get install -y mate-window-menu-applet
-RUN apt-get install -y mate-window-title-applet
-RUN apt-get install -y ubuntu-mate-icon-themes
-RUN apt-get install -y ubuntu-mate-themes
+##RUN apt-get install -y mate-utils
+##RUN apt-get install -y mate-utils-common
+##RUN apt-get install -y mate-window-applets-common
+##RUN apt-get install -y mate-window-buttons-applet
+##RUN apt-get install -y mate-window-menu-applet
+##RUN apt-get install -y mate-window-title-applet
+##RUN apt-get install -y ubuntu-mate-icon-themes
+##RUN apt-get install -y ubuntu-mate-themes
 RUN apt-get install -y xrdp
 RUN apt-get install -y xorgxrdp
-RUN apt-get install -y tightvncserver
+##RUN apt-get install -y tightvncserver
 
 RUN apt-get install --no-install-recommends -yqq \
         supervisor \
