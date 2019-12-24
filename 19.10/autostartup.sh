@@ -9,6 +9,12 @@ else
    dpkg-reconfigure -f noninteractive tzdata
 fi
 
+# generate
+if [ ! -f /etc/xrdp/rsakeys.ini ]
+  then
+    xrdp-keygen xrdp auto
+fi
+
 #CREATE USERS.
 # username:passsword:Y
 # username2:password2:Y
