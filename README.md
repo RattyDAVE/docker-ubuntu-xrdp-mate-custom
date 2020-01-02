@@ -60,7 +60,11 @@ update-locale LANG=de_DE.UTF-8
 ## To Connect
 Please note some clients need an extra parameter set glyph-cache. xfreerdp and remmina and other need this set.
 
-Linux example of how to connect ```xfreerdp /size:1920x1140 /kbd:0x00000809 /v:%IP_ADDRESS% /gdi:hw /drive:home,/home/dave +clipboard /sound:sys:alsa +glyph-cache```
+Linux example of how to connect:
+
+```
+xfreerdp /size:1920x1140 /kbd:0x00000809 /v:%IP_ADDRESS% /gdi:hw /drive:home,$HOME +clipboard /sound:sys:alsa +glyph-cache
+```
 
 
 # Ubuntu 19.04 with XRDP and MATE. Version 19.04
