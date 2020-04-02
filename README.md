@@ -1,5 +1,28 @@
 Use https://github.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom/issues to send feedback, issues, comments and general chat.
 
+### Quick Start
+
+Run the following to get started.
+
+```
+echo "user:pass:N" > CREATEUSERS.TXT
+docker run --name RattyDAVE19.10 \
+           --privileged=true \
+           -p 3389:3389 \
+           -e TZ="Europe/London"
+           -v CREATEUSERS.TXT_FILE:/root/createusers.txt \
+           -dit --restart unless-stopped \
+           rattydave/docker-ubuntu-xrdp-mate-custom:19.10
+```
+
+Then on a windows machine type
+
+```
+mstsc
+```
+
+Then put in the IP address of the docker host.
+
 ## rattydave/docker-ubuntu-xrdp-mate-custom:stable points to 18.04
 ## rattydave/docker-ubuntu-xrdp-mate-custom:latest points to 19.10
 ## rattydave/docker-ubuntu-xrdp-mate-custom:beta points to 20.04
