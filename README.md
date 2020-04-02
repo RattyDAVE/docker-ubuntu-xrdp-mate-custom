@@ -48,7 +48,19 @@ Contents:
 - Replace %LOCAL_PATH_TO_HOME_DIRECTORY% with the local directory of the /home directorys.
 - You do not need to publish port 22 only use if needed.
 
-Example startup.sh to change locale.
+This file contains 3 fields (username:password:is_sudo). Where username is the login id. Password is the password. is_sudo does the user have sudo access(only Y is recognised). It also needs a "newline" at the end of the line.  
+
+Example of a CREATEUSERS.TXT file
+```
+mickey:mouse:N
+daisy:duke:Y
+dog:flash:n
+morty:rick:wubba
+```
+In this example 4 users will be created and only daisy will have sudo rights.
+At every reboot it will check this file and ADD any new users.
+
+Example of a STARTUP.SH file to change locale.
 ```
 apt-get update
 apt-get -y install language-pack-de language-pack-gnome-de
