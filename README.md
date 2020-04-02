@@ -66,6 +66,15 @@ Linux example of how to connect:
 xfreerdp /size:1920x1140 /kbd:0x00000809 /v:%IP_ADDRESS% /gdi:hw /drive:home,$HOME +clipboard /sound:sys:alsa +glyph-cache
 ```
 
+Windows example:
+
+Open a command prompt and type
+
+```
+mstsc
+````
+
+Then put in the ip address of the docker host.
 
 # Ubuntu 19.04 with XRDP and MATE. Version 19.04
 
