@@ -23,6 +23,9 @@ mstsc
 
 Then put in the IP address of the docker host.
 
+Login using the username `user` and the password `pass`
+
+
 ## rattydave/docker-ubuntu-xrdp-mate-custom:stable points to 18.04
 ## rattydave/docker-ubuntu-xrdp-mate-custom:latest points to 19.10
 ## rattydave/docker-ubuntu-xrdp-mate-custom:beta points to 20.04
