@@ -10,7 +10,7 @@ docker run --name RattyDAVE19.10 \
            --privileged=true \
            -p 3389:3389 \
            -e TZ="Europe/London"
-           -v CREATEUSERS.TXT_FILE:/root/createusers.txt \
+           -v CREATEUSERS.TXT:/root/createusers.txt \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:19.10
 ```
