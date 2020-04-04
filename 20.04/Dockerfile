@@ -91,7 +91,7 @@ RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && dpkg-reconfigure 
 
 ADD   xrdp.ini /etc/xrdp/xrdp.ini
 
-ADD startup.sh /root/startup.sh
-CMD ["/bin/bash", "/root/startup.sh"]
+ADD autostartup.sh /root/autostartup.sh
+CMD ["/bin/bash", "/root/autostartup.sh"]
                                     
 EXPOSE 3389
