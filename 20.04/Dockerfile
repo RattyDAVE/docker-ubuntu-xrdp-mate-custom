@@ -41,6 +41,8 @@ RUN apt-get install -y mate-indicator-applet-common
 RUN apt-get install -y mate-menu
 RUN apt-get install -y mate-notification-daemon
 RUN apt-get install -y mate-notification-daemon-common
+RUN apt-get install -y mate-session-manager
+RUN apt-get install -y mate-applet-brisk-menu
 ##RUN apt-get install -y mate-utils
 ##RUN apt-get install -y mate-utils-common
 ##RUN apt-get install -y mate-window-applets-common
