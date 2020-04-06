@@ -54,6 +54,7 @@ RUN apt-get install -y xorgxrdp
 ##RUN apt-get install -y tightvncserver
 
 RUN apt-get install --no-install-recommends -yqq \
+        openssh-server \
         supervisor \
         sudo \
         tzdata \
