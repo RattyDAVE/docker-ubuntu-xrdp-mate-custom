@@ -14,7 +14,7 @@ RUN apt-get update -y && \
         geany \
         putty \
         remmina* \
-        openjdk-14-jdk \
+        openjdk-lts \
         libreoffice \
         pasmo \
         git build-essential qt5-default \
