@@ -4,7 +4,7 @@ WORKDIR /root
 
 RUN apt-get update -y && \ 
     #apt-get install -yqq caja-dropbox && \
-    apt-get install --no-install-recommends -yqq \
+    apt-get install --no-install-recommends -y \
         git \
         telnet \
         vym \
@@ -14,7 +14,7 @@ RUN apt-get update -y && \
         geany \
         putty \
         remmina* \
-        openjdk-lts \
+        openjdk-11-jdk \
         libreoffice \
         pasmo \
         git build-essential qt5-default \
