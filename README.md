@@ -53,7 +53,6 @@ Contents:
 - Local Drive mapping (require elevated rights with this parameter ```--privileged=true```)
 - Clipboard Sharing (require elevated rights with this parameter ```--privileged=true```)
 
- 
 ```
 docker run --name RattyDAVE20.04 \
            --privileged=true \
@@ -89,7 +88,6 @@ apt-get -y install language-pack-de language-pack-gnome-de
 locale-gen de_DE.UTF-8
 update-locale LANG=de_DE.UTF-8
 ```
-
 
 ## To Connect
 Please note some clients need an extra parameter set glyph-cache. xfreerdp, remmina and others need this set.
