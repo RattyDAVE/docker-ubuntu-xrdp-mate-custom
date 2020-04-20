@@ -2,6 +2,9 @@ FROM rattydave/docker-ubuntu-xrdp-mate-custom:20.04
 
 WORKDIR /root
 
+COPY sysinfo /usr/bin
+RUN chmod 755 /usr/bin/sysinfo
+
 RUN apt-get update -y && \ 
     #apt-get install -yqq caja-dropbox && \
     apt-get install --no-install-recommends -y \
@@ -78,6 +81,4 @@ RUN apt-get update -y && \
     echo "Exec=sysinfo" >> /etc/xdg/autostart/sysinfo.desktop && \
     echo "Terminal=false" >> /etc/xdg/autostart/sysinfo.desktop && \
     echo "Type=Application" >> /etc/xdg/autostart/sysinfo.desktop
-
-COPY sysinfo /usr/bin
-RUN chmod 755 /usr/bin/sysinfo
+    
