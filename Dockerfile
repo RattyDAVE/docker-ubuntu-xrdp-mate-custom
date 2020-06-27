@@ -45,6 +45,7 @@ RUN cd /root && \
         xterm \
         curl \
         wget \
+        wmctrl \
         epiphany-browser && \
     ln -fs /usr/share/zoneinfo/UTC /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y install \
