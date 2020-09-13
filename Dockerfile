@@ -85,7 +85,7 @@ RUN cd /root && \
     #git clone -b master https://github.com/neutrinolabs/xrdp.git && \
     #git clone -b master https://github.com/neutrinolabs/xorgxrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
-    git clone -b delel https://github.com/neutrinolabs/xorgxrdp.git && \
+    git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
     cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg --enable-vsock --enable-fdkaac --enable-opus --enable-mp3lame --enable-pixman && make && make install && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
     cd /root && \
