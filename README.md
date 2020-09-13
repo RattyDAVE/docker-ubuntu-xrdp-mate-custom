@@ -9,7 +9,7 @@ echo "user:pass:N" > CREATEUSERS.TXT
 docker run --name RattyDAVE20.04 \
            --privileged=true \
            -p 3389:3389 \
-           -e TZ="Europe/London"
+           -e TZ="Europe/London" \
            -v CREATEUSERS.TXT:/root/createusers.txt \
            -dit --restart unless-stopped \
            rattydave/docker-ubuntu-xrdp-mate-custom:20.04
