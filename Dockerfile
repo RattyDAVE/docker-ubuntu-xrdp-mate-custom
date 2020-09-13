@@ -82,8 +82,10 @@ RUN cd /root && \
     git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR="/tmp/pulseaudio-$pulsever" && make && \
     cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so && \
     cd /root && \
-    git clone -b master https://github.com/neutrinolabs/xrdp.git && \
-    git clone -b master https://github.com/neutrinolabs/xorgxrdp.git && \
+    #git clone -b master https://github.com/neutrinolabs/xrdp.git && \
+    #git clone -b master https://github.com/neutrinolabs/xorgxrdp.git && \
+    git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
+    git clone -b delel https://github.com/neutrinolabs/xorgxrdp.git && \
     cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg --enable-vsock --enable-fdkaac --enable-opus --enable-mp3lame --enable-pixman && make && make install && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
     cd /root && \
