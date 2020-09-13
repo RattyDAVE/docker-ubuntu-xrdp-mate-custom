@@ -57,7 +57,7 @@ Contents:
 docker run --name RattyDAVE20.04 \
            --privileged=true \
            -p 3389:3389 \
-           -e TZ="Europe/London"
+           -e TZ="Europe/London" \
            -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
            -v %LOCAL_PATH_TO_STARTUP.SH_FILE%:/root/startup.sh \
            -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
@@ -143,7 +143,7 @@ Example of a working command line.
 docker run --name RattyDAVE20.04-tools \
            --privileged=true \
            -p 3389:3389 \
-           -e TZ="Europe/London"
+           -e TZ="Europe/London" \
            -v %LOCAL_PATH_TO_CREATEUSERS.TXT_FILE%:/root/createusers.txt \
            -v %LOCAL_PATH_TO_STARTUP.SH_FILE%:/root/startup.sh \
            -v %LOCAL_PATH_TO_HOME_DIRECTORY%:/home \
