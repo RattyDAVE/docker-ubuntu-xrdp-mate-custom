@@ -25,7 +25,6 @@ Then put in the IP address of the docker host.
 
 Login using the username `user` and the password `pass`
 
-
 ## rattydave/docker-ubuntu-xrdp-mate-custom:stable points to 18.04
 ## rattydave/docker-ubuntu-xrdp-mate-custom:latest points to 20.04
 
@@ -105,6 +104,17 @@ Open a command prompt and type
 ```
 mstsc
 ````
+
+## Auto Update
+
+To automatically update I recomend using watchtower.
+
+```
+docker run -d \
+  --name watchtower \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  v2tec/watchtower 
+```
 
 Then put in the ip address of the docker host.
 
