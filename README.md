@@ -105,6 +105,8 @@ Open a command prompt and type
 mstsc
 ````
 
+Then put in the ip address of the docker host.
+
 ## Auto Update
 
 To automatically update I recomend using watchtower.
@@ -115,8 +117,6 @@ docker run -d \
   -v /var/run/docker.sock:/var/run/docker.sock \
   v2tec/watchtower 
 ```
-
-Then put in the ip address of the docker host.
 
 ## rattydave/docker-ubuntu-xrdp-mate-custom:20.04-tools
 
