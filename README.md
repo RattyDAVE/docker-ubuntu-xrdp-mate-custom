@@ -113,9 +113,9 @@ To automatically update I recomend using watchtower.
 
 ```
 docker run -d \
-  --name watchtower \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  v2tec/watchtower 
+    --name watchtower \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    containrrr/watchtower
 ```
 
 ## rattydave/docker-ubuntu-xrdp-mate-custom:20.04-tools
