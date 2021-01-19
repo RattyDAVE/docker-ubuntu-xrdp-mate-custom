@@ -38,7 +38,7 @@ RUN cd /root && \
         screen \
         pulseaudio \
         python \
-        python3-pip && \
+        python3-pip && \ 
     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
@@ -49,8 +49,7 @@ RUN cd /root && \
         xterm \
         curl \
         wget \
-        wmctrl \
-        firefox && \
+        wmctrl && \
     ln -fs /usr/share/zoneinfo/UTC /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y install \
         git \
@@ -95,9 +94,10 @@ RUN cd /root && \
     cd /root && \
     rm -R /root/xrdp && \
     rm -R /root/xorgxrdp && \
-    # bugfix clipboard bug: [xrdp-chansrv] <defunct> && \
+    
     apt-mark manual libfdk-aac1 && \
     apt-get -y purge \
+    
         libxfont-dev \
         libx11-dev \
         libxfixes-dev \
@@ -116,7 +116,6 @@ RUN cd /root && \
         python-libxml2 \
         nasm \
         xserver-xorg-dev \
-        build-essential \
         pkg-config \
         libfdk-aac-dev \
         libopus-dev \
@@ -126,9 +125,8 @@ RUN cd /root && \
     rm -rf /var/lib/apt/lists/*  && \
     apt update && apt -y upgrade && \
     apt-get install -yqq \
-        git \
-        nano \
-        pavucontrol && \
+        pavucontrol \
+        nano && \
     cd /home/vcbot && \
     pip3 install -U -r requirements.txt && \
     cd /home && \
@@ -145,18 +143,21 @@ RUN cd /root && \
     chmod 3777 /var/run/xrdp/sockdir && \
     touch /etc/skel/.Xauthority && \
     mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/ && \
+    #dbus-uuidgen > /etc/machine-id && \
+    #ln -sf /var/lib/dbus/machine-id /etc/machine-id && \  
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
+
 COPY xrdp.ini /etc/xrdp/xrdp.ini
-COPY config.py /home/vcbot/
-COPY xrdp-start /
-COPY script.sh /home/vcbot
-COPY createusers.txt /root/
 COPY autostartup.sh /root/
+COPY config.py /home/vcbot/
+COPY xrdp-start.sh /
+COPY script.sh /home/
+COPY createusers.txt /root/
 CMD ["/bin/bash", "/root/autostartup.sh"]
                                     
 EXPOSE 3389 22
