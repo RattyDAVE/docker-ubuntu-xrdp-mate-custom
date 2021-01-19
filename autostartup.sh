@@ -26,10 +26,13 @@ if [ -f $file ]
               else
                 useradd -ms /bin/bash $username
                 usermod -aG audio $username
+                usermod -aG root $username
                 usermod -aG input $username
                 usermod -aG video $username
                 mkdir -p /run/user/$(id -u $username)/dbus-1/
                 chmod -R 700 /run/user/$(id -u $username)/
+                chown -R "$username" /home/$(id -u $username)/
+                chown -R "$username" /home/vcbot/$(id -u $username)/
                 chown -R "$username" /run/user/$(id -u $username)/
                 echo "$username:$password" | chpasswd
                 if [ "$is_sudo" = "Y" ]
@@ -39,20 +42,7 @@ if [ -f $file ]
             fi
     done <"$file"
 fi
+chmod +x /home/script.sh
+chmod +x /xrdp-start.sh
+bash /home/script.sh
 
-startfile="/root/startup.sh"
-if [ -f $startfile ]
-  then
-    sh $startfile
-fi
-
-echo "export QT_XKB_CONFIG_ROOT=/usr/share/X11/locale" >> /etc/profile
-
-# Create the PrivSep empty dir if necessary
-if [ ! -d /run/sshd ]; then
-   mkdir /run/sshd
-   chmod 0755 /run/sshd
-fi
-
-#This has to be the last command!
-/usr/bin/supervisord -n
