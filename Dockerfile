@@ -34,7 +34,11 @@ RUN cd /root && \
         ubuntu-mate-icon-themes \
         ubuntu-mate-themes \
         tightvncserver \
-        pulseaudio && \
+        mplayer \
+        screen \
+        pulseaudio \
+        python \
+        python3-pip && \
     apt-get install --no-install-recommends -yqq \
         supervisor \
         sudo \
@@ -46,7 +50,7 @@ RUN cd /root && \
         curl \
         wget \
         wmctrl \
-        epiphany-browser && \
+        firefox && \
     ln -fs /usr/share/zoneinfo/UTC /etc/localtime && dpkg-reconfigure -f noninteractive tzdata && \
     apt-get -y install \
         git \
@@ -82,19 +86,18 @@ RUN cd /root && \
     git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR="/tmp/pulseaudio-$pulsever" && make && \
     cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so && \
     cd /root && \
-    #git clone -b master https://github.com/neutrinolabs/xrdp.git && \
-    #git clone -b master https://github.com/neutrinolabs/xorgxrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xorgxrdp.git && \
     cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg --enable-vsock --enable-fdkaac --enable-opus --enable-mp3lame --enable-pixman && make && make install && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
+    cd /home && \
+    git clone https://github.com/rojserbest/VoiceChatPyroBot.git vcbot && \
     cd /root && \
     rm -R /root/xrdp && \
     rm -R /root/xorgxrdp && \
     # bugfix clipboard bug: [xrdp-chansrv] <defunct> && \
     apt-mark manual libfdk-aac1 && \
     apt-get -y purge \
-        git \
         libxfont-dev \
         libx11-dev \
         libxfixes-dev \
@@ -118,10 +121,18 @@ RUN cd /root && \
         libfdk-aac-dev \
         libopus-dev \
         libmp3lame-dev && \
-        #        fuse \
     apt-get -y autoclean && apt-get -y autoremove && \
     apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g) && \
     rm -rf /var/lib/apt/lists/*  && \
+    apt update && apt -y upgrade && \
+    apt-get install -yqq \
+        git \
+        nano \
+        pavucontrol && \
+    cd /home/vcbot && \
+    pip3 install -U -r requirements.txt && \
+    cd /home && \
+    wget https://telegram.org/dl/desktop/linux -O tdesktop.tar.xz && tar -xf tdesktop.tar.xz && rm tdesktop.tar.xz && \
     echo "mate-session" > /etc/skel/.xsession && \
     sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
     sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini  && \
@@ -134,21 +145,17 @@ RUN cd /root && \
     chmod 3777 /var/run/xrdp/sockdir && \
     touch /etc/skel/.Xauthority && \
     mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/ && \
-    #dbus-uuidgen > /etc/machine-id && \
-    #ln -sf /var/lib/dbus/machine-id /etc/machine-id && \  
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "[program:xrdp]" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp -nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp" >> /etc/supervisor/conf.d/xrdp.conf
-#RUN     echo "[program:dbus-daemon]" > /etc/supervisor/conf.d/dbus-daemon.conf && \
-#    echo "command=/usr/bin/dbus-daemon --system --nofork" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
-#    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
-#    echo "user = messagebus"  >> /etc/supervisor/conf.d/dbus-daemon.conf
-
 COPY xrdp.ini /etc/xrdp/xrdp.ini
-
+COPY config.py /home/vcbot/
+COPY xrdp-start /
+COPY script.sh /home/vcbot
+COPY createusers.txt /root/
 COPY autostartup.sh /root/
 CMD ["/bin/bash", "/root/autostartup.sh"]
                                     
