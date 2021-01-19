@@ -1,3 +1,4 @@
+#!/bin/bash
 startfile="/root/startup.sh"
 if [ -f $startfile ]
   then
