@@ -33,7 +33,7 @@ Sign in with your Github account and fork this repo this repo.
 `DUR_LIMIT`: Max video duration in minutes for downloads
 
 ⚠️ The Following variables are Compulsory (Others will use default values if not set)
-`API_ID
+`API_ID`
 `API_HASH`
 `TOKEN` 
 `SUDO_USERS`
@@ -64,9 +64,9 @@ Sign in with your Github account and fork this repo this repo.
   password :music
   
 * If you want to edit the username and password , you can do it by editing the values in createusers.txt file. the foremat is username:password:is SUDO or not(Y)
-ℹ️ If you are changing the default user , you may need to change the same in script.sh also .
+*ℹ️ If you are changing the default user , you may need to change the same in script.sh also .
 
 * Once after loging in ,  you can see a file named Telegram in  /home/vcpb/Telegram Directory 
 
 * Execute it and login into your telegram account and Join a Voicechat.
-ℹ️ No need to change the default microphone as MySink is already default Mic.
+*ℹ️ No need to change the default microphone as MySink is already default Mic.
