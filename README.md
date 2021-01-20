@@ -42,11 +42,11 @@ Sign in with your Github account and fork this repo this repo.
   ~~~
 * If the remaining values are not set then the Default values are:
 ~~~
- `MONGO_DB_URI` = None
- `USERS_MUST_JOIN` = False
- `LOG` = False
- `LANG` = en (english)
- `DUR_LIMIT` = 10
+ MONGO_DB_URI = None
+ USERS_MUST_JOIN = False
+ LOG = False
+ LANG = en (english)
+ DUR_LIMIT = 10
 ~~~
 * After setting the Evnironment Variables save them and Wait for the Deploy to finish.
 
@@ -64,10 +64,10 @@ Sign in with your Github account and fork this repo this repo.
   username :vcpb and 
   password :music
   
-* If you want to edit the username and password , you can do it by editing the values in createusers.txt file. the foremat is username:password:is SUDO or not(Y)
-  ℹ️ If you are changing the default user , you may need to change the same in script.sh also .
+* If you want to edit the username and password , you can do it by editing the values in [createusers.txt](https://github.com/subinps/docker-ubuntu-xrdp-mate-custom-VCPB/blob/master/createusers.txt) file. the foremat is username:password:is SUDO or not(Y)
+  * ℹ️ If you are changing the default user , you may need to change the same in [script.sh](https://github.com/subinps/docker-ubuntu-xrdp-mate-custom-VCPB/blob/master/script.sh) also .
 
 * Once after loging in ,  you can see a file named Telegram in  /home/vcpb/Telegram Directory 
 
 * Execute it and login into your telegram account and Join a Voicechat.
-  ℹ️ No need to change the default microphone as MySink is already default Mic.
+  * ℹ️ No need to change the default microphone as MySink is already default Mic.
