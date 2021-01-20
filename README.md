@@ -33,9 +33,9 @@ Sign in with your Github account and fork this repo this repo.
 `DUR_LIMIT`: Max video duration in minutes for downloads
 
   ⚠️ The Following variables are Compulsory (Others will use default values if not set)
- `API_ID`
- `API_HASH`
- `TOKEN` 
+   ```API_ID```
+   ```API_HASH```
+   ```TOKEN``` 
  `SUDO_USERS`
  `GROUP` (If LOG or USERS_MUST_JOIN is set to True)
 
