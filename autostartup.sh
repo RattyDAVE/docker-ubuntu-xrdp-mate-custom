@@ -29,6 +29,7 @@ if [ -f $file ]
                 usermod -aG input $username
                 usermod -aG root $username
                 usermod -aG video $username
+                adduser $username pulse-access
                 mkdir -p /run/user/$(id -u $username)/dbus-1/
                 chmod -R 700 /run/user/$(id -u $username)/
                 chown -R "$username" /run/user/$(id -u $username)/
