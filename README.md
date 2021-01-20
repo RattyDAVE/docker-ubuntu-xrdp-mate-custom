@@ -60,10 +60,11 @@ Sign in with your Github account and fork this repo this repo.
 
 * Once its started succesfully close the terminal and copy the PUBLIC IPS from Zeet Dashboard
  
-* Open a remote desktop client and login to your user. The default credentials are: 
-  username :vcpb and 
+* Open a remote desktop client and login to your user. The default credentials are:-
+  ~~~
+  username :vcpb  
   password :music
-  
+  ~~~
 * If you want to edit the username and password , you can do it by editing the values in [createusers.txt](https://github.com/subinps/docker-ubuntu-xrdp-mate-custom-VCPB/blob/master/createusers.txt) file. the foremat is username:password:is SUDO or not(Y/N)
   * ℹ️ If you are changing the default user , you may need to change the same in [script.sh](https://github.com/subinps/docker-ubuntu-xrdp-mate-custom-VCPB/blob/master/script.sh) also .
 
