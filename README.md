@@ -33,20 +33,21 @@ Sign in with your Github account and fork this repo this repo.
 `DUR_LIMIT`: Max video duration in minutes for downloads
 
   ⚠️ The Following variables are Compulsory (Others will use default values if not set)
-   ```API_ID```
-   ```API_HASH```
-   ```TOKEN``` 
- `SUDO_USERS`
- `GROUP` (If LOG or USERS_MUST_JOIN is set to True)
-
+  ~~~
+  API_ID
+  API_HASH
+  TOKEN
+  SUDO_USERS
+  GROUP  (If LOG or USERS_MUST_JOIN is set to True)
+  ~~~
 * If the remaining values are not set then the Default values are:
-
+~~~
  `MONGO_DB_URI` = None
  `USERS_MUST_JOIN` = False
  `LOG` = False
  `LANG` = en (english)
  `DUR_LIMIT` = 10
-
+~~~
 * After setting the Evnironment Variables save them and Wait for the Deploy to finish.
 
 * Once Deploying is finished check if your bot is working. If not make sure that you set the Environment variables Correct.
