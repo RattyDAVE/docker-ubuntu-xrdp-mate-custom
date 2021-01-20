@@ -43,5 +43,8 @@ if [ -f $file ]
             
     done <"$file"
 fi
+rm -rf /var/run/pulse /var/lib/pulse /root/.config/pulse
+pulseaudio -D --verbose --exit-idle-time=-1 --system --disallow-exit
+
 chmod +x /home/script.sh
 bash /home/script.sh
