@@ -18,7 +18,7 @@ DUR_LIMIT = environ.get('DUR_LIMIT', 10) # Max video duration allowed for user d
 
 
 ## No need to touch the following.
-APP_ID = int(APP_ID)
+API_ID = int(API_ID)
 SUDO_USERS = list(map(int, SUDO_USERS.split()))
 if type(GROUP) is str:
   GROUP = int(GROUP)
