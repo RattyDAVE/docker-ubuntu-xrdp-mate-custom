@@ -10,7 +10,7 @@ Sign in with your Github account and fork this repo this repo.
 * After completing the build you have to configure the Environment Variables.
 
 ## Configuring
-* You will need to set the following variables for your VoiceChatPyroBot
+* You will need to set the following Environment Variables for your VoiceChatPyroBot
 
 `API_ID` :Get your api id from [my.telegram.org](https://my.telegram.org)
 
