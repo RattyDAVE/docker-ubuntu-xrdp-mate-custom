@@ -1,4 +1,4 @@
-# This is a Modified Version of  RattyDAVE/docker-ubuntu-xrdp-mate-custom to support deploy of [VoiceChatPyroBot](https://github.com/rojserbest/VoiceChatPyroBot.git) to [Zeet](https://zeet.co/)
+## This is a Modified Version of  RattyDAVE/docker-ubuntu-xrdp-mate-custom to support deploy of [VoiceChatPyroBot](https://github.com/rojserbest/VoiceChatPyroBot.git) to [Zeet](https://zeet.co/)
 
 ## Deploying
 Sign in with your Github account and fork this repo this repo.
@@ -64,7 +64,7 @@ Sign in with your Github account and fork this repo this repo.
   username :vcpb and 
   password :music
   
-* If you want to edit the username and password , you can do it by editing the values in [createusers.txt](https://github.com/subinps/docker-ubuntu-xrdp-mate-custom-VCPB/blob/master/createusers.txt) file. the foremat is username:password:is SUDO or not(Y)
+* If you want to edit the username and password , you can do it by editing the values in [createusers.txt](https://github.com/subinps/docker-ubuntu-xrdp-mate-custom-VCPB/blob/master/createusers.txt) file. the foremat is username:password:is SUDO or not(Y/N)
   * ℹ️ If you are changing the default user , you may need to change the same in [script.sh](https://github.com/subinps/docker-ubuntu-xrdp-mate-custom-VCPB/blob/master/script.sh) also .
 
 * Once after loging in ,  you can see a file named Telegram in  /home/vcpb/Telegram Directory 
