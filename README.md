@@ -1,7 +1,7 @@
 ## This is a Modified Version of  RattyDAVE/docker-ubuntu-xrdp-mate-custom to support deploy of [VoiceChatPyroBot](https://github.com/rojserbest/VoiceChatPyroBot.git) to [Zeet](https://zeet.co/)
 
 ## Deploying
-Sign in with your Github account and fork this repo this repo.
+Sign in with your Github account and fork this repo.
 
 * Go here [Zeet](https://zeet.co/)
 * Sign into Zeet with your Github account
