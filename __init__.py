@@ -20,3 +20,7 @@ DUR_LIMIT = int(DUR_LIMIT)
 USERS_MUST_JOIN = ast.literal_eval(USERS_MUST_JOIN)
 LOG_GROUP = GROUP if MONGO_DB_URI != "" else None
 SUDO_FILTER = filters.user(SUDO_USERS)
+async def custom_filter(_, __, ___):
+    return bool(LOG_GROUP)
+
+LOG_GROUP_FILTER = filters.create(custom_filter)
