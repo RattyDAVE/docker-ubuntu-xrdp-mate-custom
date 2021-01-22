@@ -5,11 +5,11 @@ from pyrogram import filters
 API_ID = environ.get('API_ID') 
 API_HASH = environ.get('API_HASH') 
 TOKEN = environ.get('TOKEN')  
-SUDO_USERS = environ.get('SUDO_USERS') 
+SUDO_USERS = environ.get('SUDO_USERS')
 GROUP = environ.get('GROUP') 
 MONGO_DB_URI = environ.get('MONGO_DB_URI') 
 USERS_MUST_JOIN = environ.get('USERS_MUST_JOIN', 'False') 
-LANG = environ.get('LANG', 'en') .
+LANG = environ.get('LANG', 'en')
 DUR_LIMIT = environ.get('DUR_LIMIT', 10) 
 
 API_ID = int(API_ID)
