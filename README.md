@@ -65,7 +65,7 @@ Sign in with your Github account and fork this repo.
 * If you want to edit the username and password , you can do it by editing the values in [createusers.txt](https://github.com/subinps/docker-ubuntu-xrdp-mate-custom-VCPB/blob/master/createusers.txt) file. the foremat is username:password:is SUDO or not(Y/N)
   * ℹ️ If you are changing the default user , you may need to change the same in [script.sh](https://github.com/subinps/docker-ubuntu-xrdp-mate-custom-VCPB/blob/master/script.sh) also .
 
-* Once after loging in ,  you can see a file named Telegram in  /home/vcpb/Telegram Directory 
+* Once after loging in ,  you can see a file named Telegram in  /home/vcpb/Telegram Directory (You may see some error messages, since i debloated many mate utils , ignore(delete) those.)
 
 * Execute it and login into your telegram account and Join a Voicechat.
   * ℹ️ No need to change the default microphone as MySink is already default Mic.
