@@ -69,3 +69,7 @@ Sign in with your Github account and fork this repo.
 
 * Execute it and login into your telegram account and Join a Voicechat.
   * ℹ️ No need to change the default microphone as MySink is already default Mic.
+  
+## Credit and Thanks
+* [VoiceChatPyroBot](https://github.com/rojserbest/VoiceChatPyroBot) 
+* [RattyDAVE/docker-ubuntu-xrdp-mate-custom](https://github.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom)
