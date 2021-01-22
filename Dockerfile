@@ -10,32 +10,10 @@ RUN cd /root && \
     apt-get install -yqq locales  && \ 
     apt-get install -yqq \
         mate-desktop-environment-core \
-        mate-themes \
-        mate-accessibility-profiles \
-        mate-applet-appmenu \
         mate-applet-brisk-menu \
-        mate-applets \
-        mate-applets-common \
-        mate-calc \
-        mate-calc-common \
-        mate-dock-applet \
-        mate-hud \
-        mate-indicator-applet \
-        mate-indicator-applet-common \
-        mate-menu \
         mate-notification-daemon \
         mate-notification-daemon-common \
-        mate-utils \
-        mate-utils-common \
-        mate-window-applets-common \
-        mate-window-buttons-applet \
-        mate-window-menu-applet \
-        mate-window-title-applet \
-        ubuntu-mate-icon-themes \
-        ubuntu-mate-themes \
-        tightvncserver \
         mplayer \
-        screen \
         pulseaudio \
         python \
         python3-pip && \ 
@@ -43,7 +21,7 @@ RUN cd /root && \
         supervisor \
         sudo \
         tzdata \
-        vim \
+        #vim \
         mc \
         ca-certificates \
         xterm \
@@ -99,6 +77,7 @@ RUN cd /root && \
     apt-get -y purge \
     
         libxfont-dev \
+        git \
         libx11-dev \
         libxfixes-dev \
         libssl-dev \
@@ -125,8 +104,7 @@ RUN cd /root && \
     rm -rf /var/lib/apt/lists/*  && \
     apt update && apt -y upgrade && \
     apt-get install -yqq \
-        pavucontrol \
-        nano && \
+        pavucontrol && \
     cd /home/vcbot && \
     pip3 install -U -r requirements.txt && \
     cd /home && \
