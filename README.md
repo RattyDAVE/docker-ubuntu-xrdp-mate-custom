@@ -44,4 +44,4 @@ Sign in with your Github account and fork this repo.
   
 ## Credits
 * [The original repository](https://github.com/RattyDAVE/docker-ubuntu-xrdp-mate-custom)
-* [Subpins](https://github.com/subpins) 
+* [Subinps](https://github.com/subinps) 
