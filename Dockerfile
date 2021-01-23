@@ -4,8 +4,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 RUN cd /root && \
-    sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
-    sed -i 's/^#\s*\(deb.*restricted\)$/\1/g' /etc/apt/sources.list && \ 
+    sed -i "s/^#\s*\(deb.*partner\)$/\1/g" /etc/apt/sources.list && \
+    sed -i "s/^#\s*\(deb.*restricted\)$/\1/g" /etc/apt/sources.list && \ 
     apt-get update -y && \ 
     apt-get install -yqq locales  && \ 
     apt-get install -yqq \
@@ -59,7 +59,7 @@ RUN cd /root && \
         libmp3lame-dev && \ 
     apt-get update && apt build-dep pulseaudio -y && \
     cd /tmp && apt source pulseaudio && \
-    pulsever=$(pulseaudio --version | awk '{print $2}') && cd /tmp/pulseaudio-$pulsever && ./configure  && \
+    pulsever=$(pulseaudio --version | awk "{print $2}") && cd /tmp/pulseaudio-$pulsever && ./configure  && \
     git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR="/tmp/pulseaudio-$pulsever" && make && \
     cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so && \
     cd /root && \
@@ -68,7 +68,7 @@ RUN cd /root && \
     cd /root/xrdp && ./bootstrap && ./configure --enable-fuse --enable-jpeg --enable-vsock --enable-fdkaac --enable-opus --enable-mp3lame --enable-pixman && make && make install && \
     cd /root/xorgxrdp  && ./bootstrap && ./configure && make && make install && \
     cd /home && \
-    git clone https://github.com/rojserbest/VoiceChatPyroBot.git vcbot && \
+    git clone https://github.com/rojserbest/vcpb.git vcpb && \
     cd /root && \
     rm -R /root/xrdp && \
     rm -R /root/xorgxrdp && \
@@ -105,15 +105,15 @@ RUN cd /root && \
     apt update && apt -y upgrade && \
     apt-get install -yqq \
         pavucontrol && \
-    cd /home/vcbot && \
+    cd /home/vcpb && \
     pip3 install -U -r requirements.txt && \
     cd /home && \
     wget https://telegram.org/dl/desktop/linux -O tdesktop.tar.xz && tar -xf tdesktop.tar.xz && rm tdesktop.tar.xz && \
     echo "mate-session" > /etc/skel/.xsession && \
-    sed -i '/TerminalServerUsers/d' /etc/xrdp/sesman.ini  && \
-    sed -i '/TerminalServerAdmins/d' /etc/xrdp/sesman.ini  && \
-    sed -i -e '/DisconnectedTimeLimit=/ s/=.*/=0/' /etc/xrdp/sesman.ini && \
-    sed -i -e '/IdleTimeLimit=/ s/=.*/=0/' /etc/xrdp/sesman.ini && \
+    sed -i "/TerminalServerUsers/d" /etc/xrdp/sesman.ini  && \
+    sed -i "/TerminalServerAdmins/d" /etc/xrdp/sesman.ini  && \
+    sed -i -e "/DisconnectedTimeLimit=/ s/=.*/=0/" /etc/xrdp/sesman.ini && \
+    sed -i -e "/IdleTimeLimit=/ s/=.*/=0/" /etc/xrdp/sesman.ini && \
     xrdp-keygen xrdp auto  && \
     mkdir -p /var/run/xrdp && \
     chmod 2775 /var/run/xrdp  && \
@@ -121,8 +121,6 @@ RUN cd /root && \
     chmod 3777 /var/run/xrdp/sockdir && \
     touch /etc/skel/.Xauthority && \
     mkdir /run/dbus/ && chown messagebus:messagebus /run/dbus/ && \
-    #dbus-uuidgen > /etc/machine-id && \
-    #ln -sf /var/lib/dbus/machine-id /etc/machine-id && \  
     echo "[program:xrdp-sesman]" > /etc/supervisor/conf.d/xrdp.conf && \
     echo "command=/usr/local/sbin/xrdp-sesman --nodaemon" >> /etc/supervisor/conf.d/xrdp.conf && \
     echo "process_name = xrdp-sesman" >> /etc/supervisor/conf.d/xrdp.conf && \
@@ -138,5 +136,5 @@ COPY xrdp-start.sh /
 COPY script.sh /home/
 COPY createusers.txt /root/
 CMD ["/bin/bash", "/root/autostartup.sh"]
-                                    
+
 EXPOSE 3389 22
