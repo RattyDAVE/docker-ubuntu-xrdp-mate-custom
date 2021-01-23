@@ -21,7 +21,7 @@ RUN cd /root && \
         supervisor \
         sudo \
         tzdata \
-        #vim \
+        nano \
         mc \
         ca-certificates \
         xterm \
