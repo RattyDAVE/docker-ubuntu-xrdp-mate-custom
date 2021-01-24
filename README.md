@@ -32,11 +32,12 @@ Sign in with your Github account and fork this repo.
 * Fill the environment variables as described below.
 * Zeet will start building from the Dockerfile, it might take some time.
 * Once deployed, you'll see a small terminal icon, click it to open Zeet's in-browser terminal.
+* Change the default password for the user vcpb `sudo passwd vcpb` . Enter a new password when it asks.
 * Type `/xrdp-start.sh`, hit enter, wait 10 seconds and disconnect from the terminal.
 * After starting XRDP, copy your project's pulbic IP address and open a remote desktop client.
 * Use the public IP, plus the following credentials to login:
     User: `vcpb`  
-    Passphrase: `music`
+    Passphrase: `music` or the password you set previously
 * After logging in, you can ignore some expected error messages.
 * Open Mate terminal, type `~/Telegram/Telegram` to open tdesktop.
 * When tdesktop is opened, login with an alt account of yours.
