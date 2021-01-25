@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Set Timezone
+# Set a timezone
 if [[ -z "${TZ}" ]]; then
    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
    dpkg-reconfigure -f noninteractive tzdata
@@ -8,17 +8,21 @@ else
    ln -fs /usr/share/zoneinfo/${TZ} /etc/localtime
    dpkg-reconfigure -f noninteractive tzdata
 fi
+chmod +x /xrdp-start.sh
 
-#CREATE USERS.
-# username:passsword:Y
-# username2:password2:Y
+# Format of the list of users
+# separated by newline
+# in createuser.txt
+# to be created:
+# user:pass:[Y/N]
+# Y/N = add user to sudoers?
 
 file="/root/createusers.txt"
 if [ -f $file ]
   then
     while IFS=: read -r username password is_sudo
         do
-            echo "Username: $username, Password: $password , Sudo: $is_sudo"
+            echo "$username:$password:$is_sudo"
 
             if getent passwd $username > /dev/null 2>&1
               then
@@ -27,32 +31,25 @@ if [ -f $file ]
                 useradd -ms /bin/bash $username
                 usermod -aG audio $username
                 usermod -aG input $username
+                usermod -aG root $username
                 usermod -aG video $username
+                adduser $username pulse-access
                 mkdir -p /run/user/$(id -u $username)/dbus-1/
                 chmod -R 700 /run/user/$(id -u $username)/
                 chown -R "$username" /run/user/$(id -u $username)/
+                chown -R $username:root /home/vcbot
+                chown -R $username:root /home
                 echo "$username:$password" | chpasswd
                 if [ "$is_sudo" = "Y" ]
                   then
                     usermod -aG sudo $username
                 fi
             fi
+            
     done <"$file"
 fi
+rm -rf /var/run/pulse /var/lib/pulse /root/.config/pulse
+pulseaudio -D --verbose --exit-idle-time=-1 --system --disallow-exit
 
-startfile="/root/startup.sh"
-if [ -f $startfile ]
-  then
-    sh $startfile
-fi
-
-echo "export QT_XKB_CONFIG_ROOT=/usr/share/X11/locale" >> /etc/profile
-
-# Create the PrivSep empty dir if necessary
-if [ ! -d /run/sshd ]; then
-   mkdir /run/sshd
-   chmod 0755 /run/sshd
-fi
-
-#This has to be the last command!
-/usr/bin/supervisord -n
+chmod +x /home/script.sh
+bash /home/script.sh
