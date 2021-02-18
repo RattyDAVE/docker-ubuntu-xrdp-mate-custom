@@ -38,7 +38,7 @@ This image is automatically rebuilt when updates are realeased for Ubuntu.
 - rattydave/docker-ubuntu-xrdp-mate-custom:20.04-tools
 
 Contents:
-- Ubuntu 19.10
+- Ubuntu 20.04
 - Mate Desktop (ubuntu repo)
 - XRDP (built from source)
 - XRPDXORG (built from source)
