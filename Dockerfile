@@ -5,9 +5,9 @@ ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 RUN cd /root && \
     sed -i 's/^#\s*\(deb.*partner\)$/\1/g' /etc/apt/sources.list && \
-    sed -i 's/^#\s*\(deb.*restricted\)$/\1/g' /etc/apt/sources.list && \ 
-    apt-get update -y && \ 
-    apt-get install -yqq locales  && \ 
+    sed -i 's/^#\s*\(deb.*restricted\)$/\1/g' /etc/apt/sources.list && \
+    apt-get update -y && \
+    apt-get install -yqq locales  && \
     apt-get install -yqq \
         mate-desktop-environment-core \
         mate-themes \
