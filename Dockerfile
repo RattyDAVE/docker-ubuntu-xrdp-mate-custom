@@ -148,9 +148,9 @@ RUN cd /root && \
 #    echo "process_name = dbus-daemon" >> /etc/supervisor/conf.d/dbus-daemon.conf && \
 #    echo "user = messagebus"  >> /etc/supervisor/conf.d/dbus-daemon.conf
 
-COPY xrdp.ini /etc/xrdp/xrdp.ini
+ADD xrdp.ini /etc/xrdp/xrdp.ini
 
-COPY autostartup.sh /root/
+ADD autostartup.sh /root/autostartup.sh
 CMD ["/bin/bash", "/root/autostartup.sh"]
                                     
 EXPOSE 3389 22
