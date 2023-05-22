@@ -77,7 +77,8 @@ RUN cd /root && \
         libpulse-dev m4 intltool dpkg-dev \
         libfdk-aac-dev \
         libopus-dev \
-        libmp3lame-dev && \
+        libmp3lame-dev
+        
     apt-get update && apt build-dep pulseaudio -y && \
     cd /tmp && apt source pulseaudio && \
     pulseaudio --version && \
