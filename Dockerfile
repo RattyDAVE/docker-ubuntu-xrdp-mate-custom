@@ -1,5 +1,5 @@
-#FROM ubuntu:20.04
-FROM ubuntu:22.04
+FROM ubuntu:20.04
+#FROM ubuntu:22.04
 
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -77,16 +77,14 @@ RUN cd /root && \
         libpulse-dev m4 intltool dpkg-dev \
         libfdk-aac-dev \
         libopus-dev \
-        libmp3lame-dev
-        
-RUN apt-get update && apt build-dep pulseaudio -y && \
+        libmp3lame-dev && \
+    apt-get update && apt build-dep pulseaudio -y && \
     cd /tmp && apt source pulseaudio && \
     pulseaudio --version && \
     pulsever=$(pulseaudio --version | awk '{print $2}') && cd /tmp/pulseaudio-$pulsever+dfsg1 && ./configure  && \
     git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR="/tmp/pulseaudio-$pulsever+dfsg1" && make -j$(nproc) && \
-    cd /tmp/pulseaudio-$pulsever+dfsg1/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so
-    
-RUN cd /root && \
+    cd /tmp/pulseaudio-$pulsever+dfsg1/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so  && \
+    cd /root && \
     #git clone -b master https://github.com/neutrinolabs/xrdp.git && \
     #git clone -b master https://github.com/neutrinolabs/xorgxrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
