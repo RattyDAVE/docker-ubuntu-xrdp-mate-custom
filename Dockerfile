@@ -79,13 +79,14 @@ RUN cd /root && \
         libopus-dev \
         libmp3lame-dev
         
-    apt-get update && apt build-dep pulseaudio -y && \
+RUN apt-get update && apt build-dep pulseaudio -y && \
     cd /tmp && apt source pulseaudio && \
     pulseaudio --version && \
     pulsever=$(pulseaudio --version | awk '{print $2}') && cd /tmp/pulseaudio-$pulsever && ./configure  && \
     git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR="/tmp/pulseaudio-$pulsever" && make -j$(nproc) && \
-    cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so && \
-    cd /root && \
+    cd /tmp/pulseaudio-$pulsever/pulseaudio-module-xrdp/src/.libs && install -t "/var/lib/xrdp-pulseaudio-installer" -D -m 644 *.so
+    
+RUN cd /root && \
     #git clone -b master https://github.com/neutrinolabs/xrdp.git && \
     #git clone -b master https://github.com/neutrinolabs/xorgxrdp.git && \
     git clone -b devel https://github.com/neutrinolabs/xrdp.git && \
