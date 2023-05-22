@@ -1,4 +1,6 @@
-FROM ubuntu:20.04
+#FROM ubuntu:20.04
+FROM ubuntu:22.04
+
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
