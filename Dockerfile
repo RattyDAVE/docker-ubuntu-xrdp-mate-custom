@@ -68,7 +68,7 @@ RUN cd /root && \
         libfuse-dev \
         xsltproc \
         libxrandr-dev \
-        python-libxml2 \
+        python3-libxml2 \
         nasm \
         xserver-xorg-dev \
         fuse \
