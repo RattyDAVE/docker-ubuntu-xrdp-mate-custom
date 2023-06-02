@@ -12,7 +12,7 @@ docker run --name RattyDAVE20.04 \
            -e TZ="Europe/London" \
            -v ${PWD}/CREATEUSERS.TXT:/root/createusers.txt \
            -dit --restart unless-stopped \
-           rattydave/docker-ubuntu-xrdp-mate-custom:20.04
+           rattydave/docker-ubuntu-xrdp-mate-custom
 ```
 
 Then on a windows machine type
@@ -30,9 +30,6 @@ Login using the username `user` and the password `pass`
 This image is automatically rebuilt when updates are realeased for Ubuntu.
 
 # Ubuntu 20.04 with XRDP and MATE. (latest)
-
-- rattydave/docker-ubuntu-xrdp-mate-custom:20.04
-- rattydave/docker-ubuntu-xrdp-mate-custom:20.04-tools
 
 Contents:
 - Ubuntu 20.04
