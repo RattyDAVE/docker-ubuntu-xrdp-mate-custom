@@ -142,7 +142,7 @@ RUN echo "mate-session" > /etc/skel/.xsession && \
     mkdir -p /var/run/xrdp/sockdir && \
     chmod 3777 /var/run/xrdp/sockdir && \
     touch /etc/skel/.Xauthority && \
-    #mkdir /run/dbus/ && \
+    mkdir /run/dbus/ && \
     chown messagebus:messagebus /run/dbus/ && \
     #dbus-uuidgen > /etc/machine-id && \
     #ln -sf /var/lib/dbus/machine-id /etc/machine-id && \  
